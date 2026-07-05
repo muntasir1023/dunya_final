@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DÜNYA INTERNATIONALE SUPERMARKT</title>
+    
+    <link rel="icon" href="https://raw.githubusercontent.com/muntasir1023/Dunya/main/dunya%20logo.png" type="image/png">
+    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/muntasir1023/Dunya/main/dunya%20logo.png">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        dunya: {
+                            light: '#0064AE', /* Premium Blue */
+                            main: '#0064AE',  /* Brand Main Blue */
+                            dark: '#004375',  /* Deep Blue */
+                            overlay: 'rgba(10, 20, 25, 0.75)', /* Balanced dark overlay for food images */
+                        }
+
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0a0f0d;
+            color: #ffffff;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .ambient-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background-image: url('https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            z-index: -2;
+            filter: brightness(0.3);
+        }
+        .ambient-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: radial-gradient(circle at 50% 50%, rgba(22, 163, 74, 0.05) 0%, rgba(10, 15, 13, 0.98) 100%);
+            z-index: -1;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-nav {
+            background: rgba(10, 15, 12, 0.8);
+            backdrop-filter: blur(25px) saturate(180%);
+            -webkit-backdrop-filter: blur(25px) saturate(180%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        [dir="rtl"] { text-align: right; }
+        [dir="rtl"] .ml-auto { margin-right: auto; margin-left: 0; }
+        
+        #lang-dropdown { transform-origin: top right; transition: all 0.2s ease; }
+
+        .stat-card:hover {
+            border-color: rgba(74, 222, 128, 0.4);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        /* --- NEW CLEAN LIGHT THEME --- */
+        html.light body { background-color: #fdfdfd; color: #0f172a; }
+        html.light .ambient-overlay { background: radial-gradient(circle at 50% 50%, rgba(22, 163, 74, 0.04) 0%, rgba(253, 253, 253, 0.7) 100%); }
+        html.light .ambient-bg { filter: brightness(1.05) saturate(0.8); opacity: 0.3; }
+        
+        html.light .glass-panel { background: #ffffff; border: 1px solid rgba(0,0,0,0.1); box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05); color: #0f172a; }
+        html.light .glass-nav { 
+            background: rgba(255, 255, 255, 0.8) !important; 
+            border-bottom: 1px solid rgba(0,0,0,0.08); 
+            backdrop-filter: blur(20px) saturate(180%);
+        }
+        
+        /* Fix Text Visibility */
+        html.light .text-white, html.light h1, html.light h2, html.light h3, html.light .flex-col span { 
+            color: #0f172a !important; 
+        }
+        html.light .text-gray-300, html.light .text-gray-400 { color: #000000 !important; }
+        html.light .bg-white\/10, html.light .bg-white\/5 { background-color: rgba(0,0,0,0.05) !important; }
+        html.light .border-white\/10, html.light .border-white\/5 { border-color: rgba(0,0,0,0.1) !important; }
+        
+        /* Specific card fixes */
+        html.light .stat-card { background: #ffffff; }
+        html.light .bg-dunya-main { background-color: #0064AE; }
+
+
+        /* Theme Toggle UI */
+        .theme-switch-container {
+            position: relative; width: 52px; height: 26px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 100px; border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer; display: flex; align-items: center;
+            justify-content: space-between; padding: 0 6px;
+            transition: all 0.3s ease;
+        }
+        .theme-switch-handle {
+            position: absolute; left: 3px; width: 20px; height: 20px;
+            background: #0064AE; border-radius: 50%;
+
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+        html.light .theme-switch-container { background: rgba(0, 0, 0, 0.05); border-color: rgba(0, 0, 0, 0.05); }
+        html.light .theme-switch-handle { transform: translateX(24px); }
+
+        /* Mobile Menu Glass Fix */
+
+        /* Custom Cursor */
+        #cursor-dot {
+            width: 8px; height: 8px; background-color: #0064AE;
+
+            border-radius: 50%; position: fixed; pointer-events: none;
+            z-index: 9999; transform: translate(-50%, -50%);
+        }
+        #cursor-outline {
+            width: 36px; height: 36px; border: 1px solid rgba(74, 222, 128, 0.6);
+            border-radius: 50%; position: fixed; pointer-events: none;
+            z-index: 9998; transform: translate(-50%, -50%);
+            transition: width 0.2s, height 0.2s, background-color 0.2s;
+        }
+        @media (hover: none) and (pointer: coarse) {
+            #cursor-dot, #cursor-outline { display: none; }
+        }
+
+
+        /* Mobile Menu Glass Fix */
+        #mobile-menu {
+            backdrop-filter: blur(200px) saturate(210%) !important;
+            -webkit-backdrop-filter: blur(200px) saturate(210%) !important;
+            background: rgba(10, 15, 13, 0.92) !important;
+        }
+        html.light #mobile-menu { background: rgba(255, 255, 255, 0.88) !important; }
+
+        /* Bulk Service Banner Style */
+        #premium-banner {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        #premium-banner:hover {
+            transform: scale(1.02) translateY(-5px);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Custom Cursor -->
+    <div id="cursor-dot"></div>
+    <div id="cursor-outline"></div>
+
+    <div class="ambient-bg"></div>
+    <div class="ambient-overlay"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            
+            <!-- Desktop Left-aligned Links (Home, Products, About Us, Vacancy) -->
+            <div class="hidden md:flex items-center gap-8 justify-start">
+                <a href="index.html" class="text-sm font-semibold text-white" data-i18n="nav_home">Home</a>
+                <a href="items.html" class="text-sm font-semibold text-gray-300 hover:text-white transition-colors" data-i18n="nav_products">Products</a>
+                <a href="aboutus.html" class="text-sm font-semibold text-white relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-[2px] after:bg-dunya-light after:rounded-full" data-i18n="nav_about">About Us</a>
+                <a href="vacancy.html" class="text-sm font-semibold text-gray-300 hover:text-white transition-colors" data-i18n="nav_vacancy">Vacancy</a>
+            </div>
+
+            <!-- Action & WORKING Language Switcher (Stays aligned on the right) -->
+            <div class="hidden md:flex items-center gap-4 relative">
+                
+                <!-- Theme Toggle -->
+                <div class="theme-switch-container" onclick="toggleTheme()">
+                    <div class="theme-switch-handle"></div>
+                    <i class="fa-solid fa-moon text-[10px] text-dunya-light"></i>
+                    <i class="fa-solid fa-sun text-[10px] text-gray-400"></i>
+                </div>
+
+                <!-- Language Dropdown Toggle -->
+                <div class="relative">
+                    <button id="lang-btn" class="glass-panel px-4 py-2 rounded-full flex items-center gap-2 cursor-pointer hover:bg-white/10 transition">
+                        <i class="fa-solid fa-globe text-dunya-light text-sm"></i>
+                        <span id="current-lang-text" class="text-xs font-semibold tracking-wide">EN</span>
+                        <i class="fa-solid fa-chevron-down text-[10px] ml-1"></i>
+                    </button>
+
+                    <!-- Dropdown Menu -->
+                    <div id="lang-dropdown" class="absolute right-0 mt-2 w-32 glass-panel rounded-2xl overflow-hidden opacity-0 scale-95 pointer-events-none z-50 shadow-2xl border border-white/20">
+                        <ul class="py-2 text-sm text-gray-300">
+                            <li><button onclick="setLanguage('en')" class="w-full text-left px-4 py-2 hover:bg-white/10 hover:text-white transition lang-option" data-lang="en">English (EN)</button></li>
+                            <li><button onclick="setLanguage('nl')" class="w-full text-left px-4 py-2 hover:bg-white/10 hover:text-white transition lang-option" data-lang="nl">Nederlands (NL)</button></li>
+                            <li><button onclick="setLanguage('tr')" class="w-full text-left px-4 py-2 hover:bg-white/10 hover:text-white transition lang-option" data-lang="tr">Türkçe (TR)</button></li>
+                            <li><button onclick="setLanguage('fr')" class="w-full text-left px-4 py-2 hover:bg-white/10 hover:text-white transition lang-option" data-lang="fr">Français (FR)</button></li>
+                            <li><button onclick="setLanguage('ku')" class="w-full text-left px-4 py-2 hover:bg-white/10 hover:text-white transition lang-option" data-lang="ku">Kurdî (KU)</button></li>
+                            <li><button onclick="setLanguage('es')" class="w-full text-left px-4 py-2 hover:bg-white/10 hover:text-white transition lang-option" data-lang="es">Español (ES)</button></li>
+                            <li><button onclick="setLanguage('ar')" class="w-full text-left px-4 py-2 hover:bg-white/10 hover:text-white transition lang-option" data-lang="ar">العربية (AR)</button></li>
+                            <li><button onclick="setLanguage('zz')" class="w-full text-left px-4 py-2 hover:bg-white/10 hover:text-white transition lang-option" data-lang="zz">Zazaki (ZZ)</button></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-white text-2xl z-[110] focus:outline-none" id="mobile-btn">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="fixed inset-0 h-screen flex-col items-center justify-center gap-6 opacity-0 pointer-events-none transition-opacity duration-300 hidden md:hidden z-[100]">
+            <a href="index.html" class="text-2xl font-bold text-white" data-i18n="nav_home">Home</a>
+            <a href="items.html" class="text-2xl font-bold text-gray-300" data-i18n="nav_products">Products</a>
+            <a href="aboutus.html" class="text-2xl font-bold text-gray-300" data-i18n="nav_about">About Us</a>
+            <a href="vacancy.html" class="text-2xl font-bold text-gray-300" data-i18n="nav_vacancy">Vacancy</a>
+            
+            <div class="flex items-center gap-3 glass-panel px-6 py-3 rounded-full" onclick="toggleTheme()">
+                <span class="text-sm font-medium text-white">Switch Theme</span>
+                <div class="theme-switch-container">
+                    <div class="theme-switch-handle"></div>
+                    <i class="fa-solid fa-moon text-[10px] text-dunya-light"></i>
+                    <i class="fa-solid fa-sun text-[10px] text-gray-400"></i>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-3 mt-4 px-6 max-w-sm">
+                <button onclick="setLanguage('en'); toggleMobileMenu();" class="glass-panel px-3 py-1.5 rounded-lg text-xs lang-option" data-lang="en">EN</button>
+                <button onclick="setLanguage('nl'); toggleMobileMenu();" class="glass-panel px-3 py-1.5 rounded-lg text-xs lang-option" data-lang="nl">NL</button>
+                <button onclick="setLanguage('tr'); toggleMobileMenu();" class="glass-panel px-3 py-1.5 rounded-lg text-xs lang-option" data-lang="tr">TR</button>
+                <button onclick="setLanguage('fr'); toggleMobileMenu();" class="glass-panel px-3 py-1.5 rounded-lg text-xs lang-option" data-lang="fr">FR</button>
+                <button onclick="setLanguage('ku'); toggleMobileMenu();" class="glass-panel px-3 py-1.5 rounded-lg text-xs lang-option" data-lang="ku">KU</button>
+                <button onclick="setLanguage('es'); toggleMobileMenu();" class="glass-panel px-3 py-1.5 rounded-lg text-xs lang-option" data-lang="es">ES</button>
+                <button onclick="setLanguage('ar'); toggleMobileMenu();" class="glass-panel px-3 py-1.5 rounded-lg text-xs lang-option" data-lang="ar">AR</button>
+                <button onclick="setLanguage('zz'); toggleMobileMenu();" class="glass-panel px-3 py-1.5 rounded-lg text-xs lang-option" data-lang="zz">ZZ</button>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- About Content -->
+    <main class="pt-40 pb-24 px-6 max-w-7xl mx-auto">
+        <!-- Header like vacancy.html (capsule outline / glass) -->
+        <div class="max-w-3xl mx-auto text-center reveal active mb-16">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel text-xs font-bold uppercase tracking-widest text-dunya-light mb-6">
+                <i class="fa-solid fa-circle-info"></i>
+                <span data-i18n="about_badge">About Us</span>
+            </div>
+
+            <h1 class="text-4xl md:text-6xl font-serif font-bold text-white mb-6" data-i18n="about_page_title">Our Story</h1>
+
+            <p class="text-gray-300 text-lg leading-relaxed" data-i18n="about_page_desc">
+                For the last 25 years, Dunya International Supermarket has been on a single mission: to bring the authentic tastes of the world to our local community.
+            </p>
+
+            <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="items.html" class="glass-panel text-white px-8 py-3 rounded-full font-bold hover:bg-white/10 transition">
+                    <i class="fa-solid fa-basket-shopping mr-2 text-dunya-light"></i>
+                    <span data-i18n="about_btn_products">Explore Products</span>
+                </a>
+                <a href="vacancy.html" class="glass-panel text-white px-8 py-3 rounded-full font-bold hover:bg-white/10 transition">
+                    <i class="fa-solid fa-briefcase mr-2 text-dunya-light"></i>
+                    <span data-i18n="about_btn_vacancy">See Vacancy</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Mission & Values -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-32">
+            <div>
+                <h1 class="text-5xl md:text-7xl font-serif font-bold text-white mb-8" data-i18n="about_title">Our Story</h1>
+                <div class="glass-panel p-8 md:p-10 rounded-[2.5rem] mb-12">
+                    <div class="space-y-6 text-gray-400 text-lg leading-relaxed">
+                        <p data-i18n="about_p1">As of January 1, 2025, we, Dilan and Baris, are proud to have taken over our family’s international supermarket. For 25 years, our father ran the supermarket with great dedication and passion, building a strong reputation within the community. With deep respect for his work, we are continuing this tradition while adding new ideas and a fresh vision.</p>
+                        <p data-i18n="about_p2">We combine different backgrounds and areas of expertise. Dilan completed a law degree and brings legal knowledge, structure, and entrepreneurship to the business. Baris has completed two master’s degrees in Economics and possesses extensive knowledge in business management, finance, and strategic development. In addition, Baris grew up in Paris, which has given him an international perspective and multicultural experience.</p>
+                        <p data-i18n="about_p3">As entrepreneurs with a Kurdish background, we place great importance on hospitality, quality, and connection. Our supermarket is a place where people from different cultures come together and discover products from all over the world. We strive to provide our customers every day with a wide assortment, excellent service, and a familiar, welcoming atmosphere.</p>
+                        <p data-i18n="about_p4">With pride, we continue to build on the family business and look forward to the future, where tradition, quality, and innovation go hand in hand.</p>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-6">
+                    <div class="stat-card glass-panel p-6 rounded-3xl text-center transition-all duration-300">
+                        <div class="text-3xl font-bold text-dunya-light mb-1">25+</div>
+                        <div class="text-xs uppercase tracking-widest text-gray-500" data-i18n="stat_years">Years Experience</div>
+                    </div>
+                    <div class="stat-card glass-panel p-6 rounded-3xl text-center transition-all duration-300">
+                        <div class="text-3xl font-bold text-dunya-light mb-1">5k+</div>
+                        <div class="text-xs uppercase tracking-widest text-gray-500" data-i18n="stat_products">Products</div>
+                    </div>
+                    <div class="stat-card glass-panel p-6 rounded-3xl text-center transition-all duration-300">
+                        <div class="text-3xl font-bold text-dunya-light mb-1" data-i18n="stat_halal_badge">Halal</div>
+                        <div class="text-xs uppercase tracking-widest text-gray-500" data-i18n="stat_halal">Halal Certified</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="relative">
+                <div class="aspect-square rounded-[3rem] overflow-hidden glass-panel p-4">
+                    <img src="https://images.unsplash.com/photo-1578916171728-46686eac8d58?q=80&w=1200&auto=format&fit=crop" class="w-full h-full object-cover rounded-[2rem]" alt="Market Interior" data-i18n-alt="img_market_interior">
+                </div>
+                <!-- Floating Badge -->
+                <div class="absolute -bottom-6 -left-6 glass-panel p-8 rounded-[2rem] shadow-2xl">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-dunya-main flex items-center justify-center">
+                            <i class="fa-solid fa-award text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <div class="text-white font-bold" data-i18n="badge_title">Quality First</div>
+                            <div class="text-gray-400 text-xs" data-i18n="badge_sub">Awarded Market 2023</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mission & Values -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="glass-panel p-10 rounded-[2.5rem]">
+                <i class="fa-solid fa-leaf text-4xl text-dunya-light mb-6"></i>
+                <h3 class="text-2xl font-serif font-bold mb-4" data-i18n="val1_t">Fresh Daily</h3>
+                <p class="text-gray-400" data-i18n="val1_d">Our butcher and bakery sections are replenished every single morning to ensure the highest standards.</p>
+            </div>
+            <div class="glass-panel p-10 rounded-[2.5rem]">
+                <i class="fa-solid fa-earth-americas text-4xl text-dunya-light mb-6"></i>
+                <h3 class="text-2xl font-serif font-bold mb-4" data-i18n="val2_t">Global Sourcing</h3>
+                <p class="text-gray-400" data-i18n="val2_d">We work directly with international distributors to bring you authentic brands you can't find elsewhere.</p>
+            </div>
+            <div class="glass-panel p-10 rounded-[2.5rem]">
+                <i class="fa-solid fa-heart text-4xl text-dunya-light mb-6"></i>
+                <h3 class="text-2xl font-serif font-bold mb-4" data-i18n="val3_t">Family Trust</h3>
+                <p class="text-gray-400" data-i18n="val3_d">As a family-run business, we treat every customer like a guest in our own home.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Premium Service Section -->
+    <section class="pb-24 px-6 reveal" id="premium-banner">
+        <div class="max-w-4xl mx-auto">
+            <div class="glass-panel p-8 md:p-12 rounded-[3rem] border-dunya-main/30 border shadow-2xl relative overflow-hidden text-center">
+                <div class="absolute -top-24 -right-24 w-48 h-48 bg-dunya-main/10 rounded-full blur-3xl"></div>
+                <div class="absolute -bottom-24 -left-24 w-48 h-48 bg-dunya-main/5 rounded-full blur-3xl"></div>
+                
+                    <h4 class="text-dunya-light font-bold flex items-center justify-center gap-2 mb-6 text-sm uppercase tracking-widest">
+                    <i class="fa-solid fa-hand-holding-heart"></i> <span data-i18n="premium_service_title">Premium Service</span>
+                </h4>
+                <p class="text-lg md:text-xl text-gray-200 leading-relaxed mb-8 max-w-2xl mx-auto" data-i18n="premium_service_desc">
+                    Ordering for <b>2+ weeks</b>? Avoid the search! WhatsApp your list to us. Just pick up and pay. <b>No advanced payment required.</b>
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+<a href="https://wa.me/31630803777" class="bg-dunya-main text-white px-8 py-3 rounded-full font-bold flex items-center justify-center gap-2 hover:brightness-110 transition shadow-lg shadow-dunya-main/20">
+                        <i class="fa-brands fa-whatsapp text-lg"></i> + WhatsApp Order
+                    </a>
+<a href="tel:+31630803777" class="glass-panel text-white px-8 py-3 rounded-full font-bold hover:bg-white/10 transition">+31630803777</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="glass-nav border-t border-white/10 pt-20 pb-10 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center gap-3 py-1 group mb-6">
+                        <i class="fa-solid fa-cart-shopping text-dunya-light text-xl md:text-2xl drop-shadow-sm"></i>
+                        <div class="flex flex-col md:flex-row md:items-center text-[15px] md:text-lg lg:text-xl font-black tracking-tight" style="font-family: 'Franklin Gothic Heavy', 'Arial Black', sans-serif;">
+                            <span class="text-dunya-light md:mr-4">DÜNYA</span>
+                            <div class="flex items-center gap-2 md:gap-4 text-white">
+                                <span>INTERNATI<i class="fa-solid fa-earth-americas text-blue-400 scale-90 mx-[1px]"></i>NALE</span>
+                                <span>SUPERMARKT</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mb-8 max-w-md" data-i18n="footer_desc">Bringing the flavors of the world to our local community for the last 25 years. Your trusted partner for quality international groceries.</p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full glass-panel flex items-center justify-center hover:bg-dunya-main transition"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full glass-panel flex items-center justify-center hover:bg-dunya-main transition"><i class="fa-brands fa-instagram"></i></a>
+<a href="https://wa.me/31630803777" class="w-10 h-10 rounded-full glass-panel flex items-center justify-center hover:bg-dunya-main transition" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-serif font-bold mb-6 text-white" data-i18n="footer_links">Quick Links</h4>
+                    <ul class="space-y-4 text-gray-400 text-sm">
+                        <li><a href="index.html" class="hover:text-dunya-light transition" data-i18n="nav_home">Home</a></li>
+                        <li><a href="items.html" class="hover:text-dunya-light transition" data-i18n="nav_products">Products</a></li>
+                        <li><a href="aboutus.html" class="text-sm font-semibold text-white relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-[2px] after:bg-dunya-light after:rounded-full" data-i18n="nav_about">About Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-serif font-bold mb-6 text-white" data-i18n="footer_contact">Location</h4>
+                    <p class="text-gray-400 text-sm mb-4">Couwenbergstraat 115,<br>6535 RX Nijmegen</p>
+                    <p class="text-gray-400 text-sm">dunyahatert@hotmail.com</p>
+<a href="tel:+31630803777" class="text-dunya-light font-bold mt-2 hover:text-white transition">+31630803777</a>
+                </div>
+            </div>
+            <div class="border-t border-white/5 pt-8 text-center text-xs text-gray-500">
+                <p data-i18n="footer_rights">© 2026 DÜNYA INTERNATIONALE SUPERMARKT. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Theme Management
+        function toggleTheme() {
+            const html = document.documentElement;
+            html.classList.toggle('light');
+            localStorage.setItem('theme', html.classList.contains('light') ? 'light' : 'dark');
+        }
+
+        (function() {
+            const theme = localStorage.getItem('theme') || 'light';
+            if (theme === 'dark') {
+                document.documentElement.classList.remove('light');
+            }
+        })();
+
+        const translations = {
+            en: {
+                nav_home: "Home", nav_products: "Products", nav_about: "About Us", nav_vacancy: "Vacancy",
+                about_badge: "About Us",
+                about_page_title: "Our Story",
+                about_page_desc: "For the last 25 years, Dunya International Supermarket has been on a single mission: to bring the authentic tastes of the world to our local community.",
+                about_btn_products: "Explore Products",
+                about_btn_vacancy: "See Vacancy",
+                about_title: "Our Story",
+                about_p1: "As of January 1, 2025, we, Dilan and Baris, are proud to have taken over our family’s international supermarket. For 25 years, our father ran the supermarket with great dedication and passion, building a strong reputation within the community. With deep respect for his work, we are continuing this tradition while adding new ideas and a fresh vision.",
+                about_p2: "We combine different backgrounds and areas of expertise. Dilan completed a law degree and brings legal knowledge, structure, and entrepreneurship to the business. Baris has completed two master’s degrees in Economics and possesses extensive knowledge in business management, finance, and strategic development. In addition, Baris grew up in Paris, which has given him an international perspective and multicultural experience.",
+                about_p3: "As entrepreneurs with a Kurdish background, we place great importance on hospitality, quality, and connection. Our supermarket is a place where people from different cultures come together and discover products from all over the world. We strive to provide our customers every day with a wide assortment, excellent service, and a familiar, welcoming atmosphere.",
+                about_p4: "With pride, we continue to build on the family business and look forward to the future, where tradition, quality, and innovation go hand in hand.",
+                stat_years: "Years Experience", stat_products: "Products", stat_halal: "Halal Certified",
+                badge_title: "Quality First", badge_sub: "Awarded Market 2023",
+                val1_t: "Fresh Daily", val1_d: "Our sections are replenished every morning for the highest standards.", // Removed extra space
+                val2_t: "Global Sourcing", val2_d: "We bring you authentic brands you can't find elsewhere.",
+                val3_t: "Family Trust", val3_d: "As a family business, we treat every customer like a guest.",
+                footer_desc: "Bringing the flavors of the world to our community for the last 25 years. Your trusted partner.",
+                footer_links: "Quick Links", footer_contact: "Location", footer_rights: "© 2026 DÜNYA INTERNATIONALE SUPERMARKT. All rights reserved.",
+                premium_service_desc: "Ordering for 2+ weeks? Avoid the search! WhatsApp your list. Just pick up and pay. No advanced payment required.",
+                premium_service_title: "Premium Service",
+                stat_halal_badge: "Halal",
+                img_market_interior: "Market Interior",
+                about_p1: "As of January 1, 2025, we, Dilan and Baris, are proud to have taken over our family’s international supermarket. For 25 years, our father ran the supermarket with great dedication and passion, building a strong reputation within the community. With deep respect for his work, we are continuing this tradition while adding new ideas and a fresh vision.",
+                about_p2: "We combine different backgrounds and areas of expertise. Dilan completed a law degree and brings legal knowledge, structure, and entrepreneurship to the business. Baris has completed two master’s degrees in Economics and possesses extensive knowledge in business management, finance, and strategic development. In addition, Baris grew up in Paris, which has given him an international perspective and multicultural experience.",
+                about_p3: "As entrepreneurs with a Kurdish background, we place great importance on hospitality, quality, and connection. Our supermarket is a place where people from different cultures come together and discover products from all over the world. We strive to provide our customers every day with a wide assortment, excellent service, and a familiar, welcoming atmosphere.",
+                about_p4: "With pride, we continue to build on the family business and look forward to the future, where tradition, quality, and innovation go hand in hand."
+            },
+            nl: {
+                nav_home: "Startpagina", nav_products: "Producten", nav_about: "Over Ons", nav_vacancy: "Vacature",
+                about_badge: "Over Ons",
+                about_page_title: "Ons Verhaal",
+                about_page_desc: "In de afgelopen 25 jaar heeft Dunya International Supermarket één missie gehad: de authentic smaken van de wereld naar onze lokale gemeenschap brengen.",
+                about_btn_products: "Bekijk Producten",
+                about_btn_vacancy: "Bekijk Vacatures",
+                about_title: "Ons Verhaal",
+                about_p1: "As of January 1, 2025, we, Dilan and Baris, are proud to have taken over our family’s international supermarket. For 25 years, our father ran the supermarket with great dedication and passion, building a strong reputation within the community. With deep respect for his work, we are continuing this tradition while adding new ideas and a fresh vision.",
+                about_p2: "We combine different backgrounds and areas of expertise. Dilan completed a law degree and brings legal knowledge, structure, and entrepreneurship to the business. Baris has completed two master’s degrees in Economics and possesses extensive knowledge in business management, finance, and strategic development. In addition, Baris grew up in Paris, which has given him an international perspective and multicultural experience.",
+                about_p3: "As entrepreneurs with a Kurdish background, we place great importance on hospitality, quality, and connection. Our supermarket is a place where people from different cultures come together and discover products from all over the world. We strive to provide our customers every day with a wide assortment, excellent service, and a familiar, welcoming atmosphere.",
+                about_p4: "With pride, we continue to build on the family business and look forward to the future, where tradition, quality, and innovation go hand in hand.",
+                stat_years: "Jaar Ervaring", stat_products: "Producten", stat_halal: "Halal Gecertificeerd",
+                badge_title: "Kwaliteit Eerst", badge_sub: "Bekroonde Markt 2023", // Removed extra space
+                val1_t: "Dagelijks Vers", val1_d: "Onze afdelingen worden elke ochtend aangevuld voor de hoogste normen.",
+                val2_t: "Wereldwijde Inkoop", val2_d: "Wij brengen u authentieke merken die u nergens anders vindt.",
+                val3_t: "Familie Vertrouwen", val3_d: "Als familiebedrijf behandelen we elke klant als een gast.",
+                footer_desc: "De smaken van de wereld in onze gemeenschap voor de afgelopen 25 jaar. Uw vertrouwde partner.",
+                footer_links: "Snelkoppelingen", footer_contact: "Locatie", footer_rights: "© 2026 DÜNYA INTERNATIONALE SUPERMARKT. Alle rechten voorbehouden.",
+                premium_service_desc: "Boodschappen voor 2+ weken? Bestel via WhatsApp! Wij pakken het in, u haalt het op. Geen aanbetaling nodig."
+            },
+            tr: {
+                nav_home: "Anasayfa", nav_products: "Ürünler", nav_about: "Hakkımızda", nav_vacancy: "İş İlanı",
+                about_badge: "Hakkımızda",
+                about_page_title: "Hikayemiz",
+                about_page_desc: "Son 25 yıldır, Dunya International Supermarket tek bir misyonla ilerliyor: dünyanın otantik lezzetlerini yerel topluluğumuza taşımak.",
+                about_btn_products: "Ürünleri Gör",
+                about_btn_vacancy: "İş ilanlarına bak",
+                about_title: "Hikayemiz",
+                about_p1: "1 Ocak 2025 itibarıyla Dilan ve Baris olarak ailenin uluslararası süpermarketini devralmaktan gurur duyuyoruz. 25 yıldır babamız süpermarketi büyük bir özveri ve tutku ile yöneterek topluluk içinde güçlü bir itibar oluşturdu. İşine derin bir saygıyla bu geleneği sürdürürken, yeni fikirler ve taze bir vizyon da ekliyoruz.",
+                about_p2: "Farklı geçmişler ve uzmanlık alanlarını bir araya getiriyoruz. Dilan hukuk eğitimi tamamladı ve iş dünyasına hukuki bilgi, yapı ve girişimcilik getiriyor. Baris ise Ekonomi alanında iki yüksek lisans derecesini tamamladı; işletme yönetimi, finans ve stratejik gelişim konularında geniş bir birikime sahip. Ayrıca Baris, Paris’te büyüdü; bu da ona uluslararası bir bakış açısı ve çok kültürlü bir deneyim kazandırdı.",
+                about_p3: "Kürt kökenli girişimciler olarak misafirperverliğe, kaliteye ve bağ kurmaya büyük önem veriyoruz. Süpermarketimiz, farklı kültürlerden insanların bir araya gelip dünyanın dört bir yanından ürünleri keşfettiği bir yerdir. Müşterilerimize her gün geniş bir çeşit, mükemmel hizmet ve sıcak, tanıdık bir atmosfer sunmayı hedefliyoruz.",
+                about_p4: "Gururla aile işletmesine katkı sunmaya devam ediyor ve gelenek, kalite ve yeniliğin birlikte yürüdüğü geleceğe umutla bakıyoruz.",
+                stat_years: "Yıllık Tecrübe", stat_products: "Ürün Çeşidi", stat_halal: "Helal Sertifikalı",
+                badge_title: "Önce Kalite", badge_sub: "Ödüllü Market 2023", // Removed extra space
+                val1_t: "Günlük Taze", val1_d: "En yüksek standartlar için reyonlarımız her sabah tazelenir.",
+                val2_t: "Küresel Tedarik", val2_d: "Başka yerde bulamayacağınız orijinal markaları ayağınıza getiriyoruz.",
+                val3_t: "Aile Güveni", val3_d: "Bir aile işletmesi olarak, her müşterimize misafirimiz gibi davranıyoruz.",
+                footer_desc: "Dünya lezzetlerini son 25 yıldır mahallemize sunuyoruz. Güvenilir ortağınız.",
+                footer_links: "Hızlı Linkler", footer_contact: "Konum", footer_rights: "© 2026 DÜNYA INTERNATIONALE SUPERMARKT. Tüm hakları saklıdır.",
+                premium_service_desc: "2+ haftalık alışveriş mi? WhatsApp'tan listenizi atın, biz hazırlayalım. Kapıda ödeme, ön ödeme yok!"
+            },
+            ku: {
+                nav_home: "Sereke", nav_products: "Berhem", nav_about: "Derheqê Me", nav_vacancy: "Daxwaza Kar",
+                about_title: "Çîroka Me", about_p1: "Dunya Supermarket ji bo 25 salên dawî bi armancekê dest pê kir: anîna tehmên cîhanê ji bo civaka me.", about_p2: "Em pisporên goştê helal ê premium û berhemên navdewletî ne.",
+                stat_years: "Sal Tecribe", stat_products: "Berhem", stat_halal: "Sertîfîkaya Helal",
+                badge_title: "Berî Her Tiştî Kalîte", badge_sub: "Marketa Serketî 2023", // Removed extra space
+                val1_t: "Her Roj Taze", val1_d: "Beşên me her sibeh ji bo standardên herî bilind tên nûkirin.",
+                val2_t: "Dabînkirina Cîhanî", val2_d: "Em markayên orjînal ên ku hûn li tu derê nabînin tînin.",
+                val3_t: "Baweriya Malbatê", val3_d: "Wek karsaziyek malbatî, em her mişterî wekî mêvan dibînin.",
+                footer_desc: "Tehmên dinyayê ji bo civaka me ji bo 25 salên dawî. Hevparê we yê bawerbar.",
+                footer_links: "Lînkên Bilez", footer_contact: "Cîh", footer_rights: "© 2026 DÜNYA INTERNATIONALE SUPERMARKT. Maf parastî ne.",
+                premium_service_desc: "Ji bo 2+ hefteyan kirîn? Bi WhatsAppê lîsteya xwe bişînin. Werin û bidin, pêşekî tune!"
+            },
+            fr: {
+                nav_home: "Accueil", nav_products: "Produits", nav_about: "À Propos", nav_vacancy: "Offres d'emploi",
+                about_badge: "À Propos",
+                about_page_title: "Notre Histoire",
+                about_page_desc: "Depuis 25 ans, Dunya International Supermarket a une seule mission : apporter les goûts authentiques du monde à notre communauté locale.",
+                about_btn_products: "Voir les Produits",
+                about_btn_vacancy: "Voir les offres",
+                about_title: "Notre Histoire",
+                about_p1: "Au 1er janvier 2025, nous, Dilan et Baris, sommes fiers d’avoir repris notre supermarché international appartenant à notre famille. Pendant 25 ans, notre père a dirigé le supermarché avec beaucoup de dévouement et de passion, construisant une solide réputation au sein de la communauté. Avec un profond respect pour son travail, nous poursuivons cette tradition tout en apportant de nouvelles idées et une vision fraîche.",
+                about_p2: "Nous rassemblons des parcours différents et des domaines d’expertise variés. Dilan a obtenu une licence en droit et apporte au business des connaissances juridiques, de la structure et un esprit d’entrepreneuriat. Baris a obtenu deux masters en Économie et possède une connaissance approfondie en gestion d’entreprise, finance et développement stratégique. De plus, Baris a grandi à Paris, ce qui lui a donné une perspective internationale et une expérience multiculturelle.",
+                about_p3: "En tant qu’entrepreneurs d’origine kurde, nous accordons une grande importance à l’hospitalité, à la qualité et au lien. Notre supermarché est un lieu où des personnes de différentes cultures se rencontrent et découvrent des produits du monde entier. Nous nous efforçons chaque jour d’offrir à nos clients un large assortiment, un excellent service et une atmosphère familière et chaleureuse.",
+                about_p4: "Avec fierté, nous continuons de faire grandir l’entreprise familiale et nous avons hâte de l’avenir, où la tradition, la qualité et l’innovation vont de pair.",
+                stat_years: "Ans d'Expérience", stat_products: "Produits", stat_halal: "Certifié Halal",
+                badge_title: "La Qualité d'Abord", badge_sub: "Marché Primé 2023", // Removed extra space
+                val1_t: "Frais du Jour", val1_d: "Nos sections sont réapprovisionnées chaque matin pour garantir les plus hauts standards.",
+                val2_t: "Sourcing Mondial", val2_d: "Nous travaillons directement avec des distributeurs internationaux pour vous proposer des marques authentiques que vous ne trouverez nulle part ailleurs.",
+                val3_t: "Confiance Familiale", val3_d: "En tant qu’entreprise familiale, nous traitons chaque client comme un invité dans notre propre maison.",
+                footer_desc: "Les saveurs du monde pour notre communauté depuis 25 ans. Votre partenaire de confiance pour la qualité des produits internationaux.",
+                footer_links: "Liens Rapides", footer_contact: "Localisation", footer_rights: "© 2026 DÜNYA INTERNATIONALE SUPERMARKT. Tous droits réservés.",
+                premium_service_desc: "Courses pour 2+ semaines? Commandez via WhatsApp! On prépare tout, vous payez au retrait. Aucun acompte requis."
+            },
+            es: {
+                nav_home: "Inicio", nav_products: "Productos", nav_about: "Nosotros", nav_vacancy: "Vacante",
+                about_title: "Nuestra Historia", about_p1: "Por los últimos 25 años, el Supermercado Internacional Dunya ha tenido una sola misión: traer sabores del mundo.", about_p2: "Nos especializamos en carnes halal premium y una selección única de productos internacionales.",
+                stat_years: "Años de Experiencia", stat_products: "Productos", stat_halal: "Certificado Halal",
+                badge_title: "Calidad Primero", badge_sub: "Mercado Galardonado 2023", // Removed extra space
+                val1_t: "Fresco a Diario", val1_d: "Nuestras secciones se reponen cada mañana para garantizar calidad.",
+                val2_t: "Suministro Global", val2_d: "Traemos marcas auténticas que no encontrará en otro lugar.",
+                val3_t: "Confianza Familiar", val3_d: "Como empresa familiar, tratamos a cada cliente como un invitado.",
+                footer_desc: "Sabores del mundo en nuestra comunidad por los últimos 25 años. Su socio de confianza.",
+                footer_links: "Enlaces Rápidos", footer_contact: "Ubicación", footer_rights: "© 2026 DÜNYA INTERNATIONALE SUPERMARKT. Todos los derechos reservados.",
+                premium_service_desc: "¿Compra para 2+ semanas? Pida por WhatsApp. Nosotros lo preparamos, usted solo paga al recoger. Sin adelantos."
+            },
+            ar: {
+                nav_home: "الرئيسية", nav_products: "المنتجات", nav_about: "من نحن", nav_vacancy: "فرصة عمل",
+                about_title: "قصتنا", about_p1: "على مدار الـ 25 عاماً الماضية، كان لدى دنيا سوبر ماركت مهمة واحدة: جلب نكهات العالم إلى مجتمعنا المحلي.", about_p2: "نحن متخصصون في اللحوم الحلال الممتازة ومجموعة لا مثيل لها من البقالة الدولية.",
+                stat_years: "عام من الخبرة", stat_products: "منتج", stat_halal: "شهادة حلال",
+                badge_title: "الجودة أولاً", badge_sub: "سوبر ماركت متميز 2023", // Removed extra space
+                val1_t: "طازج يومياً", val1_d: "يتم تجديد أقسامنا كل صباح لضمان أعلى المعايير.",
+                val2_t: "مصادر عالمية", val2_d: "نوفر لك علامات تجارية أصلية لا تجدها في أي مكان آخر.",
+                val3_t: "ثقة العائلة", val3_d: "كعمل تجاري عائلي، نعامل كل عميل كضيف في منزلنا.",
+                footer_desc: "نقدم نكهات العالم لمجتمعنا على مدار الـ 25 عاماً الماضية. شريكك الموثوق.",
+                footer_links: "روابط سريعة", footer_contact: "الموقع", footer_rights: "© 2026 DÜNYA INTERNATIONALE SUPERMARKT. جميع الحقوق محفوظة.",
+                premium_service_desc: "طلب لـ اسبوعين أو أكثر؟ أرسل قائمتك عبر الواتساب. نجهزها لك وتدفع عند الاستلام. لا يشترط الدفع المسبق."
+            },
+            zz: {
+                nav_home: "Keye", nav_products: "Malun", nav_about: "Ma ser",
+                about_title: "Hêkata Ma", about_p1: "25 serra peyêne de, Dinya Supermarket bi yew waştene dest pê kerd: Tehmê dinya bîyarê şıma ver.", about_p2: "Ma goştê helalî û malê dinya de weş ê.",
+                stat_years: "Serre Tecribe", stat_products: "Malî", stat_halal: "Sertîfîkaya Helalî",
+                badge_title: "Verê Kalîte", badge_sub: "Marketa Serkete 2023", // Removed extra space
+                val1_t: "Her Roj Taze", val1_d: "Reyonê ma her sabah taze benê.",
+                val2_t: "Malo Dinya", val2_d: "Ma malê ke caê de çiniyê, şıma rê anê.",
+                val3_t: "İtibarê Malbatî", val3_d: "Zey karê malbatî, ma her kesî rê zey meymani ewnîyênê.",
+                footer_desc: "25 serra peyêne de tehmê dinya ma de estê. İtibarê şıma yo.",
+                footer_links: "Lînkê Leze", footer_contact: "Ca", footer_rights: "© 2026 DÜNYA INTERNATIONALE SUPERMARKT. Heqî amê pawıtene.",
+                premium_service_desc: "2+ heftan rê market? WhatsApp ra bınusên. Ma amade kenîme, şıma teyna bıpayerê. Verpê dînayîş çînyo."
+            }
+        };
+
+        const langBtn = document.getElementById('lang-btn');
+        const langDropdown = document.getElementById('lang-dropdown');
+        const currentLangText = document.getElementById('current-lang-text');
+
+        langBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            langDropdown.classList.toggle('opacity-0');
+            langDropdown.classList.toggle('scale-95');
+            langDropdown.classList.toggle('pointer-events-none');
+        });
+
+        window.setLanguage = function(langCode) {
+            localStorage.setItem('dunya-language', langCode);
+            currentLangText.textContent = langCode.toUpperCase();
+            
+            const isRTL = langCode === 'ar' || langCode === 'ku';
+            document.documentElement.setAttribute('dir', isRTL ? 'rtl' : 'ltr');
+            
+            // Translate text nodes
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if(translations[langCode] && translations[langCode][key]) {
+                    // Auto-style "Halal" and add icon
+                    const styledText = translations[langCode][key].replace(/(Halal|Helal|حلال)/gi, '<span class="text-dunya-light inline-flex items-center gap-1 font-bold"><i class="fa-solid fa-certificate text-[10px]"></i> $1</span>');
+                    el.style.opacity = '0';
+                    setTimeout(() => {
+                        el.innerHTML = styledText;
+                        el.style.opacity = '1';
+                    }, 200);
+                }
+            });
+
+            // Translate attributes (e.g., alt)
+            document.querySelectorAll('[data-i18n-alt]').forEach(el => {
+                const key = el.getAttribute('data-i18n-alt');
+                if(translations[langCode] && translations[langCode][key]) {
+                    el.setAttribute('alt', translations[langCode][key]);
+                }
+            });
+
+
+            // Highlight selected option
+            document.querySelectorAll('.lang-option').forEach(el => {
+                const itemLang = el.getAttribute('data-lang');
+                if(itemLang === langCode) {
+                    el.classList.add('lang-active');
+                } else {
+                    el.classList.remove('lang-active');
+                }
+            });
+
+            langDropdown.classList.add('opacity-0', 'scale-95', 'pointer-events-none');
+        };
+
+        const mobileBtn = document.getElementById('mobile-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        window.toggleMobileMenu = function() {
+            const isHidden = mobileMenu.classList.contains('hidden');
+            if (isHidden) {
+                mobileMenu.classList.remove('hidden');
+                setTimeout(() => {
+                    mobileMenu.classList.remove('opacity-0', 'pointer-events-none');
+                    mobileMenu.classList.add('opacity-100', 'flex');
+                    document.body.style.overflow = 'hidden';
+                    mobileBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+                }, 10);
+            } else {
+                mobileMenu.classList.remove('opacity-100');
+                mobileMenu.classList.add('opacity-0', 'pointer-events-none');
+                setTimeout(() => {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenu.classList.remove('flex');
+                    document.body.style.overflow = 'auto';
+                    mobileBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
+                }, 300);
+            }
+        };
+        
+        // Custom Mouse Cursor
+        const dot = document.getElementById('cursor-dot');
+        const outline = document.getElementById('cursor-outline');
+
+        if (window.matchMedia("(pointer: fine)").matches) {
+            window.addEventListener('mousemove', (e) => {
+                const posX = e.clientX; const posY = e.clientY;
+                dot.style.left = `${posX}px`; dot.style.top = `${posY}px`;
+                outline.animate({ left: `${posX}px`, top: `${posY}px` }, { duration: 500, fill: "forwards" });
+            });
+
+            document.querySelectorAll('a, button, .stat-card').forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    outline.style.width = '50px'; outline.style.height = '50px';
+                    outline.style.backgroundColor = 'rgba(74, 222, 128, 0.1)';
+                });
+                el.addEventListener('mouseleave', () => {
+                    outline.style.width = '36px'; outline.style.height = '36px';
+                    outline.style.backgroundColor = 'transparent';
+                });
+            });
+        }
+
+        if (mobileBtn) mobileBtn.addEventListener('click', toggleMobileMenu);
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('dunya-language') || 'en';
+            setLanguage(savedLang);
+        });
+
+        document.addEventListener('click', () => {
+            if(!langDropdown.classList.contains('opacity-0')) {
+                langDropdown.classList.add('opacity-0', 'scale-95', 'pointer-events-none');
+            }
+        });
+    </script>
+</body>
+</html>

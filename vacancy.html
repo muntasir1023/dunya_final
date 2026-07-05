@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DÜNYA INTERNATIONALE SUPERMARKT</title>
+
+    <link rel="icon" href="https://raw.githubusercontent.com/muntasir1023/Dunya/main/dunya%20logo.png" type="image/png">
+    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/muntasir1023/Dunya/main/dunya%20logo.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        dunya: {
+                            light: '#0064AE',
+                            main: '#0064AE',
+                            dark: '#004375',
+                            overlay: 'rgba(10, 20, 25, 0.75)',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0a0f0d;
+            color: #ffffff;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .ambient-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background-image: url('https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            z-index: -2;
+            filter: brightness(0.35);
+        }
+        .ambient-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 100, 174, 0.08) 0%, rgba(10, 15, 13, 0.98) 100%);
+
+            z-index: -1;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-nav {
+            background: rgba(10, 15, 12, 0.8);
+            backdrop-filter: blur(25px) saturate(180%);
+            -webkit-backdrop-filter: blur(25px) saturate(180%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-button {
+            background: rgba(0, 100, 174, 0.2);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 100, 174, 0.4);
+            transition: all 0.3s ease;
+        }
+        .glass-button:hover {
+            background: rgba(0, 100, 174, 0.4);
+            box-shadow: 0 0 20px rgba(0, 100, 174, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .glass-card-border {
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* --- Light theme --- */
+        html.light body { background-color: #fdfdfd; color: #0f172a; }
+        html.light .ambient-overlay { background: radial-gradient(circle at 50% 50%, rgba(0, 100, 174, 0.04) 0%, rgba(253, 253, 253, 0.7) 100%); }
+
+        html.light .ambient-bg { filter: brightness(1.0) saturate(0.8); opacity: 0.3; }
+
+        html.light .glass-panel {
+            background: #ffffff;
+            border: 1px solid rgba(0,0,0,0.1);
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+            color: #0f172a;
+        }
+        html.light .glass-nav {
+            background: rgba(255, 255, 255, 0.9);
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+        }
+
+        /* Cursor (blue accent is handled later by your other edits; keep simple here) */
+        #cursor-dot {
+            width: 8px; height: 8px; background-color: #0064AE;
+            border-radius: 50%; position: fixed; pointer-events: none;
+            z-index: 9999; transform: translate(-50%, -50%);
+        }
+        #cursor-outline {
+            width: 36px; height: 36px; border: 1px solid rgba(0, 100, 174, 0.6);
+            border-radius: 50%; position: fixed; pointer-events: none;
+            z-index: 9998; transform: translate(-50%, -50%);
+            transition: width 0.2s, height 0.2s, background-color 0.2s;
+        }
+        @media (hover: none) and (pointer: coarse) {
+            #cursor-dot, #cursor-outline { display: none; }
+        }
+
+        [dir="rtl"] { text-align: right; }
+        [dir="rtl"] .ml-auto { margin-right: auto; margin-left: 0; }
+
+        .lang-active { color: #0064AE; font-weight: bold; }
+        #lang-dropdown { transform-origin: top right; transition: all 0.2s ease; }
+
+        /* Mobile Menu Glass Fix */
+        #mobile-menu {
+            backdrop-filter: blur(200px) saturate(210%) !important;
+            -webkit-backdrop-filter: blur(200px) saturate(210%) !important;
+            background: rgba(10, 15, 13, 0.92) !important;
+        }
+        html.light #mobile-menu { background: rgba(255, 255, 255, 0.88) !important; }
+
+        /* Fade reveal helper (optional) */
+        .reveal { opacity: 0; transform: translateY(20px); transition: all 0.6s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* Theme Toggle UI */
+        .theme-switch-container {
+            position: relative; width: 52px; height: 26px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 100px; border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer; display: flex; align-items: center;
+            justify-content: space-between; padding: 0 6px;
+            transition: all 0.3s ease;
+        }
+        .theme-switch-handle {
+            position: absolute; left: 3px; width: 20px; height: 20px;
+            background: #0064AE; border-radius: 50%;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+        html.light .theme-switch-container { background: rgba(0, 0, 0, 0.1); border-color: rgba(0, 0, 0, 0.1); }
+        html.light .theme-switch-handle { transform: translateX(24px); }
+    </style>
+</head>
+
+<body class="antialiased selection:bg-dunya-main selection:text-white">
+    <div id="cursor-dot"></div>
+    <div id="cursor-outline"></div>
+
+    <div class="ambient-bg"></div>
+    <div class="ambient-overlay"></div>
+
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+
+            <!-- Desktop links -->
+            <div class="hidden md:flex items-center gap-8 justify-start">
+                <a href="index.html" class="text-sm font-semibold text-white" data-i18n="nav_home">Home</a>
+                <a href="items.html" class="text-sm font-semibold text-gray-300 hover:text-white transition-colors" data-i18n="nav_products">Products</a>
+                <a href="aboutus.html" class="text-sm font-semibold text-white" data-i18n="nav_about">About Us</a>
+                <a href="vacancy.html" class="text-sm font-semibold text-gray-300 hover:text-white transition-colors relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-[2px] after:bg-dunya-light after:rounded-full" data-i18n="nav_vacancy">Vacancy</a>
+            </div>
+
+
+            <!-- Actions -->
+            <div class="hidden md:flex items-center gap-4 relative">
+                <div class="theme-switch-container" onclick="toggleTheme()">
+                    <div class="theme-switch-handle"></div>
+                    <i class="fa-solid fa-moon text-[10px] text-dunya-light"></i>
+                    <i class="fa-solid fa-sun text-[10px] text-gray-400"></i>
+                </div>
+
+                <div class="relative">
+                    <button id="lang-btn" class="glass-panel px-4 py-2 rounded-full flex items-center gap-2 cursor-pointer hover:bg-white/10 transition">
+                        <i class="fa-solid fa-globe text-dunya-light text-sm"></i>
+                        <span id="current-lang-text" class="text-xs font-semibold tracking-wide">EN</span>
+                        <i class="fa-solid fa-chevron-down text-[10px] ml-1"></i>
+                    </button>
+
+                    <div id="lang-dropdown" class="absolute right-0 mt-2 w-32 glass-panel rounded-2xl overflow-hidden opacity-0 scale-95 pointer-events-none z-50 shadow-2xl border border-white/20">
+                        <ul class="py-2 text-sm text-gray-300">
+                            <li><button onclick="setLanguage('en')" class="w-full text-left px-4 py-2 hover:bg-white/10 hover:text-white transition lang-option" data-lang="en">English (EN)</button></li>
+                            <li><button onclick="setLanguage('nl')" class="w-full text-left px-4 py-2 hover:bg-white/10 hover:text-white transition lang-option" data-lang="nl">Nederlands (NL)</button></li>
+                            <li><button onclick="setLanguage('tr')" class="w-full text-left px-4 py-2 hover:bg-white/10 hover:text-white transition lang-option" data-lang="tr">Türkçe (TR)</button></li>
+                            <li><button onclick="setLanguage('fr')" class="w-full text-left px-4 py-2 hover:bg-white/10 hover:text-white transition lang-option" data-lang="fr">Français (FR)</button></li>
+                            <li><button onclick="setLanguage('ku')" class="w-full text-left px-4 py-2 hover:bg-white/10 hover:text-white transition lang-option" data-lang="ku">Kurdî (KU)</button></li>
+                            <li><button onclick="setLanguage('es')" class="w-full text-left px-4 py-2 hover:bg-white/10 hover:text-white transition lang-option" data-lang="es">Español (ES)</button></li>
+                            <li><button onclick="setLanguage('ar')" class="w-full text-left px-4 py-2 hover:bg-white/10 hover:text-white transition lang-option" data-lang="ar">العربية (AR)</button></li>
+                            <li><button onclick="setLanguage('zz')" class="w-full text-left px-4 py-2 hover:bg-white/10 hover:text-white transition lang-option" data-lang="zz">Zazaki (ZZ)</button></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <button class="md:hidden text-white text-2xl z-[110] focus:outline-none" id="mobile-btn">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="fixed inset-0 h-screen flex-col items-center justify-center gap-8 opacity-0 pointer-events-none transition-opacity duration-300 hidden md:hidden z-[100]">
+            <a href="index.html" class="text-sm font-semibold glass-panel px-5 py-2 rounded-full text-white hover:bg-white/10 transition" data-i18n="nav_home">Home</a>
+            <a href="items.html" class="text-sm font-semibold glass-panel px-5 py-2 rounded-full text-gray-300 hover:text-white hover:bg-white/10 transition" data-i18n="nav_products">Products</a>
+            <a href="aboutus.html" class="text-sm font-semibold glass-panel px-5 py-2 rounded-full text-gray-300 hover:text-white hover:bg-white/10 transition" data-i18n="nav_about">About Us</a>
+
+
+            <div class="flex items-center gap-3 glass-panel px-6 py-3 rounded-full" onclick="toggleTheme()">
+                <span class="text-sm font-medium text-white">Switch Theme</span>
+                <div class="theme-switch-container">
+                    <div class="theme-switch-handle"></div>
+                    <i class="fa-solid fa-moon text-[10px] text-dunya-light"></i>
+                    <i class="fa-solid fa-sun text-[10px] text-gray-400"></i>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-4 mt-4 px-6">
+                <a href="index.html" class="text-sm font-semibold glass-panel px-5 py-2 rounded-full text-white hover:bg-white/10 transition" data-i18n="nav_home">Home</a>
+                <a href="items.html" class="text-sm font-semibold glass-panel px-5 py-2 rounded-full text-gray-300 hover:text-white hover:bg-white/10 transition" data-i18n="nav_products">Products</a>
+                <a href="aboutus.html" class="text-sm font-semibold glass-panel px-5 py-2 rounded-full text-gray-300 hover:text-white hover:bg-white/10 transition" data-i18n="nav_about">About Us</a>
+                <a href="vacancy.html" class="text-sm font-semibold glass-panel px-5 py-2 rounded-full text-gray-300 hover:text-white hover:bg-white/10 transition" data-i18n="nav_vacancy">Vacancy</a>
+
+                <div class="w-full border-t border-white/10 my-2"></div>
+
+
+                <button onclick="setLanguage('en'); toggleMobileMenu();" class="glass-panel px-4 py-2 rounded-lg text-sm lang-option" data-lang="en">EN</button>
+
+                <button onclick="setLanguage('nl'); toggleMobileMenu();" class="glass-panel px-4 py-2 rounded-lg text-sm lang-option" data-lang="nl">NL</button>
+                <button onclick="setLanguage('tr'); toggleMobileMenu();" class="glass-panel px-4 py-2 rounded-lg text-sm lang-option" data-lang="tr">TR</button>
+                <button onclick="setLanguage('fr'); toggleMobileMenu();" class="glass-panel px-4 py-2 rounded-lg text-sm lang-option" data-lang="fr">FR</button>
+                <button onclick="setLanguage('ku'); toggleMobileMenu();" class="glass-panel px-4 py-2 rounded-lg text-sm lang-option" data-lang="ku">KU</button>
+                <button onclick="setLanguage('es'); toggleMobileMenu();" class="glass-panel px-4 py-2 rounded-lg text-sm lang-option" data-lang="es">ES</button>
+                <button onclick="setLanguage('ar'); toggleMobileMenu();" class="glass-panel px-4 py-2 rounded-lg text-sm lang-option" data-lang="ar">AR</button>
+                <button onclick="setLanguage('zz'); toggleMobileMenu();" class="glass-panel px-4 py-2 rounded-lg text-sm lang-option" data-lang="zz">ZZ</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-40 pb-24 px-6 max-w-7xl mx-auto">
+        <!-- Header like aboutus.html (capsule outline / glass) -->
+        <div class="max-w-3xl mx-auto text-center reveal active mb-16">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel text-xs font-bold uppercase tracking-widest text-dunya-light mb-6">
+                <i class="fa-solid fa-circle-info"></i>
+                <span data-i18n="vacancy_badge">Vacancy</span>
+            </div>
+
+            <h1 class="text-4xl md:text-6xl font-serif font-bold text-white mb-6" data-i18n="vacancy_page_title">Vacancy</h1>
+
+            <p class="text-gray-300 text-lg leading-relaxed" data-i18n="vacancy_desc">
+                Send your CV and tell us which role you’re interested in. We’ll get back to you as soon as possible.
+            </p>
+
+            <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="https://wa.me/31630803777" class="bg-dunya-main text-white px-8 py-3 rounded-full font-bold flex items-center justify-center gap-2 hover:brightness-110 transition shadow-lg shadow-dunya-main/20">
+                    <i class="fa-brands fa-whatsapp text-lg"></i>
+                    <span data-i18n="vacancy_whatsapp">WhatsApp</span>
+                </a>
+                <a href="tel:+31630803777" class="glass-panel text-white px-8 py-3 rounded-full font-bold hover:bg-white/10 transition">
+                    <span data-i18n="vacancy_call">Call</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Job Vacancy Section -->
+        <section class="reveal mb-16">
+            <div class="glass-panel rounded-[2.5rem] border border-white/10 p-8 md:p-12">
+                <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-6 mb-10">
+                    <div>
+                        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel text-xs font-bold uppercase tracking-widest text-dunya-light mb-5">
+                            <i class="fa-solid fa-briefcase"></i>
+                            <span data-i18n="job_badge">Job Vacancy</span>
+                        </div>
+                        <h2 class="text-3xl md:text-5xl font-serif font-bold text-white mb-5" data-i18n="job_title">Are you looking for a fun part-time job?</h2>
+                        <p class="text-gray-300 text-lg leading-relaxed" data-i18n="job_intro">
+                            Are you looking for a fun part-time job or holiday job in a friendly and international environment? Then we are looking for you!
+                        </p>
+                    </div>
+
+                    <div class="hidden md:flex items-center justify-center">
+                        <div class="w-28 h-28 rounded-[2rem] glass-panel flex items-center justify-center">
+                            <i class="fa-solid fa-store text-dunya-light text-4xl"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                    <div class="glass-card-border border-l-0">
+                        <h3 class="text-xl md:text-2xl font-serif font-bold text-white mb-5 flex items-center gap-3">
+                            <i class="fa-solid fa-bullseye text-dunya-light"></i>
+                            <span data-i18n="job_what_title">What will you do?</span>
+                        </h3>
+                        <ul class="space-y-3 text-gray-300">
+                            <li class="flex gap-3">
+                                <span class="text-dunya-light mt-1"><i class="fa-solid fa-check"></i></span>
+                                <span data-i18n="job_do_1">Stocking shelves and presenting products attractively;</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-dunya-light mt-1"><i class="fa-solid fa-check"></i></span>
+                                <span data-i18n="job_do_2">Helping customers with their questions;</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-dunya-light mt-1"><i class="fa-solid fa-check"></i></span>
+                                <span data-i18n="job_do_3">Operating the checkout;</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-dunya-light mt-1"><i class="fa-solid fa-check"></i></span>
+                                <span data-i18n="job_do_4">Checking best-before dates;</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-dunya-light mt-1"><i class="fa-solid fa-check"></i></span>
+                                <span data-i18n="job_do_5">Assisting with receiving and processing deliveries;</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-dunya-light mt-1"><i class="fa-solid fa-check"></i></span>
+                                <span data-i18n="job_do_6">Keeping the store clean and tidy.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl md:text-2xl font-serif font-bold text-white mb-5 flex items-center gap-3">
+                            <i class="fa-solid fa-mug-hot text-dunya-light"></i>
+                            <span data-i18n="job_ask_title">What do we ask?</span>
+                        </h3>
+                        <ul class="space-y-3 text-gray-300">
+                            <li class="flex gap-3">
+                                <span class="text-dunya-light mt-1"><i class="fa-solid fa-star"></i></span>
+                                <span data-i18n="job_ask_1">You are enthusiastic and customer-friendly;</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-dunya-light mt-1"><i class="fa-solid fa-star"></i></span>
+                                <span data-i18n="job_ask_2">You can work independently but are also a great team player;</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-dunya-light mt-1"><i class="fa-solid fa-star"></i></span>
+                                <span data-i18n="job_ask_3">You are flexible and available for evenings and weekends;</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-dunya-light mt-1"><i class="fa-solid fa-star"></i></span>
+                                <span data-i18n="job_ask_4">No experience is required — we are happy to train you;</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-dunya-light mt-1"><i class="fa-solid fa-star"></i></span>
+                                <span data-i18n="job_ask_5">You speak Dutch or English.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl md:text-2xl font-serif font-bold text-white mb-5 flex items-center gap-3">
+                            <i class="fa-solid fa-hand-holding-heart text-dunya-light"></i>
+                            <span data-i18n="job_offer_title">What do we offer?</span>
+                        </h3>
+                        <ul class="space-y-3 text-gray-300">
+                            <li class="flex gap-3">
+                                <span class="text-dunya-light mt-1"><i class="fa-solid fa-circle-check"></i></span>
+                                <span data-i18n="job_offer_1">A varied part-time job in an international working environment;</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-dunya-light mt-1"><i class="fa-solid fa-circle-check"></i></span>
+                                <span data-i18n="job_offer_2">Flexible working hours that fit well around school or studies;</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-dunya-light mt-1"><i class="fa-solid fa-circle-check"></i></span>
+                                <span data-i18n="job_offer_3">A competitive salary;</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-dunya-light mt-1"><i class="fa-solid fa-circle-check"></i></span>
+                                <span data-i18n="job_offer_4">A friendly team with colleagues from different nationalities;</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-dunya-light mt-1"><i class="fa-solid fa-circle-check"></i></span>
+                                <span data-i18n="job_offer_5">The opportunity to gain valuable retail experience.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl md:text-2xl font-serif font-bold text-white mb-5 flex items-center gap-3">
+                            <i class="fa-solid fa-users text-dunya-light"></i>
+                            <span data-i18n="job_for_title">Who is this for?</span>
+                        </h3>
+                        <p class="text-gray-300 leading-relaxed text-lg" data-i18n="job_for_desc">
+                            This position is ideal as a part-time job alongside school or studies, but it is also very suitable as a holiday job during school breaks.
+                        </p>
+                        <div class="mt-8">
+                            <div class="inline-flex items-center gap-3 glass-panel px-5 py-4 rounded-[1.5rem] border border-white/10">
+                                <i class="fa-solid fa-paper-plane text-dunya-light"></i>
+                                <p class="text-gray-200 font-bold" data-i18n="job_cta">Does this sound like something you would enjoy? Then apply today!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Internship Section -->
+        <section class="reveal">
+            <div class="glass-panel rounded-[2.5rem] border border-white/10 p-8 md:p-12">
+                <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-6 mb-10">
+                    <div>
+                        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel text-xs font-bold uppercase tracking-widest text-dunya-light mb-5">
+                            <i class="fa-solid fa-user-graduate"></i>
+                            <span data-i18n="intern_badge">Internship</span>
+                        </div>
+                        <h2 class="text-3xl md:text-5xl font-serif font-bold text-white mb-5" data-i18n="intern_title">Internship at Our International Supermarket</h2>
+                        <p class="text-gray-300 text-lg leading-relaxed" data-i18n="intern_intro">
+                            Are you looking for a valuable and varied internship in the retail sector? Then you’ve come to the right place.
+                        </p>
+                    </div>
+
+                    <div class="hidden md:flex items-center justify-center">
+                        <div class="w-28 h-28 rounded-[2rem] glass-panel flex items-center justify-center">
+                            <i class="fa-solid fa-graduation-cap text-dunya-light text-4xl"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                    <div>
+                        <h3 class="text-xl md:text-2xl font-serif font-bold text-white mb-5 flex items-center gap-3">
+                            <i class="fa-solid fa-lightbulb text-dunya-light"></i>
+                            <span data-i18n="intern_learn_title">What will you learn during your internship?</span>
+                        </h3>
+                        <ul class="space-y-3 text-gray-300">
+                            <li class="flex gap-3">
+                                <span class="text-dunya-light mt-1"><i class="fa-solid fa-check"></i></span>
+                                <span data-i18n="intern_learn_1">Customer-friendly and service-oriented work;</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-dunya-light mt-1"><i class="fa-solid fa-check"></i></span>
+                                <span data-i18n="intern_learn_2">Stocking and presenting products;</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-dunya-light mt-1"><i class="fa-solid fa-check"></i></span>
+                                <span data-i18n="intern_learn_3">Inventory management and logistical processes;</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-dunya-light mt-1"><i class="fa-solid fa-check"></i></span>
+                                <span data-i18n="intern_learn_4">Checkout operations;</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-dunya-light mt-1"><i class="fa-solid fa-check"></i></span>
+                                <span data-i18n="intern_learn_5">Working according to hygiene and safety guidelines;</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-dunya-light mt-1"><i class="fa-solid fa-check"></i></span>
+                                <span data-i18n="intern_learn_6">Collaborating in a dynamic retail environment.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl md:text-2xl font-serif font-bold text-white mb-5 flex items-center gap-3">
+                            <i class="fa-solid fa-handshake text-dunya-light"></i>
+                            <span data-i18n="intern_offer_title">What do we offer?</span>
+                        </h3>
+                        <ul class="space-y-3 text-gray-300">
+                            <li class="flex gap-3">
+                                <span class="text-dunya-light mt-1"><i class="fa-solid fa-circle-check"></i></span>
+                                <span data-i18n="intern_offer_1">Personal guidance from experienced colleagues;</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-dunya-light mt-1"><i class="fa-solid fa-circle-check"></i></span>
+                                <span data-i18n="intern_offer_2">A safe and professional learning environment;</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-dunya-light mt-1"><i class="fa-solid fa-circle-check"></i></span>
+                                <span data-i18n="intern_offer_3">The opportunity to gain practical experience in an international workplace;</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-dunya-light mt-1"><i class="fa-solid fa-circle-check"></i></span>
+                                <span data-i18n="intern_offer_4">Support to achieve your educational learning goals;</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-dunya-light mt-1"><i class="fa-solid fa-circle-check"></i></span>
+                                <span data-i18n="intern_offer_5">A varied internship where you actively contribute to the team.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="lg:col-span-2">
+                        <div class="glass-panel rounded-[2rem] p-8 md:p-10 border border-white/10">
+                            <p class="text-gray-300 leading-relaxed text-lg" data-i18n="intern_long">
+                                We believe it’s important that interns can develop themselves and build professional skills with confidence. That’s why we provide good supervision, clear agreements, and plenty of room to learn and ask questions.
+                            </p>
+                            <div class="mt-8 inline-flex items-center gap-3 glass-panel px-6 py-5 rounded-[1.5rem] border border-white/10">
+                                <i class="fa-solid fa-envelope-open-text text-dunya-light"></i>
+                                <p class="text-gray-200 font-bold" data-i18n="intern_cta">
+                                    Are you motivated, eager to learn, and looking for a challenging internship? Feel free to contact us to discuss the possibilities. We look forward to welcoming you to our team!
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+    <footer class="glass-nav border-t border-white/10 pt-20 pb-10 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                <div class="col-span-1 md:col-span-2">
+                    <a href="index.html" class="flex items-center gap-3 py-1 group mb-6">
+                        <i class="fa-solid fa-cart-shopping text-dunya-light text-xl md:text-2xl drop-shadow-sm"></i>
+                        <div class="flex flex-col md:flex-row md:items-center text-[15px] md:text-lg lg:text-xl font-black tracking-tight" style="font-family: 'Franklin Gothic Heavy', 'Arial Black', sans-serif;">
+                            <span class="hidden md:inline-flex text-dunya-light md:mr-4">DÜNYA</span>
+                            <div class="hidden md:inline-flex items-center gap-2 md:gap-4 text-white">
+                                <span>INTERNATI<i class="fa-solid fa-earth-americas text-blue-400 scale-90 mx-[1px]"></i>NALE</span>
+                                <span>SUPERMARKT</span>
+                            </div>
+                        </div>
+                    </a>
+                    <p class="text-gray-400 mb-8 max-w-md" data-i18n="footer_desc">Bringing the flavors of the world to our local community for the last 25 years.</p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full glass-panel flex items-center justify-center hover:bg-dunya-main transition"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full glass-panel flex items-center justify-center hover:bg-dunya-main transition"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://wa.me/31630803777" class="w-10 h-10 rounded-full glass-panel flex items-center justify-center hover:bg-dunya-main transition"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-serif font-bold mb-6 text-white" data-i18n="footer_links">Quick Links</h4>
+                    <ul class="space-y-4 text-gray-400 text-sm">
+                        <li><a href="index.html" class="hover:text-dunya-light transition" data-i18n="nav_home">Home</a></li>
+                        <li><a href="items.html" class="hover:text-dunya-light transition" data-i18n="nav_products">Products</a></li>
+<li><a href="aboutus.html" class="hover:text-dunya-light transition" data-i18n="nav_about">About Us</a></li>
+                        <li><a href="vacancy.html" class="hover:text-dunya-light transition" data-i18n="nav_vacancy">Vacancy</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-serif font-bold mb-6 text-white" data-i18n="footer_contact">Location</h4>
+                    <p class="text-gray-400 text-sm mb-4">Couwenbergstraat 115,<br>6535 RX Nijmegen</p>
+                    <p class="text-gray-400 text-sm">dunyahatert@hotmail.com</p>
+                    <p class="text-dunya-light font-bold mt-2">+31 6 3080 3777</p>
+                </div>
+            </div>
+
+            <div class="border-t border-white/5 pt-8 text-center text-xs text-gray-500">
+                <p data-i18n="footer_rights">© 2026 DÜNYA INTERNATIONALE SUPERMARKT. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            html.classList.toggle('light');
+            localStorage.setItem('theme', html.classList.contains('light') ? 'light' : 'dark');
+        }
+
+        (function() {
+            const theme = localStorage.getItem('theme') || 'light';
+            if (theme === 'dark') document.documentElement.classList.remove('light');
+        })();
+
+        const translations = {
+            en: {
+                nav_home: "Home", nav_products: "Products", nav_about: "About Us",
+                vacancy_badge: "Vacancy",
+                vacancy_page_title: "Vacancy",
+                vacancy_desc: "Send your CV and tell us which role you’re interested in. We’ll get back to you as soon as possible.",
+                vacancy_whatsapp: "WhatsApp",
+                vacancy_call: "Call",
+                job_badge: "Job Vacancy",
+                job_title: "Are you looking for a fun part-time job?",
+                job_intro: "Are you looking for a fun part-time job or holiday job in a friendly and international environment? Then we are looking for you!",
+                job_what_title: "What will you do?",
+                job_do_1: "Stocking shelves and presenting products attractively;",
+                job_do_2: "Helping customers with their questions;",
+                job_do_3: "Operating the checkout;",
+                job_do_4: "Checking best-before dates;",
+                job_do_5: "Assisting with receiving and processing deliveries;",
+                job_do_6: "Keeping the store clean and tidy.",
+                job_ask_title: "What do we ask?",
+                job_ask_1: "You are enthusiastic and customer-friendly;",
+                job_ask_2: "You can work independently but are also a great team player;",
+                job_ask_3: "You are flexible and available for evenings and weekends;",
+                job_ask_4: "No experience is required — we are happy to train you;",
+                job_ask_5: "You speak Dutch or English.",
+                job_offer_title: "What do we offer?",
+                job_offer_1: "A varied part-time job in an international working environment;",
+                job_offer_2: "Flexible working hours that fit well around school or studies;",
+                job_offer_3: "A competitive salary;",
+                job_offer_4: "A friendly team with colleagues from different nationalities;",
+                job_offer_5: "The opportunity to gain valuable retail experience.",
+                job_for_title: "Who is this for?",
+                job_for_desc: "This position is ideal as a part-time job alongside school or studies, but it is also very suitable as a holiday job during school breaks.",
+                job_cta: "Does this sound like something you would enjoy? Then apply today!",
+                intern_badge: "Internship",
+                intern_title: "Internship at Our International Supermarket",
+                intern_intro: "Are you looking for a valuable and varied internship in the retail sector? Then you’ve come to the right place.",
+                intern_learn_title: "What will you learn during your internship?",
+                intern_learn_1: "Customer-friendly and service-oriented work;",
+                intern_learn_2: "Stocking and presenting products;",
+                intern_learn_3: "Inventory management and logistical processes;",
+                intern_learn_4: "Checkout operations;",
+                intern_learn_5: "Working according to hygiene and safety guidelines;",
+                intern_learn_6: "Collaborating in a dynamic retail environment.",
+                intern_offer_title: "What do we offer?",
+                intern_offer_1: "Personal guidance from experienced colleagues;",
+                intern_offer_2: "A safe and professional learning environment;",
+                intern_offer_3: "The opportunity to gain practical experience in an international workplace;",
+                intern_offer_4: "Support to achieve your educational learning goals;",
+                intern_offer_5: "A varied internship where you actively contribute to the team.",
+                intern_long: "We believe it’s important that interns can develop themselves and build professional skills with confidence. That’s why we provide good supervision, clear agreements, and plenty of room to learn and ask questions.",
+                intern_cta: "Are you motivated, eager to learn, and looking for a challenging internship? Feel free to contact us to discuss the possibilities. We look forward to welcoming you to our team!" ,
+                footer_desc: "Bringing the flavors of the world to our local community for the last 25 years.",
+                footer_links: "Quick Links",
+                footer_contact: "Location",
+                footer_rights: "© 2026 DÜNYA INTERNATIONALE SUPERMARKT. All rights reserved."
+            },
+            nl: {
+                nav_home: "Startpagina", nav_products: "Producten", nav_about: "Over Ons",
+                vacancy_badge: "Vacature",
+                vacancy_page_title: "Vacature",
+                vacancy_desc: "Stuur je CV en laat ons weten voor welke functie je interesse hebt. We nemen zo snel mogelijk contact met je op.",
+                vacancy_whatsapp: "WhatsApp",
+                vacancy_call: "Bellen",
+                job_badge: "Vacature",
+                job_title: "Op zoek naar een leuke parttime baan?",
+                job_intro: "Op zoek naar een leuke parttime baan of vakantiejob in een vriendelijke en internationale omgeving? Dan zijn wij op zoek naar jou!",
+                job_what_title: "Wat ga je doen?",
+                job_do_1: "Rekken aanvullen en producten aantrekkelijk presenteren;",
+                job_do_2: "Klanten helpen met hun vragen;",
+                job_do_3: "De kassa bedienen;",
+                job_do_4: "Controleren van houdbaarheidsdata;",
+                job_do_5: "Helpen bij het ontvangen en verwerken van leveringen;",
+                job_do_6: "De winkel schoon en netjes houden.",
+                job_ask_title: "Wat vragen wij?",
+                job_ask_1: "Je bent enthousiast en klantvriendelijk;",
+                job_ask_2: "Je kunt zelfstandig werken, maar bent ook een echte teamspeler;",
+                job_ask_3: "Je bent flexibel en beschikbaar voor avonden en weekenden;",
+                job_ask_4: "Geen ervaring nodig — wij leren je graag het vak;",
+                job_ask_5: "Je spreekt Nederlands of Engels.",
+                job_offer_title: "Wat bieden wij?",
+                job_offer_1: "Een afwisselende parttime baan in een internationale werkomgeving;",
+                job_offer_2: "Flexibele werktijden die goed passen bij school of studie;",
+                job_offer_3: "Een competitief salaris;",
+                job_offer_4: "Een vriendelijk team met collega’s van verschillende nationaliteiten;",
+                job_offer_5: "De kans om waardevolle retailervaring op te doen.",
+                job_for_title: "Voor wie is dit?",
+                job_for_desc: "Deze functie is ideaal als parttime baan naast school of studie, maar ook heel geschikt als vakantiejob tijdens schoolvakanties.",
+                job_cta: "Klinkt dit als iets voor jou? Solliciteer vandaag nog!",
+                intern_badge: "Stage",
+                intern_title: "Stage bij onze internationale supermarkt",
+                intern_intro: "Zoek je een waardevolle en afwisselende stage in de retailsector? Dan ben je bij ons aan het juiste adres.",
+                intern_learn_title: "Wat ga je leren tijdens je stage?",
+                intern_learn_1: "Klantvriendelijk en servicegericht werken;",
+                intern_learn_2: "Producten aanvullen en presenteren;",
+                intern_learn_3: "Voorraadbeheer en logistieke processen;",
+                intern_learn_4: "Kassawerkzaamheden;",
+                intern_learn_5: "Werken volgens hygiëne- en veiligheidsrichtlijnen;",
+                intern_learn_6: "Samenwerken in een dynamische retailomgeving.",
+                intern_offer_title: "Wat bieden wij?",
+                intern_offer_1: "Persoonlijke begeleiding van ervaren collega’s;",
+                intern_offer_2: "Een veilige en professionele leeromgeving;",
+                intern_offer_3: "De kans om praktische ervaring op te doen in een internationale werkomgeving;",
+                intern_offer_4: "Ondersteuning bij het behalen van je leerdoelen;",
+                intern_offer_5: "Een afwisselende stage waarin je actief bijdraagt aan het team.",
+                intern_long: "We vinden het belangrijk dat stagiairs zichzelf kunnen ontwikkelen en met vertrouwen professionele vaardigheden opbouwen. Daarom bieden wij goede begeleiding, duidelijke afspraken en volop ruimte om te leren en vragen te stellen.",
+                intern_cta: "Ben je gemotiveerd, nieuwsgierig en op zoek naar een uitdagende stage? Neem gerust contact met ons op om de mogelijkheden te bespreken. We kijken ernaar uit je te verwelkomen in ons team!",
+                footer_desc: "De smaken van de wereld naar onze lokale gemeenschap voor de afgelopen 25 jaar.",
+                footer_links: "Snelkoppelingen",
+                footer_contact: "Locatie",
+                footer_rights: "© 2026 DÜNYA INTERNATIONALE SUPERMARKT. Alle rechten voorbehouden."
+            },
+            tr: {
+                nav_home: "Ana Sayfa", nav_products: "Ürünler", nav_about: "Hakkımızda",
+                vacancy_badge: "İş İlanı",
+                vacancy_page_title: "İş İlanı",
+                vacancy_desc: "Özgeçmişinizi gönderin ve hangi pozisyona ilgi duyduğunuzu yazın. Mümkün olan en kısa sürede geri dönüş yapacağız.",
+                vacancy_whatsapp: "WhatsApp",
+                vacancy_call: "Ara",
+                footer_desc: "Dünyanın lezzetlerini son 25 yıldır yerel topluluğumuza taşıyoruz.",
+                footer_links: "Hızlı Bağlantılar",
+                footer_contact: "Konum",
+                footer_rights: "© 2026 DÜNYA INTERNATIONALE SUPERMARKT. Tüm hakları saklıdır."
+            },
+            fr: {
+                nav_home: "Accueil", nav_products: "Produits", nav_about: "À Propos",
+                vacancy_badge: "Offres d'emploi",
+                vacancy_page_title: "Offres d'emploi",
+                vacancy_desc: "Envoyez votre CV et dites-nous pour quel poste vous êtes intéressé(e). Nous vous répondrons dès que possible.",
+                vacancy_whatsapp: "WhatsApp",
+                vacancy_call: "Appeler",
+                footer_desc: "Les saveurs du monde pour notre communauté locale depuis 25 ans.",
+                footer_links: "Liens Rapides",
+                footer_contact: "Localisation",
+                footer_rights: "© 2026 DÜNYA INTERNATIONALE SUPERMARKT. Tous droits réservés."
+            },
+            ku: {
+                nav_home: "Destpêk", nav_products: "Berhem", nav_about: "Derbarê Me",
+                vacancy_badge: "Daxwaza Kar",
+                vacancy_page_title: "Daxwaza Kar",
+                vacancy_desc: "CV'y xwe bişînin û bêjin ka kîjan cihê ji we re tê xelet e. Em ê herî zû vegerin we.",
+                vacancy_whatsapp: "WhatsApp",
+                vacancy_call: "Bêje",
+                footer_desc: "Her gav lezzetên cîhanê ji bo civaka me ya herêmî di 25 salan de.",
+                footer_links: "Lînkên Bilez",
+                footer_contact: "Cîh",
+                footer_rights: "© 2026 DÜNYA INTERNATIONALE SUPERMARKT. Maf parastî ne."
+            },
+            es: {
+                nav_home: "Inicio", nav_products: "Productos", nav_about: "Nosotros",
+                vacancy_badge: "Vacante",
+                vacancy_page_title: "Vacante",
+                vacancy_desc: "Envía tu CV y dinos a qué puesto te gustaría optar. Te responderemos lo antes posible.",
+                vacancy_whatsapp: "WhatsApp",
+                vacancy_call: "Llamar",
+                footer_desc: "Llevamos los sabores del mundo a nuestra comunidad local desde hace 25 años.",
+                footer_links: "Enlaces Rápidos",
+                footer_contact: "Ubicación",
+                footer_rights: "© 2026 DÜNYA INTERNATIONALE SUPERMARKT. Todos los derechos reservados."
+            },
+            ar: {
+                nav_home: "الرئيسية", nav_products: "المنتجات", nav_about: "من نحن",
+                vacancy_badge: "فرصة عمل",
+                vacancy_page_title: "فرصة عمل",
+                vacancy_desc: "أرسل سيرتك الذاتية وأخبرنا بالوظيفة التي تهتم بها. سنعود إليك في أقرب وقت ممكن.",
+                vacancy_whatsapp: "واتساب",
+                vacancy_call: "اتصل",
+                footer_desc: "نقدم نكهات العالم لمجتمعنا المحلي على مدار 25 عاماً.",
+                footer_links: "روابط سريعة",
+                footer_contact: "الموقع",
+                footer_rights: "© 2026 DÜNYA INTERNATIONALE SUPERMARKT. جميع الحقوق محفوظة."
+            },
+            zz: {
+                nav_home: "Keye", nav_products: "Malun", nav_about: "Ma ser",
+                vacancy_badge: "Daxwaza Kar",
+                vacancy_page_title: "Daxwaza Kar",
+                vacancy_desc: "CV'y xwe bîne û bêjin kîjan cihê we digire. Em ê herî zû vegerin we.",
+                vacancy_whatsapp: "WhatsApp",
+                vacancy_call: "Bêje",
+                footer_desc: "25 serra peyêne de tehmê dinya ji bo civaka me.",
+                footer_links: "Lînkê Leze",
+                footer_contact: "Ca",
+                footer_rights: "© 2026 DÜNYA INTERNATIONALE SUPERMARKT. Heqî amê pawıtene."
+            }
+        };
+
+        const langBtn = document.getElementById('lang-btn');
+        const langDropdown = document.getElementById('lang-dropdown');
+        const currentLangText = document.getElementById('current-lang-text');
+        let isLangOpen = false;
+
+        langBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            isLangOpen = !isLangOpen;
+            if (isLangOpen) {
+                langDropdown.classList.remove('opacity-0', 'scale-95', 'pointer-events-none');
+                langDropdown.classList.add('opacity-100', 'scale-100');
+            } else {
+                langDropdown.classList.add('opacity-0', 'scale-95', 'pointer-events-none');
+                langDropdown.classList.remove('opacity-100', 'scale-100');
+            }
+        });
+
+        document.addEventListener('click', () => {
+            if (isLangOpen) {
+                isLangOpen = false;
+                langDropdown.classList.add('opacity-0', 'scale-95', 'pointer-events-none');
+                langDropdown.classList.remove('opacity-100', 'scale-100');
+            }
+        });
+
+        window.setLanguage = function(langCode) {
+            localStorage.setItem('dunya-language', langCode);
+
+            currentLangText.textContent = langCode.toUpperCase();
+
+            const isRTL = langCode === 'ar' || langCode === 'ku';
+            document.documentElement.setAttribute('dir', isRTL ? 'rtl' : 'ltr');
+
+            document.querySelectorAll('.lang-option').forEach(el => {
+                const itemLang = el.getAttribute('data-lang');
+                if (itemLang === langCode) el.classList.add('lang-active');
+                else el.classList.remove('lang-active');
+            });
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[langCode] && translations[langCode][key]) {
+                    el.style.opacity = '0';
+                    const styledText = translations[langCode][key].replace(/(Halal|Helal|حلال)/gi, '<span class="text-dunya-light inline-flex items-center gap-1 font-bold"><i class="fa-solid fa-certificate text-[10px]"></i> $1</span>');
+                    setTimeout(() => {
+                        el.innerHTML = styledText;
+                        el.style.opacity = '1';
+                    }, 200);
+                }
+            });
+
+            isLangOpen = false;
+            langDropdown.classList.add('opacity-0', 'scale-95', 'pointer-events-none');
+            langDropdown.classList.remove('opacity-100', 'scale-100');
+        };
+
+        const mobileBtn = document.getElementById('mobile-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        window.toggleMobileMenu = function() {
+            const isHidden = mobileMenu.classList.contains('hidden');
+            if (isHidden) {
+                mobileMenu.classList.remove('hidden');
+                setTimeout(() => {
+                    mobileMenu.classList.remove('opacity-0', 'pointer-events-none');
+                    mobileMenu.classList.add('opacity-100', 'flex');
+                    document.body.style.overflow = 'hidden';
+                    mobileBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+                }, 10);
+            } else {
+                mobileMenu.classList.remove('opacity-100');
+                mobileMenu.classList.add('opacity-0', 'pointer-events-none');
+                setTimeout(() => {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenu.classList.remove('flex');
+                    document.body.style.overflow = 'auto';
+                    mobileBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
+                }, 300);
+            }
+        };
+
+        if (mobileBtn) mobileBtn.addEventListener('click', toggleMobileMenu);
+
+        // Custom cursor
+        const dot = document.getElementById('cursor-dot');
+        const outline = document.getElementById('cursor-outline');
+
+        if (window.matchMedia("(pointer: fine)").matches) {
+            window.addEventListener('mousemove', (e) => {
+                const posX = e.clientX;
+                const posY = e.clientY;
+                dot.style.left = `${posX}px`;
+                dot.style.top = `${posY}px`;
+                outline.animate({ left: `${posX}px`, top: `${posY}px` }, { duration: 500, fill: "forwards" });
+            });
+
+            document.querySelectorAll('a, button, .glass-panel').forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    outline.style.width = '50px';
+                    outline.style.height = '50px';
+                    outline.style.backgroundColor = 'rgba(0, 100, 174, 0.12)';
+                });
+                el.addEventListener('mouseleave', () => {
+                    outline.style.width = '36px';
+                    outline.style.height = '36px';
+                    outline.style.backgroundColor = 'transparent';
+                });
+            });
+        }
+
+        // Reveal (optional)
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15, rootMargin: "0px 0px -50px 0px" });
+
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('dunya-language') || 'en';
+            setLanguage(savedLang);
+        });
+    </script>
+</body>
+</html>

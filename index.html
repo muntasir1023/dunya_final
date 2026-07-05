@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DÜNYA INTERNATIONALE SUPERMARKT</title>
+    
+    <link rel="icon" href="https://raw.githubusercontent.com/muntasir1023/Dunya/main/dunya%20logo.png" type="image/png">
+    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/muntasir1023/Dunya/main/dunya%20logo.png">
+    <!-- SEO Meta Tags -->
+
+    <meta name="keywords" content="Dunya, Supermarket, Nijmegen, Gelderland, Halal Butcher, International Market, Turkish Groceries">
+    <meta name="author" content="Muntasir">
+
+    <!-- Fonts: Inter and Playfair Display for premium food headers -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        dunya: {
+                            light: '#0064AE', /* Premium Blue */
+                            main: '#0064AE',  /* Brand Main Blue */
+                            dark: '#004375',  /* Deep Blue */
+                            overlay: 'rgba(10, 20, 25, 0.75)', /* Balanced dark overlay for food images */
+                        }
+                    },
+                    animation: {
+                        'marquee': 'marquee 30s linear infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'fade-in': 'fadeIn 0.5s ease-out forwards',
+                    },
+                    keyframes: {
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-100%)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS for Liquid Glass and Imagery -->
+    <style>
+        /* Base Reset */
+        body {
+            background-color: #050b14;
+            color: #ffffff;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #050b14; }
+        ::-webkit-scrollbar-thumb { background: #0064AE; border-radius: 10px; }
+
+        /* Background Image Engine */
+        .ambient-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background-image: url('https://images.unsplash.com/photo-1596040033229-a9821ebd058d?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            z-index: -2;
+        }
+        .ambient-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: linear-gradient(135deg, rgba(5, 12, 20, 0.9) 0%, rgba(3, 6, 10, 0.98) 100%);
+            z-index: -1;
+        }
+
+        /* LIQUID GLASS UI */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .glass-nav {
+            background: rgba(5, 10, 18, 0.6);
+            backdrop-filter: blur(25px) saturate(180%);
+            -webkit-backdrop-filter: blur(25px) saturate(180%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-button {
+            background: rgba(0, 100, 174, 0.15);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 100, 174, 0.4);
+            transition: all 0.3s ease;
+        }
+        .glass-button:hover {
+            background: rgba(0, 100, 174, 0.35);
+            box-shadow: 0 0 20px rgba(0, 100, 174, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Image Cards for Food */
+        .food-card-img {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 50%;
+            background-size: cover;
+            background-position: center;
+            mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+            opacity: 0.8;
+            z-index: 0;
+            transition: transform 0.7s ease;
+        }
+        
+        .tilt-card:hover .food-card-img {
+            transform: scale(1.05);
+        }
+
+        /* Utilities */
+        .tilt-card {
+            transform-style: preserve-3d;
+            transform: perspective(1000px);
+            transition: transform 0.1s ease;
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* Custom Cursor */
+        #cursor-dot {
+            width: 8px; height: 8px; background-color: #0064AE;
+            border-radius: 50%; position: fixed; pointer-events: none;
+            z-index: 9999; transform: translate(-50%, -50%);
+        }
+        #cursor-outline {
+            width: 36px; height: 36px; border: 1px solid rgba(0, 100, 174, 0.6);
+            border-radius: 50%; position: fixed; pointer-events: none;
+            z-index: 9998; transform: translate(-50%, -50%);
+            transition: width 0.2s, height 0.2s, background-color 0.2s;
+        }
+        @media (hover: none) and (pointer: coarse) {
+            #cursor-dot, #cursor-outline { display: none; }
+        }
+
+        /* Language Dropdown Animation */
+        #lang-dropdown {
+            transform-origin: top right;
+            transition: all 0.2s ease;
+        }
+        .lang-active { color: #0064AE; font-weight: bold; }
+
+        /* --- REFINED LIGHT THEME --- */
+        html.light body { background-color: #fcfcfc; color: #0f172a; }
+        html.light .ambient-overlay { background: radial-gradient(circle at 50% 50%, rgba(0, 100, 174, 0.04) 0%, rgba(252, 252, 252, 0.7) 100%); }
+        html.light .ambient-bg { filter: brightness(1.0) saturate(0.8); opacity: 0.3; } 
+        
+        html.light .glass-panel { 
+            background: #ffffff !important; 
+            border: 1px solid rgba(0,0,0,0.1); 
+            box-shadow: 0 8px 20px -5px rgba(0,0,0,0.08); 
+            color: #0f172a; 
+        }
+        html.light .glass-nav { 
+            background: rgba(255, 255, 255, 0.8) !important;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+        }
+        
+        /* Enhanced Text Visibility */
+        html.light .text-white:not(.glass-button *), 
+        html.light .text-gray-100, html.light .text-gray-200, html.light .text-gray-300,
+        html.light h1, html.light h2, html.light h3, html.light h4, 
+        html.light .flex-col span { 
+            color: #000000 !important; 
+        }
+        html.light .text-gray-400 { color: #1e293b !important; }
+        /* Ensure Tailwind opacity variants stay visible in light mode */
+        html.light .text-gray-300\/90 { color: #111827 !important; }
+        html.light .text-gray-200\/80 { color: #111827 !important; }
+        html.light .text-gray-100\/70 { color: #111827 !important; }
+        /* Gradient/title text transparency sometimes looks broken when light theme is toggled */
+        html.light .bg-clip-text { -webkit-text-fill-color: transparent; }
+
+        /* Theme Toggle UI */
+        .theme-switch-container {
+            position: relative; width: 52px; height: 26px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 100px; border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer; display: flex; align-items: center;
+            justify-content: space-between; padding: 0 6px;
+            transition: all 0.3s ease;
+        }
+        .theme-switch-handle {
+            position: absolute; left: 3px; width: 20px; height: 20px;
+            background: #0064AE; border-radius: 50%;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+        html.light .theme-switch-container { 
+            background: rgba(0, 0, 0, 0.1); 
+            border-color: rgba(0, 0, 0, 0.1); 
+        }
+        html.light .theme-switch-container i.fa-moon { color: #4a5568 !important; } 
+        html.light .theme-switch-container i.fa-sun { color: #0064AE !important; } 
+
+        html.light .theme-switch-handle { transform: translateX(24px); }
+        html.light .lang-option:hover { background-color: rgba(0,0,0,0.05); }
+
+        /* Mobile Menu Glass Fix */
+        #mobile-menu {
+            backdrop-filter: blur(200px) saturate(210%) !important;
+            -webkit-backdrop-filter: blur(200px) saturate(210%) !important;
+            background: rgba(5, 10, 18, 0.92) !important;
+        }
+        html.light #mobile-menu { background: rgba(255, 255, 255, 0.88) !important; }
+
+        /* Bulk Service Banner Style */
+        #premium-banner {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        #premium-banner:hover {
+            transform: scale(1.02) translateY(-5px);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-dunya-main selection:text-white">
+
+    <!-- Custom Cursor -->
+    <div id="cursor-dot"></div>
+    <div id="cursor-outline"></div>
+
+    <!-- Fresh Food Background -->
+    <div class="ambient-bg"></div>
+    <div class="ambient-overlay"></div>
+
+    <!-- Navigation Bar -->
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            
+            <!-- Desktop Left-aligned Links (Home, Products, About Us, Vacancy) -->
+            <div class="hidden md:flex items-center gap-8 justify-start">
+                <a href="index.html" class="text-sm font-semibold text-white relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-[2px] after:bg-dunya-light after:rounded-full" data-i18n="nav_home">Home</a>
+                <a href="items.html" class="text-sm font-semibold text-gray-300 hover:text-white transition-colors" data-i18n="nav_products">Products</a>
+                <a href="aboutus.html" class="text-sm font-semibold text-gray-300 hover:text-white transition-colors" data-i18n="nav_about">About Us</a>
+                <a href="vacancy.html" class="text-sm font-semibold text-gray-300 hover:text-white transition-colors" data-i18n="nav_vacancy">Vacancy</a>
+            </div>
+
+            <!-- Action & WORKING Language Switcher (Stays aligned on the right) -->
+            <div class="hidden md:flex items-center gap-4 relative">
+
+                <!-- Centered banner text -->
+                <div class="hidden sm:flex items-center justify-center flex-1">
+                    <div class="glass-panel px-5 py-2 rounded-full border border-white/10">
+                        <span class="text-xs font-bold tracking-wide text-white">HAVE A</span>
+                        <span class="ml-2 text-xs font-bold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-dunya-light to-blue-400">SWEEEET DAY !!!</span>
+                    </div>
+                </div>
+
+                <!-- Theme Toggle (left of language button) -->
+                <div class="theme-switch-container" onclick="toggleTheme()">
+
+                    <div class="theme-switch-handle"></div>
+                    <i class="fa-solid fa-moon text-[10px] text-dunya-light"></i>
+                    <i class="fa-solid fa-sun text-[10px] text-gray-400"></i>
+                </div>
+
+                <!-- Language Dropdown Toggle -->
+                <div class="relative">
+                    <button id="lang-btn" class="glass-panel px-4 py-2 rounded-full flex items-center gap-2 cursor-pointer hover:bg-white/10 transition">
+
+                        <i class="fa-solid fa-globe text-dunya-light text-sm"></i>
+                        <span id="current-lang-text" class="text-xs font-semibold tracking-wide">EN</span>
+                        <i class="fa-solid fa-chevron-down text-[10px] ml-1"></i>
+                    </button>
+
+
+                    
+                    <!-- Dropdown Menu -->
+                    <div id="lang-dropdown" class="absolute right-0 mt-2 w-32 glass-panel rounded-2xl overflow-hidden opacity-0 scale-95 pointer-events-none z-50 shadow-2xl border border-white/20">
+                        <ul class="py-2 text-sm text-gray-300">
+                            <li><button onclick="setLanguage('en')" class="w-full text-left px-4 py-2 hover:bg-white/10 hover:text-white transition lang-option" data-lang="en">English (EN)</button></li>
+                            <li><button onclick="setLanguage('nl')" class="w-full text-left px-4 py-2 hover:bg-white/10 hover:text-white transition lang-option" data-lang="nl">Nederlands (NL)</button></li>
+                            <li><button onclick="setLanguage('tr')" class="w-full text-left px-4 py-2 hover:bg-white/10 hover:text-white transition lang-option" data-lang="tr">Türkçe (TR)</button></li>
+                            <li><button onclick="setLanguage('fr')" class="w-full text-left px-4 py-2 hover:bg-white/10 hover:text-white transition lang-option" data-lang="fr">Français (FR)</button></li>
+                            <li><button onclick="setLanguage('ku')" class="w-full text-left px-4 py-2 hover:bg-white/10 hover:text-white transition lang-option" data-lang="ku">Kurdî (KU)</button></li>
+                            <li><button onclick="setLanguage('es')" class="w-full text-left px-4 py-2 hover:bg-white/10 hover:text-white transition lang-option" data-lang="es">Español (ES)</button></li>
+                            <li><button onclick="setLanguage('ar')" class="w-full text-left px-4 py-2 hover:bg-white/10 hover:text-white transition lang-option" data-lang="ar">العربية (AR)</button></li>
+                            <li><button onclick="setLanguage('zz')" class="w-full text-left px-4 py-2 hover:bg-white/10 hover:text-white transition lang-option" data-lang="zz">Zazaki (ZZ)</button></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Explore/Products CTA removed as requested -->
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-white text-2xl z-[110] focus:outline-none" id="mobile-btn">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="fixed inset-0 h-screen flex-col items-center justify-center gap-6 opacity-0 pointer-events-none transition-opacity duration-300 hidden md:hidden z-[100]">
+            <a href="index.html" class="text-2xl font-bold text-white" data-i18n="nav_home">Home</a>
+            <a href="items.html" class="text-2xl font-bold text-gray-300" data-i18n="nav_products">Products</a>
+            <a href="aboutus.html" class="text-2xl font-bold text-gray-300" data-i18n="nav_about">About Us</a>
+            <a href="vacancy.html" class="text-2xl font-bold text-gray-300" data-i18n="nav_vacancy">Vacancy</a>
+            
+            <div class="flex items-center gap-3 glass-panel px-6 py-3 rounded-full" onclick="toggleTheme()">
+                <span class="text-sm font-medium text-white">Switch Theme</span>
+                <div class="theme-switch-container">
+                    <div class="theme-switch-handle"></div>
+                    <i class="fa-solid fa-moon text-[10px] text-dunya-light"></i>
+                    <i class="fa-solid fa-sun text-[10px] text-gray-400"></i>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-3 mt-4 px-6 max-w-sm">
+                <button onclick="setLanguage('en'); toggleMobileMenu();" class="glass-panel px-3 py-1.5 rounded-lg text-xs lang-option" data-lang="en">EN</button>
+                <button onclick="setLanguage('nl'); toggleMobileMenu();" class="glass-panel px-3 py-1.5 rounded-lg text-xs lang-option" data-lang="nl">NL</button>
+                <button onclick="setLanguage('tr'); toggleMobileMenu();" class="glass-panel px-3 py-1.5 rounded-lg text-xs lang-option" data-lang="tr">TR</button>
+                <button onclick="setLanguage('fr'); toggleMobileMenu();" class="glass-panel px-3 py-1.5 rounded-lg text-xs lang-option" data-lang="fr">FR</button>
+                <button onclick="setLanguage('ku'); toggleMobileMenu();" class="glass-panel px-3 py-1.5 rounded-lg text-xs lang-option" data-lang="ku">KU</button>
+                <button onclick="setLanguage('es'); toggleMobileMenu();" class="glass-panel px-3 py-1.5 rounded-lg text-xs lang-option" data-lang="es">ES</button>
+                <button onclick="setLanguage('ar'); toggleMobileMenu();" class="glass-panel px-3 py-1.5 rounded-lg text-xs lang-option" data-lang="ar">AR</button>
+                <button onclick="setLanguage('zz'); toggleMobileMenu();" class="glass-panel px-3 py-1.5 rounded-lg text-xs lang-option" data-lang="zz">ZZ</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-start pt-28 px-6 md:px-16 lg:px-24">
+        <div class="max-w-4xl text-left z-10 w-full reveal active">
+            
+            <!-- Bigger, Highly Visible Left-Aligned Greeting Cycler -->
+            <div class="mb-8 inline-flex glass-panel px-8 py-3 rounded-full animate-float shadow-xl border-dunya-light/20">
+                <span class="text-dunya-light mr-3 text-lg md:text-xl"><i class="fa-solid fa-handshake"></i></span>
+                <span id="welcome-text" class="text-base md:text-lg font-bold tracking-wider text-gray-100 min-w-[140px] inline-block">
+                    Welcome
+                </span>
+            </div>
+
+            <h1 class="text-6xl md:text-8xl font-serif font-bold mb-6 leading-tight text-white drop-shadow-2xl">
+                <span class="block" data-i18n="hero_title1"> HAVE A </span>
+                <span class="block text-transparent bg-clip-text bg-gradient-to-r from-dunya-light to-blue-400" data-i18n="hero_title2"> SWEEEET DAY !!! </span>
+            </h1>
+
+            
+            <p class="text-lg md:text-xl text-gray-200 font-bold max-w-2xl mb-10 leading-relaxed drop-shadow-md" data-i18n="hero_desc">
+                25 years of trust in Nijmegen. Premium quality, Halal assurance, and a family where everyone is always welcome. Fresh food from every corner of the globe.
+            </p>
+
+            <div class="mt-16 flex flex-wrap justify-center items-center gap-4 text-sm text-gray-300 font-medium">
+                <div class="flex items-center justify-start gap-2 glass-panel px-4 py-2 rounded-full"><i class="fa-solid fa-location-dot text-dunya-light"></i> Nijmegen, NL</div>
+                <div class="flex items-center justify-center gap-2 glass-panel px-4 py-2 rounded-full"><i class="fa-solid fa-certificate text-dunya-light text-xs"></i> Halal</div>
+                <div class="flex items-center justify-end gap-2 glass-panel px-4 py-2 rounded-full"><i class="fa-solid fa-heart text-dunya-light"></i> Family Owned</div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Infinite Marquee -->
+    <div class="w-full py-4 glass-panel border-l-0 border-r-0 relative z-10 flex overflow-hidden">
+        <div class="whitespace-nowrap animate-marquee flex gap-10 items-center text-gray-200 font-semibold tracking-widest uppercase text-sm">
+            <span><i class="fa-solid fa-leaf text-dunya-light text-xs mr-2"></i> Best Meat In Region</span>
+            <span><i class="fa-solid fa-leaf text-dunya-light text-xs mr-2"></i> Balkan Products</span>
+            <span><i class="fa-solid fa-leaf text-dunya-light text-xs mr-2"></i> Asian Groceries</span>
+            <span><i class="fa-solid fa-leaf text-dunya-light text-xs mr-2"></i> African Spices</span>
+            <span><i class="fa-solid fa-leaf text-dunya-light text-xs mr-2"></i> Fresh Turkish Bakery</span>
+            <!-- Duplicate -->
+            <span><i class="fa-solid fa-leaf text-dunya-light text-xs mr-2"></i> Best Meat In Region</span>
+            <span><i class="fa-solid fa-leaf text-dunya-light text-xs mr-2"></i> Balkan Products</span>
+            <span><i class="fa-solid fa-leaf text-dunya-light text-xs mr-2"></i> Asian Groceries</span>
+            <span><i class="fa-solid fa-leaf text-dunya-light text-xs mr-2"></i> African Spices</span>
+            <span><i class="fa-solid fa-leaf text-dunya-light text-xs mr-2"></i> Fresh Turkish Bakery</span>
+        </div>
+    </div>
+
+    <!-- Core Departments (Image + Glass Cards) -->
+    <section class="py-24 px-6 relative z-10">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-sm font-bold tracking-widest text-dunya-light uppercase mb-2" data-i18n="cat_subtitle">Our Departments</h2>
+                <h3 class="text-4xl md:text-5xl font-serif font-bold text-white mb-6" data-i18n="cat_title">Fresh & Authentic</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Butcher Card -->
+                <div class="glass-panel rounded-[2.5rem] pt-32 pb-8 px-8 tilt-card group cursor-pointer reveal relative overflow-hidden" onclick="window.location.href='items.html'">
+                    <!-- Food Image Background -->
+                    <div class="food-card-img" style="background-image: url('https://images.unsplash.com/photo-1603048297172-c92544798d5a?q=80&w=800&auto=format&fit=crop');"></div>
+                    
+                    <div class="tilt-content flex flex-col h-full relative z-10 mt-8">
+                        <h4 class="text-2xl font-serif font-bold text-white mb-3 flex items-center gap-2">
+                            <i class="fa-solid fa-drumstick-bite text-dunya-light text-xl"></i> <span data-i18n="cat_meat">The Butcher</span>
+                        </h4>
+                        <p class="text-gray-300 leading-relaxed mb-6 flex-grow text-sm" data-i18n="cat_meat_desc">
+                            Known as the best meat and chicken in the Gelderland region. Halal certified, cut fresh daily.
+                        </p>
+                        <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-dunya-main transition-colors border border-white/20">
+                            <i class="fa-solid fa-arrow-right text-white text-sm -rotate-45 group-hover:rotate-0 transition-transform"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pantry Card -->
+                <div class="glass-panel rounded-[2.5rem] pt-32 pb-8 px-8 tilt-card group cursor-pointer reveal relative overflow-hidden" style="transition-delay: 100ms;" onclick="window.location.href='items.html'">
+                    <div class="food-card-img" style="background-image: url('https://images.unsplash.com/photo-1596040033229-a9821ebd058d?q=80&w=800&auto=format&fit=crop');"></div>
+                    
+                    <div class="tilt-content flex flex-col h-full relative z-10 mt-8">
+                        <h4 class="text-2xl font-serif font-bold text-white mb-3 flex items-center gap-2">
+                            <i class="fa-solid fa-earth-americas text-dunya-light text-xl"></i> <span data-i18n="cat_pantry">Global Pantry</span>
+                        </h4>
+                        <p class="text-gray-300 leading-relaxed mb-6 flex-grow text-sm" data-i18n="cat_pantry_desc">
+                            Products spanning the Balkans, Asia, and Africa. If you miss a taste from home, we have it.
+                        </p>
+                        <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-dunya-main transition-colors border border-white/20">
+                            <i class="fa-solid fa-arrow-right text-white text-sm -rotate-45 group-hover:rotate-0 transition-transform"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bakery Card -->
+                <div class="glass-panel rounded-[2.5rem] pt-32 pb-8 px-8 tilt-card group cursor-pointer reveal relative overflow-hidden" style="transition-delay: 200ms;" onclick="window.location.href='items.html'">
+                    <div class="food-card-img" style="background-image: url('https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=800&auto=format&fit=crop');"></div>
+                    
+                    <div class="tilt-content flex flex-col h-full relative z-10 mt-8">
+                        <h4 class="text-2xl font-serif font-bold text-white mb-3 flex items-center gap-2">
+                            <i class="fa-solid fa-bread-slice text-dunya-light text-xl"></i> <span data-i18n="cat_bakery">Fresh Bakery</span>
+                        </h4>
+                        <p class="text-gray-300 leading-relaxed mb-6 flex-grow text-sm" data-i18n="cat_bakery_desc">
+                            Authentic Turkish breads, sweet baklava, and daily fresh pastries. Baked with perfection.
+                        </p>
+                        <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-dunya-main transition-colors border border-white/20">
+                            <i class="fa-solid fa-arrow-right text-white text-sm -rotate-45 group-hover:rotate-0 transition-transform"></i>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Premium Service Section -->
+    <section class="py-12 px-6 reveal" id="premium-banner">
+        <div class="max-w-4xl mx-auto">
+            <div class="glass-panel p-8 md:p-12 rounded-[3rem] border-dunya-main/30 border shadow-2xl relative overflow-hidden text-center">
+                <div class="absolute -top-24 -right-24 w-48 h-48 bg-dunya-main/10 rounded-full blur-3xl"></div>
+                <div class="absolute -bottom-24 -left-24 w-48 h-48 bg-dunya-main/5 rounded-full blur-3xl"></div>
+                
+                <h4 class="text-dunya-light font-bold flex items-center justify-center gap-2 mb-6 text-sm uppercase tracking-widest">
+                    <i class="fa-solid fa-hand-holding-heart"></i> <span data-i18n="premium_service_title">Premium Service + contact</span>
+                </h4>
+                <p class="text-lg md:text-xl text-gray-200 leading-relaxed mb-8 max-w-2xl mx-auto" data-i18n="premium_service_desc">
+                    Ordering for <b>2+ weeks</b>? Avoid the search! WhatsApp your list to us. Just pick up and pay. <b>No advanced payment required.</b>
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="https://wa.me/31630803777" class="bg-dunya-main text-white px-8 py-3 rounded-full font-bold flex items-center justify-center gap-2 hover:brightness-110 transition shadow-lg shadow-dunya-main/20">
+                        <i class="fa-brands fa-whatsapp text-lg"></i> WhatsApp Order
+                    </a>
+                    <a href="tel:+31630803777" class="glass-panel text-white px-8 py-3 rounded-full font-bold hover:bg-white/10 transition">Call +31630803777</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Snippet (Truncated Description for Perfect Visual Layout) -->
+    <section class="py-20 px-6 relative z-10">
+        <div class="max-w-5xl mx-auto glass-panel rounded-[3rem] overflow-hidden reveal border border-white/10">
+            <div class="grid grid-cols-1 md:grid-cols-2">
+                <!-- Image side -->
+                <div class="h-64 md:h-auto bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1578916171728-46686eac8d58?q=80&w=1000&auto=format&fit=crop');">
+                </div>
+                
+                <!-- Text side (Optimized visuals and cleaned text) -->
+                <div class="p-10 md:p-14 flex flex-col justify-center">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel text-xs font-bold uppercase tracking-widest text-dunya-light mb-6 self-start">
+                        <i class="fa-solid fa-users"></i> Family for 25 Years
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-serif font-bold mb-4 text-white" data-i18n="about_title">A Warm Welcome. Just Good Food.</h2>
+                    <p class="text-gray-300 mb-8 leading-relaxed text-base" data-i18n="about_desc">
+                        Our goal is simple: a smile, kindness, and exceptional service.
+                    </p>
+                    <a href="aboutus.html" class="glass-button self-start px-8 py-3 rounded-full text-white font-medium flex items-center gap-2 text-sm">
+                        <span data-i18n="btn_story">Read Our Story</span> <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                    <div class="mt-6 flex flex-wrap gap-3">
+                        <div class="flex items-center gap-2 glass-panel px-4 py-2 rounded-full text-gray-200 text-xs sm:text-sm">
+                            <i class="fa-solid fa-map-location-dot text-dunya-light"></i>
+                            <span>6535 RX Nijmegen</span>
+                        </div>
+                        <div class="flex items-center gap-2 glass-panel px-4 py-2 rounded-full text-gray-200 text-xs sm:text-sm">
+                            <i class="fa-solid fa-phone text-dunya-light"></i>
+                            <a href="tel:+31630803777" class="hover:text-white transition">+31 6 3080 3777</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="glass-nav border-t border-white/10 pt-20 pb-10 px-6">
+
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center gap-3 py-1 group mb-6">
+                        <i class="fa-solid fa-cart-shopping text-dunya-light text-xl md:text-2xl drop-shadow-sm"></i>
+                        <div class="flex flex-col md:flex-row md:items-center text-[15px] md:text-lg lg:text-xl font-black tracking-tight" style="font-family: 'Franklin Gothic Heavy', 'Arial Black', sans-serif;">
+                            <span class="text-dunya-light md:mr-4">DÜNYA</span>
+                            <div class="flex items-center gap-2 md:gap-4 text-white">
+                                <span>INTERNATI<i class="fa-solid fa-earth-americas text-blue-400 scale-90 mx-[1px]"></i>NALE</span>
+                                <span>SUPERMARKT</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mb-8 max-w-md" data-i18n="footer_desc">Bringing the flavors of the world to our local community for the last 25 years. Your trusted partner for quality international groceries.</p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full glass-panel flex items-center justify-center hover:bg-dunya-main transition"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full glass-panel flex items-center justify-center hover:bg-dunya-main transition"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://wa.me/31630803777" class="w-10 h-10 rounded-full glass-panel flex items-center justify-center hover:bg-dunya-main transition"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-serif font-bold mb-6 text-white" data-i18n="footer_links">Quick Links</h4>
+                    <ul class="space-y-4 text-gray-400 text-sm">
+                        <li><a href="index.html" class="hover:text-dunya-light transition" data-i18n="nav_home">Home</a></li>
+                        <li><a href="items.html" class="hover:text-dunya-light transition" data-i18n="nav_products">Products</a></li>
+                        <li><a href="aboutus.html" class="hover:text-dunya-light transition" data-i18n="nav_about">About Us</a></li>
+                        <li><a href="vacancy.html" class="hover:text-dunya-light transition" data-i18n="nav_vacancy">Vacancy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-serif font-bold mb-6 text-white" data-i18n="footer_contact">Location</h4>
+                    <p class="text-gray-400 text-sm mb-4">Couwenbergstraat 115,<br>6535 RX Nijmegen</p>
+                    <p class="text-gray-400 text-sm">dunyahatert@hotmail.com</p>
+                    <p class="text-dunya-light font-bold mt-2">+31630803777</p>
+                </div>
+            </div>
+            <div class="border-t border-white/5 pt-8 text-center text-xs text-gray-500">
+                <p data-i18n="footer_rights">© 2026 DÜNYA INTERNATIONALE SUPERMARKT. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive JavaScript -->
+    <script>
+        // 0. THEME MANAGEMENT
+        function toggleTheme() {
+            const html = document.documentElement;
+            html.classList.toggle('light');
+            localStorage.setItem('theme', html.classList.contains('light') ? 'light' : 'dark');
+        }
+
+        (function() {
+            const theme = localStorage.getItem('theme') || 'light';
+            if (theme === 'dark') {
+                document.documentElement.classList.remove('light');
+            }
+        })();
+
+        // 1. DYNAMIC TRANSLATION SYSTEM (i18n)
+        const translations = {
+            en: {
+                nav_home: "Home",
+                nav_products: "Products",
+                nav_about: "About Us",
+                nav_vacancy: "Vacancy",
+                btn_explore: "Explore",
+                hero_title1: " HAVE A ",
+                hero_title2: " SWEEEET DAY !!! ",
+                hero_desc: "25 years of trust in Nijmegen. Premium quality, Halal assurance, and a family where everyone is always welcome. Fresh food from every corner of the globe.",
+                btn_products: "View Products",
+                btn_story: "Read Our Story",
+                cat_subtitle: "Our Departments",
+                cat_title: "Fresh & Authentic",
+                cat_meat: "The Butcher",
+                cat_meat_desc: "Known as the best meat and chicken in the Gelderland region. Halal certified, cut fresh daily.",
+                cat_pantry: "Global Pantry",
+                cat_pantry_desc: "Products spanning the Balkans, Asia, and Africa. If you miss a taste from home, we have it.",
+                cat_bakery: "Fresh Bakery",
+                cat_bakery_desc: "Authentic Turkish breads, sweet baklava, and daily fresh pastries. Baked with perfection.",
+                premium_service_title: "Premium Service + contact",
+                premium_service_desc: "Ordering for 2+ weeks? Avoid the search! WhatsApp your list to us. Just pick up and pay. No advanced payment required.",
+                about_title: "A Warm Welcome. Just Good Food.",
+                about_desc: "Our goal is simple: a smile, kindness, and exceptional service.",
+                footer_desc: "Bringing the flavors of the world to our community for the last 25 years. Your trusted partner for quality international groceries.",
+                footer_links: "Quick Links",
+                footer_contact: "Location",
+                footer_rights: "© 2026 DÜNYA INTERNATIONALE SUPERMARKT. All rights reserved."
+            },
+            nl: { 
+                nav_home: "Startpagina", nav_products: "Producten", nav_about: "Over Ons", nav_vacancy: "Vacature",
+                btn_explore: "Ontdek",
+                hero_title1: " HEB EEN ", hero_title2: " FIJNE DAG !!! ",
+                hero_desc: "25 jaar vertrouwen in Nijmegen. Premium kwaliteit, 99% Halal garantie, en een familie waar iedereen welkom is. Vers voedsel uit elke hoek van de wereld.",
+                btn_products: "Bekijk Producten", btn_story: "Lees Ons Verhaal",
+                cat_subtitle: "Onze Afdelingen", cat_title: "Vers & Authentiek",
+                cat_meat: "De Slagerij", cat_meat_desc: "Bekend als het beste vlees en kip in de regio Gelderland. 99% Halal gecertificeerd, dagelijks vers gesneden.",
+                cat_pantry: "Wereldse Boodschappen", cat_pantry_desc: "Producten uit de Balkan, Azië en Afrika. Als je de smaak van thuis mist, hebben wij het.",
+                cat_bakery: "Verse Bakkerij", cat_bakery_desc: "Authentiek Turks brood, zoete baklava en dagelijks verse gebakjes. Met perfectie gebakken.",
+                premium_service_title: "Premium Service + contact",
+                premium_service_desc: "Boodschappen voor 2+ weken? Bestel via WhatsApp! Wij pakken het in, u haalt het op. Geen aanbetaling nodig.",
+                about_title: "Een Warm Welkom. Gewoon Goed Eten.",
+                about_desc: "Ons doel is simpel: een glimlach, vriendelijkheid en uitzonderlijke service.",
+                footer_desc: "De smaken van de wereld in onze gemeenschap voor de afgelopen 25 jaar. Uw partner voor kwaliteitsproducten.",
+                footer_links: "Snelkoppelingen", footer_contact: "Locatie", footer_rights: "© 2026 DÜNYA INTERNATIONALE SUPERMARKT. Alle rechten voorbehouden."
+            },
+            tr: {
+                nav_home: "Ana Sayfa", nav_products: "Ürünler", nav_about: "Hakkımızda", nav_vacancy: "İş İlanı",
+                btn_explore: "Keşfet",
+                hero_title1: " TATLI BİR ", hero_title2: " GÜN DİLERİZ !!! ",
+                hero_desc: "Nijmegen'de 25 yıllık güven. Premium kalite, %99 Helal güvencesi ve herkesin sevgiyle karşılandığı bir aile. Dünyanın her köşesinden taze gıda.",
+                btn_products: "Ürünleri Gör", btn_story: "Hikayemizi Oku",
+                cat_subtitle: "Reyonlarımız", cat_title: "Taze ve Otantik",
+                cat_meat: "Kasap", cat_meat_desc: "Gelderland bölgesindeki en iyi et ve tavuk olarak bilinir. %99 Helal sertifikalı, günlük taze kesim.",
+                cat_pantry: "Dünya Marketi", cat_pantry_desc: "Balkanlar, Asya ve Afrika'ya uzanan ürünler. Memleketinizin tadını özlediyseniz, bizde var.",
+                cat_bakery: "Taze Fırın", cat_bakery_desc: "Otantik Türk ekmekleri, tatlı baklava ve günlük taze hamur işleri. Mükemmellikle pişirilir.",
+                premium_service_title: "Premium Servis + İletişim",
+                premium_service_desc: "2+ haftalık alışveriş mi? WhatsApp'tan listenizi atın, we hazırlayalım. Kapıda ödeme, ön ödeme yok!",
+                about_title: "Sıcak Bir Karşılama. Sadece İyi Yemek.",
+                about_desc: "Amacımız basit: bir gülümseme, nezaket ve olağanüstü hizmet.",
+                footer_desc: "Dünya lezzetlerini son 25 yıldır mahallemize sunuyoruz. Güvenilir ortağınız.",
+                footer_links: "Hızlı Linkler", footer_contact: "Konum", footer_rights: "© 2026 DÜNYA INTERNATIONALE SUPERMARKT. Tüm hakları saklıdır."
+            },
+            fr: {
+                nav_home: "Accueil", nav_products: "Produits", nav_about: "À Propos", nav_vacancy: "Offres d'emploi",
+                btn_explore: "Explorer",
+                hero_title1: " PASSEZ UNE ", hero_title2: " DOUCE JOURNÉE !!! ",
+                hero_desc: "25 ans de confiance à Nimègue. Qualité premium, 99% Halal, et une famille où tout le monde est le bienvenu. Des aliments frais du monde entier.",
+                btn_products: "Voir les Produits", btn_story: "Notre Histoire",
+                cat_subtitle: "Nos Rayons", cat_title: "Frais et Authentique",
+                cat_meat: "La Boucherie", cat_meat_desc: "Connue comme la meilleure viande de la région. Certifiée 99% Halal, coupée fraîche tous les jours.",
+                cat_pantry: "Épicerie du Monde", cat_pantry_desc: "Produits des Balkans, d'Asie et d'Afrique. Le goût de la maison est ici.",
+                cat_bakery: "Boulangerie Fraîche", cat_bakery_desc: "Pains turcs authentiques, baklavas et pâtisseries fraîches tous les jours.",
+                premium_service_title: "Service Premium + contact",
+                premium_service_desc: "Courses pour 2+ semaines? Commandez via WhatsApp! On prépare tout, vous payez au retrait. Aucun acompte requis.",
+                about_title: "Un Accueil Chaleureux. Juste de la Bonne Nourriture.",
+                about_desc: "Notre objectif : un sourire, de la gentillesse et un service exceptionnel.",
+                footer_desc: "Les saveurs du monde pour notre communauté depuis 25 ans. Votre partenaire de confiance.",
+                footer_links: "Liens Rapides", footer_contact: "Localisation", footer_rights: "© 2026 DÜNYA INTERNATIONALE SUPERMARKT. Tous droits réservés."
+            },
+            ku: {
+                nav_home: "Destpêk", nav_products: "Berhem", nav_about: "Derbarê Me", nav_vacancy: "Daxwaza Kar",
+                btn_explore: "Lêgerîn",
+                hero_title1: " ROJEKE ", hero_title2: " ŞÊRÎN !!! ",
+                hero_desc: "25 salên baweriyê li Nijmegenê. Kalîteya bilind, 99% garantiya Helal, û malbatek ku her kes lê tê pêşwazîkirin. Xwarinên nû ji her derê cîhanê.",
+                btn_products: "Berheman Bibîne", btn_story: "Çîroka Me Bixwîne",
+                cat_subtitle: "Beşên Me", cat_title: "Nû û Orjînal",
+                cat_meat: "Qesab", cat_meat_desc: "Di herêma Gelderland de wekî goşt û mirîşka herî baş tê naskirin. 99% sertîfîkaya Helal, her roj nû tê birîn.",
+                cat_pantry: "Marketa Cîhanê", cat_pantry_desc: "Berhemên ji Balkan, Asya û Afrîkayê. Ger hûn bêriya tama welat dikin, li cem me heye.",
+                cat_bakery: "Firina Nû", cat_bakery_desc: "Nanên tirkî yên orjînal, baqlawaya şîrîn û şîraniyên nû yên rojane. Bi bêkêmahî hatî pijandin.",
+                premium_service_title: "Xizmeta Premium + Têkilî",
+                premium_service_desc: "Ji bo 2+ hefteyan kirîn? Bi WhatsAppê lîsteya xwe bişînin. Werin û bidin, pêşekî tune!",
+                about_title: "Bi xêr hatineke germ. Tenê Xwarina Baş.",
+                about_desc: "Armanca me hêsan e: kenek, dilovanî û xizmetek awarte.",
+                footer_desc: "Tehmên dinyayê ji bo civaka me ji bo 25 salên dawî. Hevparê we yê bawerbar.",
+                footer_links: "Lînkên Bilez", footer_contact: "Cîh", footer_rights: "© 2026 DÜNYA INTERNATIONALE SUPERMARKT. Maf parastî ne."
+            },
+            es: {
+                nav_home: "Inicio", nav_products: "Productos", nav_about: "Nosotros", nav_vacancy: "Vacante",
+                btn_explore: "Explorar",
+                hero_title1: " ¡TEN UN ", hero_title2: " DULCE DÍA! !!! ",
+                hero_desc: "25 años de confianza en Nijmegen. Calidad premium, 99% garantía Halal y una familia donde todos son bienvenidos. Comida fresca de todos los rincones del mundo.",
+                btn_products: "Ver Productos", btn_story: "Nuestra Historia",
+                cat_subtitle: "Nuestros Departamentos", cat_title: "Fresco y Auténtico",
+                cat_meat: "La Carnicería", cat_meat_desc: "Conocida como la mejor carne y pollo de la región de Gelderland. Certificado 99% Halal, cortado fresco a diario.",
+                cat_pantry: "Despensa Global", cat_pantry_desc: "Productos de los Balcanes, Asia y África. Si extrañas el sabor de tu hogar, lo tenemos.",
+                cat_bakery: "Panadería Fresca", cat_bakery_desc: "Panes turcos auténticos, baklava dulce y pasteles frescos diarios. Horneados a la perfección.",
+                premium_service_title: "Servicio Premium + contacto",
+                premium_service_desc: "¿Compra para 2+ semanas? Pida por WhatsApp. Nosotros lo preparamos, usted solo paga al recoger. Sin adelantos.",
+                about_title: "Una Cálida Bienvenida. Solo Buena Comida.",
+                about_desc: "Nuestro objetivo es simple: una sonrisa, amabilidad y un servicio excepcional.",
+                footer_desc: "Sabores del mundo en nuestra comunidad por los últimos 25 años. Su socio de confianza.",
+                footer_links: "Enlaces Rápidos", footer_contact: "Ubicación", footer_rights: "© 2026 DÜNYA INTERNATIONALE SUPERMARKT. Todos los derechos reservados."
+            },
+            ar: {
+                nav_home: "الرئيسية", nav_products: "المنتجات", nav_about: "من نحن", nav_vacancy: "فرصة عمل",
+                btn_explore: "استكشف",
+                hero_title1: " نتمنى لكم ", hero_title2: " يوماً سعيداً !!! ",
+                hero_desc: "25 عاماً من الثقة في نايميخن. جودة ممتازة، ضمان حلال بنسبة 99%، وعائلة ترحب بالجميع. طعام طازج من كل أنحاء العالم.",
+                btn_products: "عرض المنتجات", btn_story: "اقرأ قصتنا",
+                cat_subtitle: "أقسامنا", cat_title: "طازج وأصيل",
+                cat_meat: "الملحمة", cat_meat_desc: "تشتهر بأفضل اللحوم والدواجن في منطقة خيلدرلاند. حلال بنسبة 99%، تُقطع طازجة يومياً.",
+                cat_pantry: "المؤنة العالمية", cat_pantry_desc: "منتجات من البلقان وآسيا وأفريقيا. إذا كنت تشتاق لمذاق الوطن، فستجده عندنا.",
+                cat_bakery: "المخبز الطازج", cat_bakery_desc: "خبز تركي أصيل، بقلاوة حلوة، ومعجنات طازجة يومياً. خُبزت بإتقان.",
+                premium_service_title: "خدمة ممتازة + اتصال",
+                premium_service_desc: "طلب لـ اسبوعين أو أكثر؟ أرسل قائمتك عبر الواتساب. نجهزها لك وتدفع عند الاستلام. لا يشترط الدفع المسبق.",
+                about_title: "ترحيب حار. فقط طعام جيد.",
+                about_desc: "هدفنا بسيط: ابتسامة، لطف، وخدمة استثنائية.",
+                footer_desc: "نقدم نكهات العالم لمجتمعنا على مدار الـ 25 عاماً الماضية. شريكك الموثوق.",
+                footer_links: "روابط سريعة", footer_contact: "الموقع", footer_rights: "© 2026 DÜNYA INTERNATIONALE SUPERMARKT. جميع الحقوق محفوظة."
+            },
+            zz: {
+                nav_home: "Serpel", nav_products: "Berhemi", nav_about: "Heqa Ma de", nav_vacancy: "Daxwaza Kar",
+                btn_explore: "Keşf bıkerê",
+                hero_title1: " ROJÊ DO ", hero_title2: " ŞÊRÎN !!! ",
+                hero_desc: "Nijmegen de 25 serrî itimat. Kaliteyo berz, %99 garantiya Helalî, u keyeyê ke her kes tede yeno pîroz kerdene. Her kuncê dınya ra werdê taze.",
+                btn_products: "Berheman bıvênê", btn_story: "Hêkata Ma bıwanê",
+                cat_subtitle: "Qısımanê Ma", cat_title: "Taze u Orjinal",
+                cat_meat: "Qesab", cat_meat_desc: "Mıntıqaya Gelderland de goşt u kerga tewr rınde zanîyena. %99 sertîfîkaya Helalî, rojane taze bırîyena.",
+                cat_pantry: "Marketa Dınya", cat_pantry_desc: "Balkan, Asya u Afrika ra berhemi. Eke şıma bêriya tamê welatê xo kenê, ma de esto.",
+                cat_bakery: "Noniya Taze", cat_bakery_desc: "Nanê tırkiyo orjinal, baqlawaya şîrine u nanpajê rojaneyê taze. Bi kemalî pociyeno.",
+                premium_service_title: "Xızmeto Premium + Têkilî",
+                premium_service_desc: "2+ heftan rê market? WhatsApp ra bınusên. Ma amade kenîme, şıma teyna bıpayerê. Verpê dînayîş çînyo.",
+                about_title: "Yew xêrhatîyo germ. Teyna werdê rındî.",
+                about_desc: "Hedefê ma hêsano: yew huyayîş, xeyrxawî u xızmetê do xasek.",
+                footer_desc: "25 serra peyêne de tehmê dinya ma de estê. İtibarê şıma yo herdemi.",
+                footer_links: "Lînkê Leze", footer_contact: "Ca", footer_rights: "© 2026 DÜNYA INTERNATIONALE SUPERMARKT. Heqî amê pawıtene."
+            }
+        };
+
+        // Language Dropdown Logic
+        const langBtn = document.getElementById('lang-btn');
+        const langDropdown = document.getElementById('lang-dropdown');
+        const currentLangText = document.getElementById('current-lang-text');
+        let isLangOpen = false;
+
+        // Guard: if markup changes, avoid breaking the whole page JS.
+        if (langBtn && langDropdown && currentLangText) {
+            langBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                isLangOpen = !isLangOpen;
+                if (isLangOpen) {
+                    langDropdown.classList.remove('opacity-0', 'scale-95', 'pointer-events-none');
+                    langDropdown.classList.add('opacity-100', 'scale-100');
+                } else {
+                    langDropdown.classList.add('opacity-0', 'scale-95', 'pointer-events-none');
+                    langDropdown.classList.remove('opacity-100', 'scale-100');
+                }
+            });
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', () => {
+            if(isLangOpen) {
+                isLangOpen = false;
+                if (langDropdown) {
+                    langDropdown.classList.add('opacity-0', 'scale-95', 'pointer-events-none');
+                    langDropdown.classList.remove('opacity-100', 'scale-100');
+                }
+            }
+        });
+
+        // The Translation Function
+        window.setLanguage = function(langCode) {
+            localStorage.setItem('dunya-language', langCode);
+            
+            // Update button text
+            currentLangText.textContent = langCode.toUpperCase();
+            
+            // Handle RTL
+            const isRTL = langCode === 'ar' || langCode === 'ku';
+            document.documentElement.setAttribute('dir', isRTL ? 'rtl' : 'ltr');
+
+            // Highlight selected option
+            document.querySelectorAll('.lang-option').forEach(el => {
+                const itemLang = el.getAttribute('data-lang');
+                if(itemLang === langCode) {
+                    el.classList.add('lang-active');
+                } else if(itemLang) {
+                    el.classList.remove('lang-active');
+                }
+            });
+
+            // Translate all elements with data-i18n attribute
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if(translations[langCode] && translations[langCode][key]) {
+                    // Auto-style "Halal" and add icon with brand blue theme
+                    const styledText = translations[langCode][key].replace(/(Halal|Helal|حلال)/gi, '<span class="text-dunya-light inline-flex items-center gap-1 font-bold"><i class="fa-solid fa-certificate text-[10px]"></i> $1</span>');
+                    
+                    // Add fade animation during text change
+                    el.style.opacity = '0';
+                    setTimeout(() => {
+                        el.innerHTML = styledText;
+                        el.style.opacity = '1';
+                    }, 200);
+                }
+            });
+            
+            // Close dropdown if on desktop
+            isLangOpen = false;
+            if (langDropdown) {
+                langDropdown.classList.add('opacity-0', 'scale-95', 'pointer-events-none');
+                langDropdown.classList.remove('opacity-100', 'scale-100');
+            }
+        };
+
+        // 2. Greeting Cycler (Top Left of Hero)
+        const greetings = ["Welcome", "Welkom", "Hoşgeldiniz", "Bixêrhatî", "Bienvenue", "Bienvenidos", "أهلاً بك", "Xêr Amey"];
+        const welcomeText = document.getElementById('welcome-text');
+        let greetIndex = 0;
+        setInterval(() => {
+            welcomeText.style.opacity = '0';
+            setTimeout(() => {
+                greetIndex = (greetIndex + 1) % greetings.length;
+                welcomeText.textContent = greetings[greetIndex];
+                welcomeText.style.opacity = '1';
+                welcomeText.style.transition = 'opacity 0.4s ease';
+            }, 400);
+        }, 3000);
+
+        // 3. Custom Mouse Cursor (Blue Accent Theme)
+        const dot = document.getElementById('cursor-dot');
+        const outline = document.getElementById('cursor-outline');
+
+        if (window.matchMedia("(pointer: fine)").matches) {
+            window.addEventListener('mousemove', (e) => {
+                const posX = e.clientX; const posY = e.clientY;
+                dot.style.left = `${posX}px`; dot.style.top = `${posY}px`;
+                outline.animate({ left: `${posX}px`, top: `${posY}px` }, { duration: 500, fill: "forwards" });
+            });
+
+            document.querySelectorAll('a, button, .tilt-card').forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    outline.style.width = '50px'; outline.style.height = '50px';
+                    outline.style.backgroundColor = 'rgba(0, 100, 174, 0.1)';
+                });
+                el.addEventListener('mouseleave', () => {
+                    outline.style.width = '36px'; outline.style.height = '36px';
+                    outline.style.backgroundColor = 'transparent';
+                });
+            });
+        }
+
+        // 4. Smooth Scroll Reveal
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15, rootMargin: "0px 0px -50px 0px" });
+
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+        // 5. 3D Tilt Effect
+        if (window.matchMedia("(pointer: fine)").matches) {
+            document.querySelectorAll('.tilt-card').forEach(card => {
+                card.addEventListener('mousemove', e => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left; const y = e.clientY - rect.top;
+                    const rotateX = ((y - rect.height / 2) / (rect.height / 2)) * -8;
+                    const rotateY = ((x - rect.width / 2) / (rect.width / 2)) * 8;
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+                });
+            });
+        }
+
+        // 6. Mobile Menu & Navbar Scroll
+        const mobileBtn = document.getElementById('mobile-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        // Define early and guard missing elements (prevents runtime errors)
+        window.toggleMobileMenu = function() {
+            if (!mobileMenu || !mobileBtn) return;
+
+            const isHidden = mobileMenu.classList.contains('hidden');
+            if (isHidden) {
+                mobileMenu.classList.remove('hidden');
+                setTimeout(() => {
+                    mobileMenu.classList.remove('opacity-0', 'pointer-events-none');
+                    mobileMenu.classList.add('opacity-100', 'flex');
+                    document.body.style.overflow = 'hidden';
+                    mobileBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+                }, 10);
+            } else {
+                mobileMenu.classList.remove('opacity-100');
+                mobileMenu.classList.add('opacity-0', 'pointer-events-none');
+                setTimeout(() => {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenu.classList.remove('flex');
+                    document.body.style.overflow = 'auto';
+                    mobileBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
+                }, 300);
+            }
+        };
+
+        if (mobileBtn) mobileBtn.addEventListener('click', window.toggleMobileMenu);
+
+        const navbar = document.getElementById('navbar');
+        function handleNavbarScroll() {
+            const isLight = document.documentElement.classList.contains('light');
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-lg');
+                if (!isLight) navbar.style.background = 'rgba(5, 12, 20, 0.85)';
+                else navbar.style.background = '#ffffff';
+            } else {
+                navbar.classList.remove('shadow-lg');
+                if (!isLight) navbar.style.background = 'rgba(5, 10, 18, 0.6)';
+                else navbar.style.background = '#ffffff';
+            }
+        }
+        window.addEventListener('scroll', handleNavbarScroll);
+
+        // Global Initialization
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('dunya-language') || 'en';
+            setLanguage(savedLang);
+            handleNavbarScroll();
+        });
+    </script>
+</body>
+</html>
