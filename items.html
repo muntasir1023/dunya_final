@@ -27,9 +27,9 @@
                     },
                     colors: {
                         dunya: {
-                            light: '#0064AE', /* Premium Blue */
-                            main: '#0064AE',  /* Brand Main Blue */
-                            dark: '#004375',  /* Deep Blue */
+                            light: '#005E2A', /* Premium Green */
+                            main: '#005E2A',  /* Brand Main Green */
+                            dark: '#005E2A',  /* Deep Green */
                             overlay: 'rgba(10, 20, 25, 0.75)', /* Balanced dark overlay for food images */
                         }
                     }
@@ -91,9 +91,9 @@
             cursor: pointer;
         }
         .category-pill.active {
-            background: #0064AE;
+            background: #005E2A;
             color: white;
-            box-shadow: 0 8px 20px rgba(0, 100, 174, 0.35);
+            box-shadow: 0 8px 20px rgba(0, 94, 42, 0.35);
             border-color: transparent;
         }
 
@@ -108,7 +108,7 @@
             right: 10%;
             bottom: 6px;
             height: 2px;
-            background: #0064AE;
+            background: #005E2A;
             border-radius: 9999px;
         }
 
@@ -129,7 +129,8 @@
         html.light .ambient-bg { filter: brightness(1.0) saturate(0.8); opacity: 0.3; }
         
         html.light .glass-panel { background: #ffffff; border: 1px solid rgba(0,0,0,0.1); box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05); color: #0f172a; }
-        html.light .glass-nav { background: rgba(255, 255, 255, 0.9); border-bottom: 1px solid rgba(0,0,0,0.08); }
+        /* Match index.html transparency (light mode) */
+        html.light .glass-nav { background: rgba(0, 94, 42, 0.07) !important; border-bottom: 1px solid rgba(0,0,0,0.1); }
         
         /* Fix Text Visibility */
         html.light .text-white:not(.glass-button *),
@@ -169,7 +170,7 @@
         }
         .theme-switch-handle {
             position: absolute; left: 3px; width: 20px; height: 20px;
-            background: #0064AE; border-radius: 50%;
+            background: #005E2A; border-radius: 50%;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: 0 2px 4px rgba(0,0,0,0.2);
             z-index: 10;
@@ -187,13 +188,13 @@
         }
         html.light #mobile-menu { background: rgba(255, 255, 255, 0.88) !important; }
 
-        .lang-active { color: #0064AE; font-weight: bold; }
+        .lang-active { color: #005E2A; font-weight: bold; }
         html.light .lang-option:hover { background-color: rgba(0,0,0,0.05); }
         /* Bulk Service Banner Style */
 
         /* Custom Cursor */
         #cursor-dot {
-            width: 8px; height: 8px; background-color: #0064AE;
+            width: 8px; height: 8px; background-color: #005E2A;
             border-radius: 50%; position: fixed; pointer-events: none;
             z-index: 9999; transform: translate(-50%, -50%);
         }
@@ -340,7 +341,7 @@
             content: '';
             position: absolute;
             inset: -2px;
-            background: radial-gradient(circle at 30% 20%, rgba(0,100,174,0.35) 0%, rgba(0,0,0,0) 55%);
+            background: radial-gradient(circle at 30% 20%, rgba(0,94,42,0.35) 0%, rgba(0,0,0,0) 55%);
             opacity: 0;
             transition: opacity 0.22s ease;
             pointer-events: none;
@@ -348,7 +349,7 @@
         .readmore-btn:hover {
             transform: translateY(-2px);
             background: rgba(255,255,255,0.10);
-            box-shadow: 0 12px 28px -14px rgba(0,100,174,0.45);
+            box-shadow: 0 12px 28px -14px rgba(0,94,42,0.45);
         }
         .readmore-btn:hover::after { opacity: 1; }
         .readmore-btn:active { transform: translateY(-1px) scale(0.99); }
@@ -387,6 +388,14 @@
 
             <!-- Action & WORKING Language Switcher (Stays aligned on the right) -->
             <div class="hidden md:flex items-center gap-4 relative">
+
+                <!-- Centered banner text (copied from index.html) -->
+                <div class="hidden sm:flex items-center justify-center flex-1">
+                    <div class="glass-panel px-5 py-2 rounded-full border border-white/10">
+                        <span class="text-xs font-bold tracking-wide text-white">HAVE A</span>
+                        <span class="ml-2 text-xs font-bold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-dunya-light to-dunya-light">SWEEEET DAY !!!</span>
+                    </div>
+                </div>
                 
                 <!-- Theme Toggle -->
                 <div class="theme-switch-container" onclick="toggleTheme()">
@@ -488,7 +497,7 @@
     </main>
 
     <!-- Premium Service Section -->
-    <section class="pb-32 px-6 reveal" id="premium-banner">
+    <section class="pb-20 px-6 reveal" id="premium-banner">
         <div class="max-w-4xl mx-auto">
             <div class="glass-panel p-8 md:p-12 rounded-[3rem] border-dunya-main/30 border shadow-2xl relative overflow-hidden text-center">
                 <div class="absolute -top-24 -right-24 w-48 h-48 bg-dunya-main/10 rounded-full blur-3xl"></div>
@@ -510,6 +519,31 @@
         </div>
     </section>
 
+    <!-- Too Good To Go Section -->
+    <section class="pb-32 px-6 reveal active" id="tgtg-banner">
+        <div class="max-w-4xl mx-auto">
+            <div class="glass-panel p-8 md:p-12 rounded-[3rem] border-dunya-main/30 border shadow-2xl relative overflow-hidden text-center">
+                <div class="absolute -top-24 -right-24 w-48 h-48 bg-dunya-main/10 rounded-full blur-3xl"></div>
+                <div class="absolute -bottom-24 -left-24 w-48 h-48 bg-dunya-main/5 rounded-full blur-3xl"></div>
+
+                <h4 class="text-dunya-light font-bold flex items-center justify-center gap-2 mb-6 text-sm uppercase tracking-widest">
+                    <i class="fa-solid fa-seedling"></i> Too Good To Go
+                </h4>
+
+                <p class="text-lg md:text-xl text-gray-200 leading-relaxed mb-8 max-w-2xl mx-auto">
+                    Together against food waste! Via Too Good To Go, we offer daily surprise bags with fresh products and delicacies that are left over at the end of the day. This way, you enjoy high-quality products for an affordable price and you contribute to a more sustainable future.
+                </p>
+
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="https://toogoodtogo.com" target="_blank" rel="noopener noreferrer"
+                       class="bg-dunya-main text-white px-8 py-3 rounded-full font-bold flex items-center justify-center gap-2 hover:brightness-110 transition shadow-lg shadow-dunya-main/20">
+                        <i class="fa-solid fa-bag-shopping text-lg"></i> Get Surprise Bags
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer - Refined like index.html -->
     <footer class="glass-nav border-t border-white/10 pt-20 pb-10 px-6">
         <div class="max-w-7xl mx-auto">
@@ -520,7 +554,7 @@
                         <div class="flex flex-col md:flex-row md:items-center text-[15px] md:text-lg lg:text-xl font-black tracking-tight" style="font-family: 'Franklin Gothic Heavy', 'Arial Black', sans-serif;">
                             <span class="text-dunya-light md:mr-4">DÜNYA</span>
                             <div class="flex items-center gap-2 md:gap-4 text-white">
-                                <span>INTERNATI<i class="fa-solid fa-earth-americas text-blue-400 scale-90 mx-[1px]"></i>NALE</span>
+                                <span>INTERNATI<i class="fa-solid fa-earth-americas text-dunya-light scale-90 mx-[1px]"></i>NALE</span>
                                 <span>SUPERMARKT</span>
                             </div>
                         </div>
@@ -677,7 +711,7 @@
             {
                 name: "Olive Oil & Sunflower Oil",
                 cat: "all",
-                img: "https://images.unsplash.com/photo-1514996937319-344454492b37?q=80&w=800&auto=format&fit=crop",
+                img: "https://raw.githubusercontent.com/muntasir1023/dunya_final/main/3.jpeg",
                 desc: "Discover the World of Olive Oil and Specialty Oils At our store, you will find an extensive selection of high-quality olive oils and unique specialty oils from various countries and traditions. From smooth and fruity extra virgin olive oil to exclusive nut, seed, and herb oils — we have the perfect oil for every taste and every dish. Our Olive Oil Collection Olive oil has been an essential part of Mediterranean cuisine for centuries. We offer a wide choice of: 🫒 Extra Virgin Olive Oil – Cold-pressed, pure, and full of flavor. Ideal for salads, bread, and cold dishes. 🫒 Mild Olive Oil – Gentle in taste and perfect for everyday use in the kitchen. 🫒 Organic Olive Oil – Sustainably produced with respect for nature and tradition. 🫒 Flavored Olive Oil – Enriched with delicious flavors such as garlic, lemon, chili, and herbs for an extra culinary experience. Specialty Oils for the Connoisseur In addition to olive oil, we offer a unique selection of specialty oils: 🌰 Hazelnut Oil – With a refined nutty flavor, perfect for salads and desserts. 🌰 Walnut Oil – Rich and aromatic, wonderful with cheese, vegetables, and cold dishes. 🌿 Sesame Oil – Essential in Asian cuisine for stir-fries and marinades. 🥥 Coconut Oil – Versatile for baking, cooking, and healthy recipes. 🔥 Wok Oil – Specially formulated for high temperatures and stir-fry dishes. 🌱 Flaxseed Oil – A natural source of omega-3 fatty acids. 🥑 Avocado Oil – Mild in flavor and excellent for baking and grilling. 🌾 Grapeseed Oil – Light and neutral with a high smoke point. 🌿 Black Cumin Seed Oil – A special oil valued for centuries. 🧄 Garlic Oil – Adds extra flavor to pasta, pizza, and Mediterranean dishes. 🌶️ Chili Oil – Gives every dish a delicious spicy touch. 🍄 Truffle Oil – An exclusive flavor enhancer for true connoisseurs.",
             },
             {
@@ -703,6 +737,48 @@
                 cat: "all",
                 img: "https://images.unsplash.com/photo-1541742819-7f7d6f6d8a77?q=80&w=800&auto=format&fit=crop",
                 desc: "Lavash is a traditional flatbread popular across the Middle East and particularly cherished in Lebanese cuisine. This thin, soft bread is made with simple ingredients and is known for its light texture and versatility. Lavash is ideal for making wraps, sandwiches, and mezze platters. It pairs beautifully with hummus, falafel, grilled vegetables, meat dishes, and various dips. Its soft texture makes it easy to roll or fill with a variety of ingredients.",
+            },
+            {
+                name: "Halal meat and chicken",
+                cat: "all",
+                img: "https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=800&auto=format&fit=crop",
+                desc: "Our meat and our chicken are carefully selected and prepared according to halal guidelines. This means that the entire process, from purchasing to preparation, complies with Islamic regulations. We attach great value to quality, hygiene, and respect for animals and tradition, so that you can enjoy flavorful products with peace of mind.",
+            },
+            {
+                name: "Eastern Catering",
+                cat: "all",
+                img: "https://images.unsplash.com/photo-1529692236671-f1a9673cda8e?q=80&w=800&auto=format&fit=crop",
+                desc: "Bring the rich flavors of Eastern cuisine to your party or event with our fresh and authentic catering. From traditional hot dishes and mezze to fragrant rice dishes, grilled specialties, and sweets – everything is prepared with care and according to authentic recipes. Perfect for parties, gatherings, and special occasions.",
+            },
+            {
+                name: "Herbs & Spices",
+                cat: "all",
+                img: "https://images.unsplash.com/photo-1604908176997-125f25cc500f?q=80&w=800&auto=format&fit=crop",
+                desc: "Discover our wide selection of herbs and spices from all over the world. From fragrant Mediterranean herbs to powerful Eastern spices – perfect for giving every meal extra flavor. We offer fresh quality and authentic flavors for both traditional and modern dishes.",
+            },
+            {
+                name: "Baklava & Sweets",
+                cat: "all",
+                img: "https://images.unsplash.com/photo-1606314577946-8c37bd3b6b21?q=80&w=800&auto=format&fit=crop",
+                desc: "Enjoy our delicious, artisanal baklava and Mediterranean sweets. Prepared according to a traditional recipe with fresh nuts, fine layers of phyllo dough, and a perfect balance of sweetness. Ideal with coffee, tea, or as a luxury treat for any occasion.",
+            },
+            {
+                name: "Cleaning Supplies",
+                cat: "all",
+                img: "https://images.unsplash.com/photo-1583947582421-2c8a0b5c9f9e?q=80&w=800&auto=format&fit=crop",
+                desc: "Discover our wide assortment of cleaning supplies for a fresh and clean home. From cleaning agents and laundry products to kitchen and bathroom essentials – we offer quality products for every cleaning task. Practical, affordable, and indispensable for daily use.",
+            },
+            {
+                name: "Frozen Products",
+                cat: "all",
+                img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=800&auto=format&fit=crop",
+                desc: "In our frozen food department, you will find an extensive assortment of fresh and high-quality frozen products. From vegetables, fruit, and snacks to fish, meat, and international specialties – everything is carefully selected for convenience and taste. Ideal for a quick meal without compromising on quality.",
+            },
+            {
+                name: "Fireworks – 26 Years of Experience",
+                cat: "all",
+                img: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=800&auto=format&fit=crop",
+                desc: "With no less than 26 years of experience, we are known for quality, service, and an extensive assortment of fireworks. From colorful consumer fireworks to impressive effects – every year we ensure a spectacular New Year's Eve. Safety, reliability, and customer satisfaction are always central to everything we do.",
             }
         ];
 
@@ -737,7 +813,14 @@
 
                 card.innerHTML = `
                     <div class="relative w-full aspect-square rounded-[1.8rem] overflow-hidden mb-6 relative group">
-                        <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <img
+                            src="${p.img}"
+                            alt="${p.name}"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                            data-product-name="${p.name}"
+                            data-product-img-el="${p.name}"
+                            loading="lazy"
+                        >
                         <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
                         <div class="card-overlay-glow"></div>
                     </div>
@@ -940,11 +1023,23 @@
         
         if (mobileBtn) mobileBtn.addEventListener('click', toggleMobileMenu);
 
+        // Sliding disabled per request (static image only)
+        function startOliveOilSlider() {
+            // no-op
+        }
+
+
         window.addEventListener('DOMContentLoaded', () => {
             const savedLang = localStorage.getItem('dunya-language') || 'en';
             setLanguage(savedLang);
             displayProducts(products);
+            setTimeout(() => {
+                startOliveOilSlider();
+                // Debug log removed to prevent console noise/errors in production.
+            }, 0);
         });
+
+
 
         document.addEventListener('click', () => {
             if(!langDropdown.classList.contains('opacity-0')) {
