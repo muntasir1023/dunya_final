@@ -777,14 +777,17 @@
 
         // The Translation Function
         window.setLanguage = function(langCode) {
-            localStorage.setItem('dunya-language', langCode);
+            // Safety fallback if localStorage contains an unknown value
+            const safeLang = translations[langCode] ? langCode : 'en';
+            localStorage.setItem('dunya-language', safeLang);
             
             // Update button text
-            currentLangText.textContent = langCode.toUpperCase();
+            currentLangText.textContent = safeLang.toUpperCase();
             
             // Handle RTL
-            const isRTL = langCode === 'ar' || langCode === 'ku';
+            const isRTL = safeLang === 'ar' || safeLang === 'ku';
             document.documentElement.setAttribute('dir', isRTL ? 'rtl' : 'ltr');
+
 
             // Highlight selected option
             document.querySelectorAll('.lang-option').forEach(el => {
