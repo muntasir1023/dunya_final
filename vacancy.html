@@ -24,9 +24,9 @@
                     },
                     colors: {
                         dunya: {
-                            light: '#0064AE',
-                            main: '#0064AE',
-                            dark: '#004375',
+                            light: '#005E2A',
+                            main: '#005E2A',
+                            dark: '#005E2A',
                             overlay: 'rgba(10, 20, 25, 0.75)',
                         }
                     }
@@ -55,7 +55,7 @@
         .ambient-overlay {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
-            background: radial-gradient(circle at 50% 50%, rgba(0, 100, 174, 0.08) 0%, rgba(10, 15, 13, 0.98) 100%);
+            background: radial-gradient(circle at 50% 50%, rgba(0, 94, 42, 0.08) 0%, rgba(10, 15, 13, 0.98) 100%);
 
             z-index: -1;
         }
@@ -75,14 +75,14 @@
         }
 
         .glass-button {
-            background: rgba(0, 100, 174, 0.2);
+            background: rgba(0, 94, 42, 0.2);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(0, 100, 174, 0.4);
+            border: 1px solid rgba(0, 94, 42, 0.4);
             transition: all 0.3s ease;
         }
         .glass-button:hover {
-            background: rgba(0, 100, 174, 0.4);
-            box-shadow: 0 0 20px rgba(0, 100, 174, 0.3);
+            background: rgba(0, 94, 42, 0.4);
+            box-shadow: 0 0 20px rgba(0, 94, 42, 0.3);
             transform: translateY(-2px);
         }
 
@@ -92,7 +92,7 @@
 
         /* --- Light theme --- */
         html.light body { background-color: #fdfdfd; color: #0f172a; }
-        html.light .ambient-overlay { background: radial-gradient(circle at 50% 50%, rgba(0, 100, 174, 0.04) 0%, rgba(253, 253, 253, 0.7) 100%); }
+        html.light .ambient-overlay { background: radial-gradient(circle at 50% 50%, rgba(0, 94, 42, 0.04) 0%, rgba(253, 253, 253, 0.7) 100%); }
 
         html.light .ambient-bg { filter: brightness(1.0) saturate(0.8); opacity: 0.3; }
 
@@ -102,21 +102,38 @@
             box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
             color: #0f172a;
         }
+        /* Match index.html transparency (instead of opaque white) */
         html.light .glass-nav {
-            background: rgba(255, 255, 255, 0.9);
-            border-bottom: 1px solid rgba(0,0,0,0.08);
+            background: rgba(0, 94, 42, 0.07) !important;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
             backdrop-filter: blur(20px) saturate(180%);
             -webkit-backdrop-filter: blur(20px) saturate(180%);
         }
 
+        /* Enhanced Text Visibility (fix: vacancy.html text/button not turning dark in light mode) */
+        html.light .text-white:not(.glass-button *),
+        html.light .text-gray-100,
+        html.light .text-gray-200,
+        html.light .text-gray-300,
+        html.light .text-gray-400,
+        html.light h1,
+        html.light h2,
+        html.light h3,
+        html.light h4,
+        html.light .flex-col span {
+            color: #000000 !important;
+        }
+        html.light .text-gray-300, html.light .text-gray-400 { color: #000000 !important; }
+        html.light .text-dunya-light { color: #005E2A !important; }
+
         /* Cursor (blue accent is handled later by your other edits; keep simple here) */
         #cursor-dot {
-            width: 8px; height: 8px; background-color: #0064AE;
+            width: 8px; height: 8px; background-color: #005E2A;
             border-radius: 50%; position: fixed; pointer-events: none;
             z-index: 9999; transform: translate(-50%, -50%);
         }
         #cursor-outline {
-            width: 36px; height: 36px; border: 1px solid rgba(0, 100, 174, 0.6);
+            width: 36px; height: 36px; border: 1px solid rgba(0, 94, 42, 0.6);
             border-radius: 50%; position: fixed; pointer-events: none;
             z-index: 9998; transform: translate(-50%, -50%);
             transition: width 0.2s, height 0.2s, background-color 0.2s;
@@ -128,7 +145,7 @@
         [dir="rtl"] { text-align: right; }
         [dir="rtl"] .ml-auto { margin-right: auto; margin-left: 0; }
 
-        .lang-active { color: #0064AE; font-weight: bold; }
+        .lang-active { color: #005E2A; font-weight: bold; }
         #lang-dropdown { transform-origin: top right; transition: all 0.2s ease; }
 
         /* Mobile Menu Glass Fix */
@@ -154,7 +171,7 @@
         }
         .theme-switch-handle {
             position: absolute; left: 3px; width: 20px; height: 20px;
-            background: #0064AE; border-radius: 50%;
+            background: #005E2A; border-radius: 50%;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: 0 2px 4px rgba(0,0,0,0.2);
             z-index: 10;
@@ -185,6 +202,15 @@
 
             <!-- Actions -->
             <div class="hidden md:flex items-center gap-4 relative">
+
+                <!-- Centered banner text (copied from index.html) -->
+                <div class="hidden sm:flex items-center justify-center flex-1">
+                    <div class="glass-panel px-5 py-2 rounded-full border border-white/10">
+                        <span class="text-xs font-bold tracking-wide text-white">HAVE A</span>
+                        <span class="ml-2 text-xs font-bold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-dunya-light to-dunya-light">SWEEEET DAY !!!</span>
+                    </div>
+                </div>
+
                 <div class="theme-switch-container" onclick="toggleTheme()">
                     <div class="theme-switch-handle"></div>
                     <i class="fa-solid fa-moon text-[10px] text-dunya-light"></i>
@@ -423,9 +449,9 @@
                             <i class="fa-solid fa-user-graduate"></i>
                             <span data-i18n="intern_badge">Internship</span>
                         </div>
-                        <h2 class="text-3xl md:text-5xl font-serif font-bold text-white mb-5" data-i18n="intern_title">Internship at Our International Supermarket</h2>
+                        <h2 class="text-3xl md:text-5xl font-serif font-bold text-white mb-5" data-i18n="intern_title">Internship at our International Supermarket</h2>
                         <p class="text-gray-300 text-lg leading-relaxed" data-i18n="intern_intro">
-                            Are you looking for a valuable and varied internship in the retail sector? Then you’ve come to the right place.
+                            Are you looking for an educational and varied internship in retail? Then you’ve come to the right place.
                         </p>
                     </div>
 
@@ -440,7 +466,7 @@
                     <div>
                         <h3 class="text-xl md:text-2xl font-serif font-bold text-white mb-5 flex items-center gap-3">
                             <i class="fa-solid fa-lightbulb text-dunya-light"></i>
-                            <span data-i18n="intern_learn_title">What will you learn during your internship?</span>
+                            <span data-i18n="intern_learn_title">What can you learn during your internship?</span>
                         </h3>
                         <ul class="space-y-3 text-gray-300">
                             <li class="flex gap-3">
@@ -449,11 +475,11 @@
                             </li>
                             <li class="flex gap-3">
                                 <span class="text-dunya-light mt-1"><i class="fa-solid fa-check"></i></span>
-                                <span data-i18n="intern_learn_2">Stocking and presenting products;</span>
+                                <span data-i18n="intern_learn_2">Stocking and displaying products;</span>
                             </li>
                             <li class="flex gap-3">
                                 <span class="text-dunya-light mt-1"><i class="fa-solid fa-check"></i></span>
-                                <span data-i18n="intern_learn_3">Inventory management and logistical processes;</span>
+                                <span data-i18n="intern_learn_3">Inventory management and logistics processes;</span>
                             </li>
                             <li class="flex gap-3">
                                 <span class="text-dunya-light mt-1"><i class="fa-solid fa-check"></i></span>
@@ -465,7 +491,7 @@
                             </li>
                             <li class="flex gap-3">
                                 <span class="text-dunya-light mt-1"><i class="fa-solid fa-check"></i></span>
-                                <span data-i18n="intern_learn_6">Collaborating in a dynamic retail environment.</span>
+                                <span data-i18n="intern_learn_6">Collaborating within a dynamic retail environment.</span>
                             </li>
                         </ul>
                     </div>
@@ -478,7 +504,7 @@
                         <ul class="space-y-3 text-gray-300">
                             <li class="flex gap-3">
                                 <span class="text-dunya-light mt-1"><i class="fa-solid fa-circle-check"></i></span>
-                                <span data-i18n="intern_offer_1">Personal guidance from experienced colleagues;</span>
+                                <span data-i18n="intern_offer_1">Personal guidance from experienced staff;</span>
                             </li>
                             <li class="flex gap-3">
                                 <span class="text-dunya-light mt-1"><i class="fa-solid fa-circle-check"></i></span>
@@ -486,11 +512,11 @@
                             </li>
                             <li class="flex gap-3">
                                 <span class="text-dunya-light mt-1"><i class="fa-solid fa-circle-check"></i></span>
-                                <span data-i18n="intern_offer_3">The opportunity to gain practical experience in an international workplace;</span>
+                                <span data-i18n="intern_offer_3">The opportunity to gain practical experience in an international work setting;</span>
                             </li>
                             <li class="flex gap-3">
                                 <span class="text-dunya-light mt-1"><i class="fa-solid fa-circle-check"></i></span>
-                                <span data-i18n="intern_offer_4">Support to achieve your educational learning goals;</span>
+                                <span data-i18n="intern_offer_4">Scope to achieve the learning objectives of your study program;</span>
                             </li>
                             <li class="flex gap-3">
                                 <span class="text-dunya-light mt-1"><i class="fa-solid fa-circle-check"></i></span>
@@ -502,14 +528,24 @@
                     <div class="lg:col-span-2">
                         <div class="glass-panel rounded-[2rem] p-8 md:p-10 border border-white/10">
                             <p class="text-gray-300 leading-relaxed text-lg" data-i18n="intern_long">
-                                We believe it’s important that interns can develop themselves and build professional skills with confidence. That’s why we provide good supervision, clear agreements, and plenty of room to learn and ask questions.
+                                Our international supermarket is an accredited training company affiliated with the SBB (Cooperation Organisation for Vocational Education, Training and the Labour Market). This means we meet the quality standards for supervising vocational (MBO) students and offer a professional learning environment.
+                                <br><br>
+                                During your internship, you will get acquainted with all aspects of working in a supermarket. You will learn, among other things, how to display products, assist customers, manage inventory, and work as part of a team. Thanks to our store's international character, you will also come into contact with products, customers, and colleagues from diverse cultural backgrounds.
                             </p>
                             <div class="mt-8 inline-flex items-center gap-3 glass-panel px-6 py-5 rounded-[1.5rem] border border-white/10">
                                 <i class="fa-solid fa-envelope-open-text text-dunya-light"></i>
                                 <p class="text-gray-200 font-bold" data-i18n="intern_cta">
-                                    Are you motivated, eager to learn, and looking for a challenging internship? Feel free to contact us to discuss the possibilities. We look forward to welcoming you to our team!
+                                    Are you motivated, eager to learn, and looking for a challenging internship? Then contact us to discuss the possibilities. We look forward to welcoming you to our team.
                                 </p>
                             </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-2">
+                        <div class="glass-panel rounded-[2rem] p-8 md:p-10 border border-white/10">
+                            <p class="text-gray-300 leading-relaxed text-lg" data-i18n="intern_additional">
+                                We believe it is important for interns to develop and build their professional skills with confidence. That is why we provide good supervision, clear agreements, and plenty of room to learn and ask questions.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -527,7 +563,7 @@
                         <div class="flex flex-col md:flex-row md:items-center text-[15px] md:text-lg lg:text-xl font-black tracking-tight" style="font-family: 'Franklin Gothic Heavy', 'Arial Black', sans-serif;">
                             <span class="hidden md:inline-flex text-dunya-light md:mr-4">DÜNYA</span>
                             <div class="hidden md:inline-flex items-center gap-2 md:gap-4 text-white">
-                                <span>INTERNATI<i class="fa-solid fa-earth-americas text-blue-400 scale-90 mx-[1px]"></i>NALE</span>
+                                <span>INTERNATI<i class="fa-solid fa-earth-americas text-dunya-light scale-90 mx-[1px]"></i>NALE</span>
                                 <span>SUPERMARKT</span>
                             </div>
                         </div>
@@ -610,23 +646,24 @@
                 job_for_desc: "This position is ideal as a part-time job alongside school or studies, but it is also very suitable as a holiday job during school breaks.",
                 job_cta: "Does this sound like something you would enjoy? Then apply today!",
                 intern_badge: "Internship",
-                intern_title: "Internship at Our International Supermarket",
-                intern_intro: "Are you looking for a valuable and varied internship in the retail sector? Then you’ve come to the right place.",
-                intern_learn_title: "What will you learn during your internship?",
+                intern_title: "Internship at our International Supermarket",
+                intern_intro: "Are you looking for an educational and varied internship in retail? Then you’ve come to the right place.",
+                intern_learn_title: "What can you learn during your internship?",
                 intern_learn_1: "Customer-friendly and service-oriented work;",
-                intern_learn_2: "Stocking and presenting products;",
-                intern_learn_3: "Inventory management and logistical processes;",
+                intern_learn_2: "Stocking and displaying products;",
+                intern_learn_3: "Inventory management and logistics processes;",
                 intern_learn_4: "Checkout operations;",
                 intern_learn_5: "Working according to hygiene and safety guidelines;",
-                intern_learn_6: "Collaborating in a dynamic retail environment.",
+                intern_learn_6: "Collaborating within a dynamic retail environment.",
                 intern_offer_title: "What do we offer?",
-                intern_offer_1: "Personal guidance from experienced colleagues;",
+                intern_offer_1: "Personal guidance from experienced staff;",
                 intern_offer_2: "A safe and professional learning environment;",
-                intern_offer_3: "The opportunity to gain practical experience in an international workplace;",
-                intern_offer_4: "Support to achieve your educational learning goals;",
+                intern_offer_3: "The opportunity to gain practical experience in an international work setting;",
+                intern_offer_4: "Scope to achieve the learning objectives of your study program;",
                 intern_offer_5: "A varied internship where you actively contribute to the team.",
-                intern_long: "We believe it’s important that interns can develop themselves and build professional skills with confidence. That’s why we provide good supervision, clear agreements, and plenty of room to learn and ask questions.",
-                intern_cta: "Are you motivated, eager to learn, and looking for a challenging internship? Feel free to contact us to discuss the possibilities. We look forward to welcoming you to our team!" ,
+                intern_long: "Our international supermarket is an accredited training company affiliated with the SBB (Cooperation Organisation for Vocational Education, Training and the Labour Market). This means we meet the quality standards for supervising vocational (MBO) students and offer a professional learning environment.\n\nDuring your internship, you will get acquainted with all aspects of working in a supermarket. You will learn, among other things, how to display products, assist customers, manage inventory, and work as part of a team. Thanks to our store's international character, you will also come into contact with products, customers, and colleagues from diverse cultural backgrounds.",
+                intern_additional: "We believe it is important for interns to develop and build their professional skills with confidence. That is why we provide good supervision, clear agreements, and plenty of room to learn and ask questions.",
+                intern_cta: "Are you motivated, eager to learn, and looking for a challenging internship? Then contact us to discuss the possibilities. We look forward to welcoming you to our team.",
                 footer_desc: "Bringing the flavors of the world to our local community for the last 25 years.",
                 footer_links: "Quick Links",
                 footer_contact: "Location",
@@ -694,6 +731,25 @@
                 vacancy_desc: "Özgeçmişinizi gönderin ve hangi pozisyona ilgi duyduğunuzu yazın. Mümkün olan en kısa sürede geri dönüş yapacağız.",
                 vacancy_whatsapp: "WhatsApp",
                 vacancy_call: "Ara",
+                intern_badge: "Staj",
+                intern_title: "Uluslararası Süpermarketimizde Staj",
+                intern_intro: "Perakende alanında eğitimsel ve çeşitli bir staj mı arıyorsunuz? O zaman doğru yerdesiniz.",
+                intern_learn_title: "Stajınız sırasında neler öğrenebilirsiniz?",
+                intern_learn_1: "Müşteri dostu ve hizmet odaklı çalışma;",
+                intern_learn_2: "Ürünleri stoklama ve sergileme;",
+                intern_learn_3: "Stok yönetimi ve lojistik süreçler;",
+                intern_learn_4: "Kasiyer işlemleri;",
+                intern_learn_5: "Hijyen ve güvenlik kurallarına uygun çalışma;",
+                intern_learn_6: "Dinamik bir perakende ortamında ekip çalışması.",
+                intern_offer_title: "Sizlere neler sunuyoruz?",
+                intern_offer_1: "Tecrübeli personelden kişisel rehberlik;",
+                intern_offer_2: "Güvenli ve profesyonel bir öğrenme ortamı;",
+                intern_offer_3: "Uluslararası bir iş ortamında pratik deneyim kazanma fırsatı;",
+                intern_offer_4: "Eğitim programınızdaki öğrenme hedeflerinize ulaşmanız için destek;",
+                intern_offer_5: "Takıma aktif katkı sağlayacağınız çeşitli bir staj.",
+                intern_long: "Uluslararası süpermarketimiz, SBB’ye (Mesleki Eğitim, Öğretim ve İşgücü Piyasası için İşbirliği Kuruluşu) bağlı, akredite bir eğitim şirketidir. Bu sayede MBO (mesleki eğitim) öğrencilerini denetleme konusunda kalite standartlarını karşılıyor ve profesyonel bir öğrenme ortamı sunuyoruz.\n\nStajınız boyunca bir süpermarkette çalışmanın tüm yönlerini öğreneceksiniz. Diğer şeylerin yanı sıra ürünleri nasıl sergileyeceğinizi, müşterilere nasıl yardımcı olacağınızı, stok yönetimini nasıl yapacağınızı ve bir ekip içinde nasıl çalışacağınızı deneyimleyeceksiniz. Mağazamızın uluslararası karakteri sayesinde farklı kültürlerden ürünlerle, müşterilerle ve çalışanlarla da tanışacaksınız.",
+                intern_additional: "Stajyerlerin kendilerini güvenle geliştirmesi ve profesyonel becerilerini inşa etmesi bizim için önemlidir. Bu yüzden iyi bir yönlendirme, net anlaşmalar ve öğrenmek ile soru sormak için geniş bir alan sunuyoruz.",
+                intern_cta: "Motivasyonlu, öğrenmeye hevesli ve zorlu bir staj arıyorsanız, olanakları konuşmak için bizimle iletişime geçin. Ekibimize sizi katmayı sabırsızlıkla bekliyoruz.",
                 footer_desc: "Dünyanın lezzetlerini son 25 yıldır yerel topluluğumuza taşıyoruz.",
                 footer_links: "Hızlı Bağlantılar",
                 footer_contact: "Konum",
@@ -706,6 +762,25 @@
                 vacancy_desc: "Envoyez votre CV et dites-nous pour quel poste vous êtes intéressé(e). Nous vous répondrons dès que possible.",
                 vacancy_whatsapp: "WhatsApp",
                 vacancy_call: "Appeler",
+                intern_badge: "Stage",
+                intern_title: "Stage dans notre supermarché international",
+                intern_intro: "Vous cherchez un stage éducatif et varié dans la vente au détail ? Alors vous êtes au bon endroit.",
+                intern_learn_title: "Que pouvez-vous apprendre pendant votre stage ?",
+                intern_learn_1: "Un travail orienté client et service ;",
+                intern_learn_2: "Approvisionner et mettre en valeur les produits ;",
+                intern_learn_3: "Gestion des stocks et processus logistiques ;",
+                intern_learn_4: "Opérations de caisse ;",
+                intern_learn_5: "Respect des règles d’hygiène et de sécurité ;",
+                intern_learn_6: "Travailler en équipe dans un environnement de vente dynamique.",
+                intern_offer_title: "Que proposons-nous ?",
+                intern_offer_1: "Un accompagnement personnalisé par une équipe expérimentée ;",
+                intern_offer_2: "Un environnement d’apprentissage sûr et professionnel ;",
+                intern_offer_3: "L’opportunité d’acquérir une expérience pratique dans un cadre international ;",
+                intern_offer_4: "Possibilité d’atteindre les objectifs d’apprentissage de votre programme d’études ;",
+                intern_offer_5: "Un stage varié où vous contribuez activement à l’équipe.",
+                intern_long: "Notre supermarché international est une entreprise de formation accréditée affiliée à la SBB (Organisation pour la formation professionnelle, la formation et le marché du travail). Cela signifie que nous répondons aux exigences de qualité pour l’encadrement des étudiants MBO et que nous offrons un cadre d’apprentissage professionnel.\n\nPendant votre stage, vous découvrirez tous les aspects du travail dans un supermarché. Vous apprendrez notamment à mettre en valeur les produits, à aider les clients, à gérer les stocks et à travailler en équipe. Grâce au caractère international de notre magasin, vous rencontrerez également des produits, des clients et des collègues de cultures diverses.",
+                intern_additional: "Nous pensons qu’il est important que les stagiaires puissent développer et construire leurs compétences professionnelles avec confiance. C’est pourquoi nous assurons un bon encadrement, des accords clairs et beaucoup d’espace pour apprendre et poser des questions.",
+                intern_cta: "Vous êtes motivé(e), désireux(se) d’apprendre et vous recherchez un stage stimulant ? Contactez-nous pour discuter des possibilités. Nous avons hâte de vous accueillir dans notre équipe.",
                 footer_desc: "Les saveurs du monde pour notre communauté locale depuis 25 ans.",
                 footer_links: "Liens Rapides",
                 footer_contact: "Localisation",
@@ -718,6 +793,25 @@
                 vacancy_desc: "CV'y xwe bişînin û bêjin ka kîjan cihê ji we re tê xelet e. Em ê herî zû vegerin we.",
                 vacancy_whatsapp: "WhatsApp",
                 vacancy_call: "Bêje",
+                intern_badge: "Staj",
+                intern_title: "Li supermarketê me ya navneteweyî staj",
+                intern_intro: "Tu dixwazî stajek perwerdekar û cihêreng di warê firotgehê de? Dê li gorî te be.",
+                intern_learn_title: "Di stajê de çi dikarî hîn bî?",
+                intern_learn_1: "Karê miştirî-dost û karûbarê-girêdayî;",
+                intern_learn_2: "Stokkirin û pêşandana berheman;",
+                intern_learn_3: "Rêvebirina stok û prosesên lîstîk;",
+                intern_learn_4: "Karê kasayê;",
+                intern_learn_5: "Li gorî rêzikên paqijî û ewlehiyê kar kirin;",
+                intern_learn_6: "Hevparbûn di haweya perakendeyê ya tevgerdar.",
+                intern_offer_title: "Em çi pêşkêş dikin?",
+                intern_offer_1: "Rêberiya kesane ji aliyê karmendên pispor;",
+                intern_offer_2: "Cihê perwerdeyê ewle û profesyonel;",
+                intern_offer_3: "Danasîna ezmûnê pratîkî di cîhek kar a navneteweyî de;",
+                intern_offer_4: "Dema ku armancên hînkirina nivîna te bibînin;",
+                intern_offer_5: "Stajek cihêreng ku tu bi rê ve tevlî tîma bî.",
+                intern_long: "Supermarketê me ya navneteweyî şîrketek perwerdeyê akredite ye ku bi SBB (Rêxistina hevkariya perwerdeya zanistî, perwerde û bazara karkeran) re girêdayî ye. Ev jî dide me ku em standardên kalîte yên serperiştina xwendekarên MBO peyda dikin û hawîrdorek perwerdeyê ya profesyonel pêşkêş dikin.\n\nDi dema stajê de tu dê hemû alîyên kar di supermarketê de nas bikî. Tu dê, di nav de, hîn bibî ka çawa berheman pêşbikî, çawa alîkarî bide xerîdar, stok birêve bibe, û wekî beşek ji tîmê kar bike. Ji ber karaktera navneteweyî ya mağazê, tu dê her weqatîn bi berhem, xerîdar û hevalên ji çandên cûda re bibî.",
+                intern_additional: "Em bawer dikin ku ji bo xwendekarên stajê girîng e ku bi baweriya xwe şiyana xwe pêşve bixin û şiyanên profesyonel ava bikin. Ji ber vê em rêberiya baş, peymanên zelal, û qasî baş dema ku hîn bibin û pirsan bikin pêşkêş dikin.",
+                intern_cta: "Tu dilsoz, hevesdar û li gorî stajek dijwar digerî? Ji kerema xwe re bi me re têkilî daynin da ku em derbarê fersendên stajê de biaxivin. Em hêvî dikin ku tu beşdarî tîmê me bî.",
                 footer_desc: "Her gav lezzetên cîhanê ji bo civaka me ya herêmî di 25 salan de.",
                 footer_links: "Lînkên Bilez",
                 footer_contact: "Cîh",
@@ -730,6 +824,25 @@
                 vacancy_desc: "Envía tu CV y dinos a qué puesto te gustaría optar. Te responderemos lo antes posible.",
                 vacancy_whatsapp: "WhatsApp",
                 vacancy_call: "Llamar",
+                intern_badge: "Prácticas",
+                intern_title: "Prácticas en nuestro supermercado internacional",
+                intern_intro: "¿Buscas unas prácticas educativas y variadas en el sector minorista? Entonces estás en el lugar correcto.",
+                intern_learn_title: "¿Qué puedes aprender durante tus prácticas?",
+                intern_learn_1: "Trabajo orientado al cliente y al servicio;",
+                intern_learn_2: "Colocar y mostrar productos;",
+                intern_learn_3: "Gestión de inventario y procesos logísticos;",
+                intern_learn_4: "Operaciones de caja;",
+                intern_learn_5: "Cumplir con las normas de higiene y seguridad;",
+                intern_learn_6: "Colaborar en un entorno minorista dinámico.",
+                intern_offer_title: "¿Qué ofrecemos?",
+                intern_offer_1: "Orientación personal por personal experimentado;",
+                intern_offer_2: "Un entorno de aprendizaje seguro y profesional;",
+                intern_offer_3: "La oportunidad de ganar experiencia práctica en un entorno laboral internacional;",
+                intern_offer_4: "Espacio para lograr los objetivos de aprendizaje de tu programa de estudios;",
+                intern_offer_5: "Unas prácticas variadas en las que contribuyes activamente al equipo.",
+                intern_long: "Nuestro supermercado internacional es una empresa de formación acreditada afiliada a la SBB (Organización de cooperación para la educación profesional, la formación y el mercado laboral). Esto significa que cumplimos con los estándares de calidad para supervisar estudiantes MBO y ofrecemos un entorno de aprendizaje profesional.\n\nDurante tus prácticas, conocerás todos los aspectos del trabajo en un supermercado. Aprenderás, entre otras cosas, cómo mostrar productos, ayudar a los clientes, gestionar inventario y trabajar en equipo. Gracias al carácter internacional de nuestra tienda, también conocerás productos, clientes y colegas de diferentes culturas.",
+                intern_additional: "Creemos que es importante que los/las estudiantes en prácticas desarrollen y construyan sus habilidades profesionales con confianza. Por eso ofrecemos una buena supervisión, acuerdos claros y mucho espacio para aprender y preguntar.",
+                intern_cta: "¿Estás motivado/a, con ganas de aprender y buscas unas prácticas desafiantes? Ponte en contacto con nosotros para analizar las posibilidades. ¡Esperamos darte la bienvenida a nuestro equipo!",
                 footer_desc: "Llevamos los sabores del mundo a nuestra comunidad local desde hace 25 años.",
                 footer_links: "Enlaces Rápidos",
                 footer_contact: "Ubicación",
@@ -742,6 +855,25 @@
                 vacancy_desc: "أرسل سيرتك الذاتية وأخبرنا بالوظيفة التي تهتم بها. سنعود إليك في أقرب وقت ممكن.",
                 vacancy_whatsapp: "واتساب",
                 vacancy_call: "اتصل",
+                intern_badge: "تدريب",
+                intern_title: "تدريب في سوبرماركتنا الدولي",
+                intern_intro: "هل تبحث عن تدريب تعليمي ومتنوع في مجال البيع بالتجزئة؟ إذاً أنت في المكان الصحيح.",
+                intern_learn_title: "ماذا يمكنك أن تتعلم خلال التدريب؟",
+                intern_learn_1: "عمل موجه لخدمة العملاء وخطاب الخدمة;",
+                intern_learn_2: "ترتيب المنتجات وعرضها;",
+                intern_learn_3: "إدارة المخزون وعمليات الخدمات اللوجستية;",
+                intern_learn_4: "عمليات الكاشير;",
+                intern_learn_5: "العمل وفق إرشادات النظافة والسلامة;",
+                intern_learn_6: "التعاون داخل بيئة بيع بالتجزئة ديناميكية.",
+                intern_offer_title: "ماذا نقدم؟",
+                intern_offer_1: "إرشاد شخصي من فريق ذوي خبرة;",
+                intern_offer_2: "بيئة تعلم آمنة ومهنية;",
+                intern_offer_3: "فرصة لاكتساب خبرة عملية في بيئة عمل دولية;",
+                intern_offer_4: "المجال لتحقيق أهدافك التعليمية ضمن برنامج دراستك;",
+                intern_offer_5: "تدريب متنوع تساهم فيه بشكل فعّال ضمن الفريق.",
+                intern_long: "سوبرماركتنا الدولي هو شركة تدريب معتمدة تابعة لـ SBB (منظمة التعاون للتعليم والتدريب المهني وسوق العمل). وهذا يعني أننا نلتزم بمعايير الجودة للإشراف على طلاب MBO ونوفر بيئة تعلم احترافية.\n\nخلال فترة التدريب، ستتعرف على جميع جوانب العمل في السوبرماركت. ستتعلم من بين أمور أخرى كيفية عرض المنتجات، مساعدة العملاء، إدارة المخزون، والعمل ضمن فريق. وبفضل طابع متجرنا الدولي، ستتعرف أيضًا على منتجات وعملاء وزملاء من خلفيات ثقافية متنوعة.",
+                intern_additional: "نؤمن بأن من المهم للمتدربين تطوير مهاراتهم المهنية وبناء الثقة. لذلك نوفر إشرافًا جيدًا واتفاقات واضحة ومساحة كبيرة للتعلم وطرح الأسئلة.",
+                intern_cta: "هل أنت متحمس ولديك رغبة في التعلم وتبحث عن تدريب تحدّي؟ تواصل معنا لمناقشة الخيارات. نتطلع إلى الترحيب بك ضمن فريقنا!",
                 footer_desc: "نقدم نكهات العالم لمجتمعنا المحلي على مدار 25 عاماً.",
                 footer_links: "روابط سريعة",
                 footer_contact: "الموقع",
@@ -754,6 +886,25 @@
                 vacancy_desc: "CV'y xwe bîne û bêjin kîjan cihê we digire. Em ê herî zû vegerin we.",
                 vacancy_whatsapp: "WhatsApp",
                 vacancy_call: "Bêje",
+                intern_badge: "Staj",
+                intern_title: "Staj li supermarketê me ya navneteweyî",
+                intern_intro: "Tu dixwazî stajek perwerdekar û cihêreng di warê firotgehê de? Dê li gorî te be.",
+                intern_learn_title: "Di stajê de çi dikarî hîn bî?",
+                intern_learn_1: "Karê miştirî-dost û karûbarê-girêdayî;",
+                intern_learn_2: "Stokkirin û pêşandana berheman;",
+                intern_learn_3: "Rêvebirina stok û prosesên lîstîk;",
+                intern_learn_4: "Karê kasayê;",
+                intern_learn_5: "Li gorî rêzikên paqijî û ewlehiyê kar kirin;",
+                intern_learn_6: "Hevparbûn di haweya perakendeyê ya tevgerdar.",
+                intern_offer_title: "Em çi pêşkêş dikin?",
+                intern_offer_1: "Rêberiya kesane ji aliyê karmendên pispor;",
+                intern_offer_2: "Cihê perwerdeyê ewle û profesyonel;",
+                intern_offer_3: "Danasîna ezmûnê pratîkî di cîhek kar a navneteweyî de;",
+                intern_offer_4: "Dema ku armancên hînkirina nivîna te bibînin;",
+                intern_offer_5: "Stajek cihêreng ku tu bi rê ve tevlî tîma bî.",
+                intern_long: "Supermarketê me ya navneteweyî şîrketek perwerdeyê akredite ye ku bi SBB re girêdayî ye. Ev jî dide me ku em standardên kalîte yên serperiştina xwendekarên MBO peyda dikin û hawîrdorek perwerdeyê ya profesyonel pêşkêş dikin.\n\nDi dema stajê de tu dê hemû alîyên kar di supermarketê de nas bikî. Tu dê, di nav de, hîn bibî ka çawa berheman pêşbikî, çawa alîkarî bide xerîdar, stok birêve bibe, û wekî beşek ji tîmê kar bike. Ji ber karaktera navneteweyî ya mağazê, tu dê her weqatîn bi berhem, xerîdar û hevalên ji çandên cûda re bibî.",
+                intern_additional: "Em bawer dikin ku ji bo xwendekarên stajê girîng e ku bi baweriya xwe şiyana xwe pêşve bixin û şiyanên profesyonel ava bikin. Ji ber vê em rêberiya baş, peymanên zelal, û qasî baş dema ku hîn bibin û pirsan bikin pêşkêş dikin.",
+                intern_cta: "Tu dilsoz, hevesdar û li gorî stajek dijwar digerî? Ji kerema xwe re bi me re têkilî daynin da ku em derbarê fersendên stajê de biaxivin. Em hêvî dikin ku tu beşdarî tîmê me bî.",
                 footer_desc: "25 serra peyêne de tehmê dinya ji bo civaka me.",
                 footer_links: "Lînkê Leze",
                 footer_contact: "Ca",
@@ -861,7 +1012,7 @@
                 el.addEventListener('mouseenter', () => {
                     outline.style.width = '50px';
                     outline.style.height = '50px';
-                    outline.style.backgroundColor = 'rgba(0, 100, 174, 0.12)';
+                    outline.style.backgroundColor = 'rgba(0, 94, 42, 0.12)';
                 });
                 el.addEventListener('mouseleave', () => {
                     outline.style.width = '36px';
