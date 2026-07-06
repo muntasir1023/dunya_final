@@ -32,9 +32,9 @@
                     },
                     colors: {
                         dunya: {
-                            light: '#0064AE', /* Premium Blue */
-                            main: '#0064AE',  /* Brand Main Blue */
-                            dark: '#004375',  /* Deep Blue */
+                            light: '#005E2A', /* Premium Green */
+                            main: '#005E2A',  /* Brand Main Green */
+                            dark: '#005E2A',  /* Deep Green */
                             overlay: 'rgba(10, 20, 25, 0.75)', /* Balanced dark overlay for food images */
                         }
                     },
@@ -74,7 +74,7 @@
 
         ::-webkit-scrollbar { width: 10px; }
         ::-webkit-scrollbar-track { background: #050b14; }
-        ::-webkit-scrollbar-thumb { background: #0064AE; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: #005E2A; border-radius: 10px; }
 
         /* Background Image Engine */
         .ambient-bg {
@@ -102,21 +102,21 @@
         }
 
         .glass-nav {
-            background: rgba(5, 10, 18, 0.6);
+            background: rgba(0, 94, 42, 0.18); /* transparent slightly greenish */
             backdrop-filter: blur(25px) saturate(180%);
             -webkit-backdrop-filter: blur(25px) saturate(180%);
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .glass-button {
-            background: rgba(0, 100, 174, 0.15);
+            background: rgba(0, 94, 42, 0.15);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(0, 100, 174, 0.4);
+            border: 1px solid rgba(0, 94, 42, 0.4);
             transition: all 0.3s ease;
         }
         .glass-button:hover {
-            background: rgba(0, 100, 174, 0.35);
-            box-shadow: 0 0 20px rgba(0, 100, 174, 0.3);
+            background: rgba(0, 94, 42, 0.35);
+            box-shadow: 0 0 20px rgba(0, 94, 42, 0.3);
             transform: translateY(-2px);
         }
 
@@ -152,12 +152,12 @@
 
         /* Custom Cursor */
         #cursor-dot {
-            width: 8px; height: 8px; background-color: #0064AE;
+            width: 8px; height: 8px; background-color: #005E2A;
             border-radius: 50%; position: fixed; pointer-events: none;
             z-index: 9999; transform: translate(-50%, -50%);
         }
         #cursor-outline {
-            width: 36px; height: 36px; border: 1px solid rgba(0, 100, 174, 0.6);
+            width: 36px; height: 36px; border: 1px solid rgba(0, 94, 42, 0.6);
             border-radius: 50%; position: fixed; pointer-events: none;
             z-index: 9998; transform: translate(-50%, -50%);
             transition: width 0.2s, height 0.2s, background-color 0.2s;
@@ -171,11 +171,11 @@
             transform-origin: top right;
             transition: all 0.2s ease;
         }
-        .lang-active { color: #0064AE; font-weight: bold; }
+        .lang-active { color: #005E2A; font-weight: bold; }
 
         /* --- REFINED LIGHT THEME --- */
         html.light body { background-color: #fcfcfc; color: #0f172a; }
-        html.light .ambient-overlay { background: radial-gradient(circle at 50% 50%, rgba(0, 100, 174, 0.04) 0%, rgba(252, 252, 252, 0.7) 100%); }
+        html.light .ambient-overlay { background: radial-gradient(circle at 50% 50%, rgba(0, 94, 42, 0.04) 0%, rgba(252, 252, 252, 0.7) 100%); }
         html.light .ambient-bg { filter: brightness(1.0) saturate(0.8); opacity: 0.3; } 
         
         html.light .glass-panel { 
@@ -185,7 +185,7 @@
             color: #0f172a; 
         }
         html.light .glass-nav { 
-            background: rgba(255, 255, 255, 0.8) !important;
+            background: rgba(0, 94, 42, 0.07) !important; /* transparent slightly greenish */
             border-bottom: 1px solid rgba(0,0,0,0.1);
             backdrop-filter: blur(20px) saturate(180%);
             -webkit-backdrop-filter: blur(20px) saturate(180%);
@@ -217,7 +217,7 @@
         }
         .theme-switch-handle {
             position: absolute; left: 3px; width: 20px; height: 20px;
-            background: #0064AE; border-radius: 50%;
+            background: #005E2A; border-radius: 50%;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: 0 2px 4px rgba(0,0,0,0.2);
             z-index: 10;
@@ -227,7 +227,7 @@
             border-color: rgba(0, 0, 0, 0.1); 
         }
         html.light .theme-switch-container i.fa-moon { color: #4a5568 !important; } 
-        html.light .theme-switch-container i.fa-sun { color: #0064AE !important; } 
+        html.light .theme-switch-container i.fa-sun { color: #005E2A !important; } 
 
         html.light .theme-switch-handle { transform: translateX(24px); }
         html.light .lang-option:hover { background-color: rgba(0,0,0,0.05); }
@@ -278,7 +278,7 @@
                 <div class="hidden sm:flex items-center justify-center flex-1">
                     <div class="glass-panel px-5 py-2 rounded-full border border-white/10">
                         <span class="text-xs font-bold tracking-wide text-white">HAVE A</span>
-                        <span class="ml-2 text-xs font-bold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-dunya-light to-blue-400">SWEEEET DAY !!!</span>
+                        <span class="ml-2 text-xs font-bold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-dunya-light to-dunya-light">SWEEEET DAY !!!</span>
                     </div>
                 </div>
 
@@ -366,9 +366,13 @@
                 </span>
             </div>
 
-            <h1 class="text-6xl md:text-8xl font-serif font-bold mb-6 leading-tight text-white drop-shadow-2xl">
-                <span class="block" data-i18n="hero_title1"> HAVE A </span>
-                <span class="block text-transparent bg-clip-text bg-gradient-to-r from-dunya-light to-blue-400" data-i18n="hero_title2"> SWEEEET DAY !!! </span>
+            <h1 class="mb-6 leading-tight drop-shadow-2xl">
+                <img
+                    src="https://raw.githubusercontent.com/muntasir1023/dunya_final/main/Dunya%20website%20logo.png"
+                    alt="Have a Sweeet Day"
+                    class="block w-full max-w-[620px] md:max-w-[820px] h-auto"
+                    style="transform: translateY(-6px);"
+                />
             </h1>
 
             
@@ -538,7 +542,7 @@
                         <div class="flex flex-col md:flex-row md:items-center text-[15px] md:text-lg lg:text-xl font-black tracking-tight" style="font-family: 'Franklin Gothic Heavy', 'Arial Black', sans-serif;">
                             <span class="text-dunya-light md:mr-4">DÜNYA</span>
                             <div class="flex items-center gap-2 md:gap-4 text-white">
-                                <span>INTERNATI<i class="fa-solid fa-earth-americas text-blue-400 scale-90 mx-[1px]"></i>NALE</span>
+                                <span>INTERNATI<i class="fa-solid fa-earth-americas text-dunya-light scale-90 mx-[1px]"></i>NALE</span>
                                 <span>SUPERMARKT</span>
                             </div>
                         </div>
@@ -844,7 +848,7 @@
             document.querySelectorAll('a, button, .tilt-card').forEach(el => {
                 el.addEventListener('mouseenter', () => {
                     outline.style.width = '50px'; outline.style.height = '50px';
-                    outline.style.backgroundColor = 'rgba(0, 100, 174, 0.1)';
+                    outline.style.backgroundColor = 'rgba(0, 94, 42, 0.1)';
                 });
                 el.addEventListener('mouseleave', () => {
                     outline.style.width = '36px'; outline.style.height = '36px';
