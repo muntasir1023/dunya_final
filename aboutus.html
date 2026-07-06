@@ -138,20 +138,26 @@
         /* Custom Cursor */
         #cursor-dot {
             background-color: #005E2A;
-
-            border-radius: 50%; position: fixed; pointer-events: none;
-            z-index: 9999; transform: translate(-50%, -50%);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
         }
         #cursor-outline {
-            width: 36px; height: 36px; border: 1px solid rgba(74, 222, 128, 0.6);
-            border-radius: 50%; position: fixed; pointer-events: none;
-            z-index: 9998; transform: translate(-50%, -50%);
+            width: 36px;
+            height: 36px;
+            border: 1px solid rgba(74, 222, 128, 0.6);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
             transition: width 0.2s, height 0.2s, background-color 0.2s;
         }
         @media (hover: none) and (pointer: coarse) {
             #cursor-dot, #cursor-outline { display: none; }
         }
-
 
         /* Mobile Menu Glass Fix */
         #mobile-menu {
@@ -454,10 +460,6 @@
                 about_btn_products: "Explore Products",
                 about_btn_vacancy: "See Vacancy",
                 about_title: "Our Story",
-                about_p1: "As of January 1, 2025, we, Dilan and Baris, are proud to have taken over our family’s international supermarket. For 25 years, our father ran the supermarket with great dedication and passion, building a strong reputation within the community. With deep respect for his work, we are continuing this tradition while adding new ideas and a fresh vision.",
-                about_p2: "We combine different backgrounds and areas of expertise. Dilan completed a law degree and brings legal knowledge, structure, and entrepreneurship to the business. Baris has completed two master’s degrees in Economics and possesses extensive knowledge in business management, finance, and strategic development. In addition, Baris grew up in Paris, which has given him an international perspective and multicultural experience.",
-                about_p3: "As entrepreneurs with a Kurdish background, we place great importance on hospitality, quality, and connection. Our supermarket is a place where people from different cultures come together and discover products from all over the world. We strive to provide our customers every day with a wide assortment, excellent service, and a familiar, welcoming atmosphere.",
-                about_p4: "With pride, we continue to build on the family business and look forward to the future, where tradition, quality, and innovation go hand in hand.",
                 stat_years: "Years Experience", stat_products: "Products", stat_halal: "Halal Certified",
                 badge_title: "Quality First", badge_sub: "Awarded Market 2023",
                 val1_t: "Fresh Daily", val1_d: "Our sections are replenished every morning for the highest standards.", // Removed extra space
@@ -475,25 +477,38 @@
                 about_p4: "With pride, we continue to build on the family business and look forward to the future, where tradition, quality, and innovation go hand in hand."
             },
             nl: {
-                nav_home: "Startpagina", nav_products: "Producten", nav_about: "Over Ons", nav_vacancy: "Vacature",
+                nav_home: "Startpagina",
+                nav_products: "Producten",
+                nav_about: "Over Ons",
+                nav_vacancy: "Vacature",
                 about_badge: "Over Ons",
                 about_page_title: "Ons Verhaal",
-                about_page_desc: "In de afgelopen 25 jaar heeft Dunya International Supermarket één missie gehad: de authentic smaken van de wereld naar onze lokale gemeenschap brengen.",
+                about_page_desc: "In de afgelopen 25 jaar heeft Dunya International Supermarket één missie gehad: de authentieke smaken van de wereld naar onze lokale gemeenschap brengen.",
                 about_btn_products: "Bekijk Producten",
                 about_btn_vacancy: "Bekijk Vacatures",
                 about_title: "Ons Verhaal",
-                about_p1: "As of January 1, 2025, we, Dilan and Baris, are proud to have taken over our family’s international supermarket. For 25 years, our father ran the supermarket with great dedication and passion, building a strong reputation within the community. With deep respect for his work, we are continuing this tradition while adding new ideas and a fresh vision.",
-                about_p2: "We combine different backgrounds and areas of expertise. Dilan completed a law degree and brings legal knowledge, structure, and entrepreneurship to the business. Baris has completed two master’s degrees in Economics and possesses extensive knowledge in business management, finance, and strategic development. In addition, Baris grew up in Paris, which has given him an international perspective and multicultural experience.",
-                about_p3: "As entrepreneurs with a Kurdish background, we place great importance on hospitality, quality, and connection. Our supermarket is a place where people from different cultures come together and discover products from all over the world. We strive to provide our customers every day with a wide assortment, excellent service, and a familiar, welcoming atmosphere.",
-                about_p4: "With pride, we continue to build on the family business and look forward to the future, where tradition, quality, and innovation go hand in hand.",
-                stat_years: "Jaar Ervaring", stat_products: "Producten", stat_halal: "Halal Gecertificeerd",
-                badge_title: "Kwaliteit Eerst", badge_sub: "Bekroonde Markt 2023", // Removed extra space
-                val1_t: "Dagelijks Vers", val1_d: "Onze afdelingen worden elke ochtend aangevuld voor de hoogste normen.",
-                val2_t: "Wereldwijde Inkoop", val2_d: "Wij brengen u authentieke merken die u nergens anders vindt.",
-                val3_t: "Familie Vertrouwen", val3_d: "Als familiebedrijf behandelen we elke klant als een gast.",
-                footer_desc: "De smaken van de wereld in onze gemeenschap voor de afgelopen 25 jaar. Uw vertrouwde partner.",
-                footer_links: "Snelkoppelingen", footer_contact: "Locatie", footer_rights: "© 2026 DÜNYA INTERNATIONALE SUPERMARKT. Alle rechten voorbehouden.",
-                premium_service_desc: "Boodschappen voor 2+ weken? Bestel via WhatsApp! Wij pakken het in, u haalt het op. Geen aanbetaling nodig."
+                about_p1: "Sinds 1 januari 2025 zijn wij, Dilan en Baris, trots om de internationale supermarkt van onze familie te hebben overgenomen. Al 25 jaar runt onze vader de winkel met grote toewijding en passie en bouwt hij een sterke reputatie binnen de gemeenschap op. Met diep respect voor zijn werk zetten wij deze traditie voort, terwijl we ook nieuwe ideeën en een frisse visie toevoegen.",
+                about_p2: "We combineren verschillende achtergronden en expertise. Dilan heeft een rechtenstudie afgerond en brengt juridische kennis, structuur en ondernemerschap in het bedrijf. Baris heeft twee masteropleidingen in Economie afgerond en beschikt over uitgebreide kennis op het gebied van bedrijfsbeheer, financiën en strategische ontwikkeling. Daarnaast is Baris opgegroeid in Parijs, wat hem een internationaal perspectief en multiculturele ervaring heeft gegeven.",
+                about_p3: "Als ondernemers met een Koerdische achtergrond hechten wij veel waarde aan gastvrijheid, kwaliteit en verbondenheid. Onze supermarkt is een plek waar mensen uit verschillende culturen samenkomen en producten van over de hele wereld ontdekken. We streven ernaar om onze klanten elke dag te voorzien van een breed assortiment, uitstekende service en een vertrouwde, warme sfeer.",
+                about_p4: "Met trots bouwen we verder aan het familiebedrijf en kijken we uit naar de toekomst, waar traditie, kwaliteit en innovatie hand in hand gaan.",
+                stat_years: "Jaren Ervaring",
+                stat_products: "Producten",
+                stat_halal_badge: "Halal",
+                stat_halal: "Halal Gecertificeerd",
+                badge_title: "Kwaliteit Eerst",
+                badge_sub: "Bekroonde Markt 2023",
+                val1_t: "Dagelijks Vers",
+                val1_d: "Onze slager- en bakkerijafdelingen worden elke ochtend opnieuw gevuld, zodat we altijd de hoogste standaarden kunnen garanderen.",
+                val2_t: "Wereldwijde Inkoop",
+                val2_d: "Wij werken direct met internationale distributeurs om u authentieke merken te bieden die u nergens anders vindt.",
+                val3_t: "Familietrouw",
+                val3_d: "Als familiebedrijf behandelen we elke klant als een gast bij ons thuis.",
+                footer_desc: "De smaken van de wereld voor onze gemeenschap al 25 jaar lang. Uw vertrouwde partner voor kwaliteitsvolle internationale boodschappen.",
+                footer_links: "Snelle Links",
+                footer_contact: "Locatie",
+                footer_rights: "© 2026 DÜNYA INTERNATIONALE SUPERMARKT. Alle rechten voorbehouden.",
+                premium_service_title: "Premium Service",
+                premium_service_desc: "Boodschappen voor 2+ weken? Vermijd het zoeken! Stuur uw lijst via WhatsApp. U haalt het op en betaalt. Geen aanbetaling vereist."
             },
             tr: {
                 nav_home: "Anasayfa", nav_products: "Ürünler", nav_about: "Hakkımızda", nav_vacancy: "İş İlanı",
@@ -611,11 +626,7 @@
                 if(translations[langCode] && translations[langCode][key]) {
                     // Auto-style "Halal" and add icon
                     const styledText = translations[langCode][key].replace(/(Halal|Helal|حلال)/gi, '<span class="text-dunya-light inline-flex items-center gap-1 font-bold"><i class="fa-solid fa-certificate text-[10px]"></i> $1</span>');
-                    el.style.opacity = '0';
-                    setTimeout(() => {
-                        el.innerHTML = styledText;
-                        el.style.opacity = '1';
-                    }, 200);
+                    el.innerHTML = styledText;
                 }
             });
 
@@ -645,6 +656,8 @@
         const mobileMenu = document.getElementById('mobile-menu');
         
         window.toggleMobileMenu = function() {
+            if (!mobileMenu || !mobileBtn) return;
+
             const isHidden = mobileMenu.classList.contains('hidden');
             if (isHidden) {
                 mobileMenu.classList.remove('hidden');
@@ -670,7 +683,7 @@
         const dot = document.getElementById('cursor-dot');
         const outline = document.getElementById('cursor-outline');
 
-        if (window.matchMedia("(pointer: fine)").matches) {
+        if (dot && outline && window.matchMedia("(pointer: fine)").matches) {
             window.addEventListener('mousemove', (e) => {
                 const posX = e.clientX; const posY = e.clientY;
                 dot.style.left = `${posX}px`; dot.style.top = `${posY}px`;
@@ -691,12 +704,25 @@
 
         if (mobileBtn) mobileBtn.addEventListener('click', toggleMobileMenu);
 
+        // Smooth Scroll Reveal (matches index.html/vacancy.html)
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15, rootMargin: "0px 0px -50px 0px" });
+
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
         window.addEventListener('DOMContentLoaded', () => {
             const savedLang = localStorage.getItem('dunya-language') || 'en';
             setLanguage(savedLang);
         });
 
         document.addEventListener('click', () => {
+            if(!langDropdown) return;
             if(!langDropdown.classList.contains('opacity-0')) {
                 langDropdown.classList.add('opacity-0', 'scale-95', 'pointer-events-none');
             }
