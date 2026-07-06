@@ -27,9 +27,9 @@
                     },
                     colors: {
                         dunya: {
-                            light: '#0064AE', /* Premium Blue */
-                            main: '#0064AE',  /* Brand Main Blue */
-                            dark: '#004375',  /* Deep Blue */
+                            light: '#005E2A', /* Premium Green */
+                            main: '#005E2A',  /* Brand Main Green */
+                            dark: '#005E2A',  /* Deep Green */
                             overlay: 'rgba(10, 20, 25, 0.75)', /* Balanced dark overlay for food images */
                         }
 
@@ -93,9 +93,10 @@
         html.light .ambient-bg { filter: brightness(1.05) saturate(0.8); opacity: 0.3; }
         
         html.light .glass-panel { background: #ffffff; border: 1px solid rgba(0,0,0,0.1); box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05); color: #0f172a; }
+        /* Match index.html transparency (light mode) */
         html.light .glass-nav { 
-            background: rgba(255, 255, 255, 0.8) !important; 
-            border-bottom: 1px solid rgba(0,0,0,0.08); 
+            background: rgba(0, 94, 42, 0.07) !important; 
+            border-bottom: 1px solid rgba(0,0,0,0.1); 
             backdrop-filter: blur(20px) saturate(180%);
         }
         
@@ -109,7 +110,7 @@
         
         /* Specific card fixes */
         html.light .stat-card { background: #ffffff; }
-        html.light .bg-dunya-main { background-color: #0064AE; }
+        html.light .bg-dunya-main { background-color: #005E2A; }
 
 
         /* Theme Toggle UI */
@@ -123,7 +124,7 @@
         }
         .theme-switch-handle {
             position: absolute; left: 3px; width: 20px; height: 20px;
-            background: #0064AE; border-radius: 50%;
+            background: #005E2A; border-radius: 50%;
 
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: 0 2px 4px rgba(0,0,0,0.2);
@@ -136,7 +137,7 @@
 
         /* Custom Cursor */
         #cursor-dot {
-            width: 8px; height: 8px; background-color: #0064AE;
+            background-color: #005E2A;
 
             border-radius: 50%; position: fixed; pointer-events: none;
             z-index: 9999; transform: translate(-50%, -50%);
@@ -193,6 +194,14 @@
             <!-- Action & WORKING Language Switcher (Stays aligned on the right) -->
             <div class="hidden md:flex items-center gap-4 relative">
                 
+                <!-- Centered banner text (copied from index.html) -->
+                <div class="hidden sm:flex items-center justify-center flex-1">
+                    <div class="glass-panel px-5 py-2 rounded-full border border-white/10">
+                        <span class="text-xs font-bold tracking-wide text-white">HAVE A</span>
+                        <span class="ml-2 text-xs font-bold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-dunya-light to-dunya-light">SWEEEET DAY !!!</span>
+                    </div>
+                </div>
+
                 <!-- Theme Toggle -->
                 <div class="theme-switch-container" onclick="toggleTheme()">
                     <div class="theme-switch-handle"></div>
@@ -388,7 +397,7 @@
                         <div class="flex flex-col md:flex-row md:items-center text-[15px] md:text-lg lg:text-xl font-black tracking-tight" style="font-family: 'Franklin Gothic Heavy', 'Arial Black', sans-serif;">
                             <span class="text-dunya-light md:mr-4">DÜNYA</span>
                             <div class="flex items-center gap-2 md:gap-4 text-white">
-                                <span>INTERNATI<i class="fa-solid fa-earth-americas text-blue-400 scale-90 mx-[1px]"></i>NALE</span>
+                                <span>INTERNATI<i class="fa-solid fa-earth-americas text-dunya-light scale-90 mx-[1px]"></i>NALE</span>
                                 <span>SUPERMARKT</span>
                             </div>
                         </div>
