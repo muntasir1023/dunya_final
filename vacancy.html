@@ -36,16 +36,17 @@
     </script>
 
     <style>
-        body {
+body {
             background-color: #0a0f0d;
             color: #ffffff;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
         }
+        html, body { margin: 0; padding: 0; }
 
-        .ambient-bg {
+.ambient-bg {
             position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
+            top: 0; left: 0; width: 100%; height: 100vh;
             background-image: url('https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=2000&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
@@ -54,7 +55,7 @@
         }
         .ambient-overlay {
             position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
+            top: 0; left: 0; width: 100%; height: 100vh;
             background: radial-gradient(circle at 50% 50%, rgba(0, 94, 42, 0.08) 0%, rgba(10, 15, 13, 0.98) 100%);
 
             z-index: -1;
@@ -608,8 +609,13 @@
         }
 
         (function() {
-            const theme = localStorage.getItem('theme') || 'light';
-            if (theme === 'dark') document.documentElement.classList.remove('light');
+            const theme = localStorage.getItem('theme');
+            if (theme === 'dark') {
+                document.documentElement.classList.remove('light');
+            } else {
+                // First visit (no value) defaults to light
+                document.documentElement.classList.add('light');
+            }
         })();
 
         const translations = {
@@ -917,33 +923,38 @@
         const currentLangText = document.getElementById('current-lang-text');
         let isLangOpen = false;
 
-        langBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            isLangOpen = !isLangOpen;
-            if (isLangOpen) {
-                langDropdown.classList.remove('opacity-0', 'scale-95', 'pointer-events-none');
-                langDropdown.classList.add('opacity-100', 'scale-100');
-            } else {
-                langDropdown.classList.add('opacity-0', 'scale-95', 'pointer-events-none');
-                langDropdown.classList.remove('opacity-100', 'scale-100');
-            }
-        });
+        // Guard: avoid runtime errors if elements are missing
+        if (langBtn && langDropdown && currentLangText) {
+            langBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                isLangOpen = !isLangOpen;
+                if (isLangOpen) {
+                    langDropdown.classList.remove('opacity-0', 'scale-95', 'pointer-events-none');
+                    langDropdown.classList.add('opacity-100', 'scale-100');
+                } else {
+                    langDropdown.classList.add('opacity-0', 'scale-95', 'pointer-events-none');
+                    langDropdown.classList.remove('opacity-100', 'scale-100');
+                }
+            });
 
-        document.addEventListener('click', () => {
-            if (isLangOpen) {
-                isLangOpen = false;
-                langDropdown.classList.add('opacity-0', 'scale-95', 'pointer-events-none');
-                langDropdown.classList.remove('opacity-100', 'scale-100');
-            }
-        });
+            document.addEventListener('click', () => {
+                if (isLangOpen) {
+                    isLangOpen = false;
+                    langDropdown.classList.add('opacity-0', 'scale-95', 'pointer-events-none');
+                    langDropdown.classList.remove('opacity-100', 'scale-100');
+                }
+            });
+        }
 
         window.setLanguage = function(langCode) {
-            localStorage.setItem('dunya-language', langCode);
+            const safeLang = translations[langCode] ? langCode : 'nl';
+            localStorage.setItem('dunya-language', safeLang);
 
-            currentLangText.textContent = langCode.toUpperCase();
+            if (currentLangText) currentLangText.textContent = safeLang.toUpperCase();
 
-            const isRTL = langCode === 'ar' || langCode === 'ku';
+            const isRTL = safeLang === 'ar' || safeLang === 'ku';
             document.documentElement.setAttribute('dir', isRTL ? 'rtl' : 'ltr');
+
 
             document.querySelectorAll('.lang-option').forEach(el => {
                 const itemLang = el.getAttribute('data-lang');
