@@ -65,21 +65,22 @@
     <!-- Custom CSS for Liquid Glass and Imagery -->
     <style>
         /* Base Reset */
-        body {
+body {
             background-color: #050b14;
             color: #ffffff;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
         }
+        html, body { margin: 0; padding: 0; }
 
         ::-webkit-scrollbar { width: 10px; }
         ::-webkit-scrollbar-track { background: #050b14; }
         ::-webkit-scrollbar-thumb { background: #005E2A; border-radius: 10px; }
 
         /* Background Image Engine */
-        .ambient-bg {
+.ambient-bg {
             position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
+            top: 0; left: 0; width: 100%; height: 100vh;
             background-image: url('https://images.unsplash.com/photo-1596040033229-a9821ebd058d?q=80&w=2000&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
@@ -87,7 +88,7 @@
         }
         .ambient-overlay {
             position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
+            top: 0; left: 0; width: 100%; height: 100vh;
             background: linear-gradient(135deg, rgba(5, 12, 20, 0.9) 0%, rgba(3, 6, 10, 0.98) 100%);
             z-index: -1;
         }
@@ -250,6 +251,7 @@
     </style>
 </head>
 <body class="antialiased selection:bg-dunya-main selection:text-white">
+
 
     <!-- Custom Cursor -->
     <div id="cursor-dot"></div>
@@ -586,9 +588,12 @@
         }
 
         (function() {
-            const theme = localStorage.getItem('theme') || 'light';
+            const theme = localStorage.getItem('theme');
             if (theme === 'dark') {
                 document.documentElement.classList.remove('light');
+            } else {
+                // First visit (no value) defaults to light
+                document.documentElement.classList.add('light');
             }
         })();
 
