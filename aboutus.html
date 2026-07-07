@@ -40,16 +40,17 @@
     </script>
 
     <style>
-        body {
+body {
             background-color: #0a0f0d;
             color: #ffffff;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
         }
+        html, body { margin: 0; padding: 0; }
 
-        .ambient-bg {
+.ambient-bg {
             position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
+            top: 0; left: 0; width: 100%; height: 100vh;
             background-image: url('https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=2000&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
@@ -58,7 +59,7 @@
         }
         .ambient-overlay {
             position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
+            top: 0; left: 0; width: 100%; height: 100vh;
             background: radial-gradient(circle at 50% 50%, rgba(22, 163, 74, 0.05) 0%, rgba(10, 15, 13, 0.98) 100%);
             z-index: -1;
         }
@@ -331,10 +332,13 @@
                 </div>
             </div>
             
-            <div class="relative">
-                <div class="aspect-square rounded-[3rem] overflow-hidden glass-panel p-4">
-                    <img src="https://images.unsplash.com/photo-1578916171728-46686eac8d58?q=80&w=1200&auto=format&fit=crop" class="w-full h-full object-cover rounded-[2rem]" alt="Market Interior" data-i18n-alt="img_market_interior">
-                </div>
+                <div class="relative">
+                <div class="aspect-square rounded-[3rem] overflow-hidden glass-panel p-4 relative">
+                    <img id="about-people-1" src="https://raw.githubusercontent.com/muntasir1023/dunya_final/main/2%20people.jpeg" class="w-full h-full object-cover rounded-[2rem] about-people-img" alt="People" data-i18n-alt="img_market_interior">
+                    <img id="about-people-2" src="https://raw.githubusercontent.com/muntasir1023/dunya_final/main/3%20people.jpeg" class="w-full h-full object-cover rounded-[2rem] about-people-img hidden" alt="People" aria-hidden="true">
+                    <style>
+                        .about-people-img { position: absolute; inset: 0; }
+                    </style>
                 <!-- Floating Badge -->
                 <div class="absolute -bottom-6 -left-6 glass-panel p-8 rounded-[2rem] shadow-2xl">
                     <div class="flex items-center gap-4">
@@ -445,9 +449,12 @@
         }
 
         (function() {
-            const theme = localStorage.getItem('theme') || 'light';
+            const theme = localStorage.getItem('theme');
             if (theme === 'dark') {
                 document.documentElement.classList.remove('light');
+            } else {
+                // First visit (no value) defaults to light
+                document.documentElement.classList.add('light');
             }
         })();
 
@@ -606,29 +613,35 @@
         const langDropdown = document.getElementById('lang-dropdown');
         const currentLangText = document.getElementById('current-lang-text');
 
-        langBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            langDropdown.classList.toggle('opacity-0');
-            langDropdown.classList.toggle('scale-95');
-            langDropdown.classList.toggle('pointer-events-none');
-        });
+        // Guard: avoid runtime errors if elements are missing
+        if (langBtn && langDropdown && currentLangText) {
+            langBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                langDropdown.classList.toggle('opacity-0');
+                langDropdown.classList.toggle('scale-95');
+                langDropdown.classList.toggle('pointer-events-none');
+            });
+        }
 
         window.setLanguage = function(langCode) {
-            localStorage.setItem('dunya-language', langCode);
-            currentLangText.textContent = langCode.toUpperCase();
-            
-            const isRTL = langCode === 'ar' || langCode === 'ku';
+            const safeLang = translations[langCode] ? langCode : 'en';
+            localStorage.setItem('dunya-language', safeLang);
+
+
+            if (currentLangText) currentLangText.textContent = safeLang.toUpperCase();
+
+            const isRTL = safeLang === 'ar' || safeLang === 'ku';
             document.documentElement.setAttribute('dir', isRTL ? 'rtl' : 'ltr');
-            
+
             // Translate text nodes
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
-                if(translations[langCode] && translations[langCode][key]) {
-                    // Auto-style "Halal" and add icon
-                    const styledText = translations[langCode][key].replace(/(Halal|Helal|حلال)/gi, '<span class="text-dunya-light inline-flex items-center gap-1 font-bold"><i class="fa-solid fa-certificate text-[10px]"></i> $1</span>');
+                if(translations[safeLang] && translations[safeLang][key]) {
+                    const styledText = translations[safeLang][key].replace(/(Halal|Helal|حلال)/gi, '<span class="text-dunya-light inline-flex items-center gap-1 font-bold"><i class="fa-solid fa-certificate text-[10px]"></i> $1</span>');
                     el.innerHTML = styledText;
                 }
             });
+
 
             // Translate attributes (e.g., alt)
             document.querySelectorAll('[data-i18n-alt]').forEach(el => {
@@ -716,10 +729,28 @@
 
         document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-        window.addEventListener('DOMContentLoaded', () => {
-            const savedLang = localStorage.getItem('dunya-language') || 'en';
-            setLanguage(savedLang);
-        });
+            // About page dual image switcher (every 5 seconds)
+            const aboutPeople1 = document.getElementById('about-people-1');
+            const aboutPeople2 = document.getElementById('about-people-2');
+            if (aboutPeople1 && aboutPeople2) {
+                let aboutPeopleIndex = 1;
+                setInterval(() => {
+                    aboutPeopleIndex = (aboutPeopleIndex === 1) ? 2 : 1;
+                    if (aboutPeopleIndex === 1) {
+                        aboutPeople1.classList.remove('hidden');
+                        aboutPeople2.classList.add('hidden');
+                    } else {
+                        aboutPeople2.classList.remove('hidden');
+                        aboutPeople1.classList.add('hidden');
+                    }
+                }, 5000);
+            }
+
+            window.addEventListener('DOMContentLoaded', () => {
+                const savedLang = localStorage.getItem('dunya-language') || 'en';
+                setLanguage(savedLang);
+            });
+
 
         document.addEventListener('click', () => {
             if(!langDropdown) return;
