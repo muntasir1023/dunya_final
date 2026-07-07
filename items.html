@@ -39,17 +39,18 @@
     </script>
 
     <style>
-        body {
+body {
             background-color: #0a0f0d;
             color: #ffffff;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
         }
+        html, body { margin: 0; padding: 0; }
 
         /* Hero Background like index.html */
-        .ambient-bg {
+.ambient-bg {
             position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
+            top: 0; left: 0; width: 100%; height: 100vh;
             background-image: url('https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=2000&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
@@ -58,7 +59,7 @@
         }
         .ambient-overlay {
             position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
+            top: 0; left: 0; width: 100%; height: 100vh;
             background: radial-gradient(circle at 50% 50%, rgba(22, 163, 74, 0.05) 0%, rgba(10, 15, 13, 0.95) 100%);
             z-index: -1;
         }
@@ -597,9 +598,12 @@
         }
 
         (function() {
-            const theme = localStorage.getItem('theme') || 'light';
+            const theme = localStorage.getItem('theme');
             if (theme === 'dark') {
                 document.documentElement.classList.remove('light');
+            } else {
+                // First visit (no value) defaults to light
+                document.documentElement.classList.add('light');
             }
         })();
 
@@ -717,7 +721,7 @@
             {
                 name: "Vegetables & Fruit",
                 cat: "all",
-                img: "https://images.unsplash.com/photo-1543362906-acfc16c6752b?q=80&w=800&auto=format&fit=crop",
+                img: "https://raw.githubusercontent.com/muntasir1023/dunya_final/main/spices.jpeg",
                 desc: "At our international supermarket, you will find an extensive and fresh vegetable selection from all over the world. From everyday staple vegetables to unique exotic products from Africa, Asia, the Middle East, and South America. We offer, among others, African leafy greens, peppers, okra, cassava, plantains, and many other authentic ingredients for both traditional and modern dishes. Quality, freshness, and diversity are at the heart of what we do, so every customer can rediscover the flavors of home.",
             },
             {
@@ -735,49 +739,52 @@
             {
                 name: "Lebanese Lavash Bread",
                 cat: "all",
-                img: "https://images.unsplash.com/photo-1541742819-7f7d6f6d8a77?q=80&w=800&auto=format&fit=crop",
+                img: "https://raw.githubusercontent.com/muntasir1023/dunya_final/main/bread.jpeg",
                 desc: "Lavash is a traditional flatbread popular across the Middle East and particularly cherished in Lebanese cuisine. This thin, soft bread is made with simple ingredients and is known for its light texture and versatility. Lavash is ideal for making wraps, sandwiches, and mezze platters. It pairs beautifully with hummus, falafel, grilled vegetables, meat dishes, and various dips. Its soft texture makes it easy to roll or fill with a variety of ingredients.",
             },
             {
                 name: "Halal meat and chicken",
                 cat: "all",
-                img: "https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=800&auto=format&fit=crop",
+                img: "https://raw.githubusercontent.com/muntasir1023/dunya_final/main/meat.jpeg",
                 desc: "Our meat and our chicken are carefully selected and prepared according to halal guidelines. This means that the entire process, from purchasing to preparation, complies with Islamic regulations. We attach great value to quality, hygiene, and respect for animals and tradition, so that you can enjoy flavorful products with peace of mind.",
             },
             {
                 name: "Eastern Catering",
                 cat: "all",
-                img: "https://images.unsplash.com/photo-1529692236671-f1a9673cda8e?q=80&w=800&auto=format&fit=crop",
+                img: "https://raw.githubusercontent.com/muntasir1023/dunya_final/main/catering.jpeg",
                 desc: "Bring the rich flavors of Eastern cuisine to your party or event with our fresh and authentic catering. From traditional hot dishes and mezze to fragrant rice dishes, grilled specialties, and sweets – everything is prepared with care and according to authentic recipes. Perfect for parties, gatherings, and special occasions.",
             },
+
             {
                 name: "Herbs & Spices",
                 cat: "all",
-                img: "https://images.unsplash.com/photo-1604908176997-125f25cc500f?q=80&w=800&auto=format&fit=crop",
+                img: "https://raw.githubusercontent.com/muntasir1023/dunya_final/main/fruits%202.jpeg",
                 desc: "Discover our wide selection of herbs and spices from all over the world. From fragrant Mediterranean herbs to powerful Eastern spices – perfect for giving every meal extra flavor. We offer fresh quality and authentic flavors for both traditional and modern dishes.",
             },
             {
                 name: "Baklava & Sweets",
                 cat: "all",
-                img: "https://images.unsplash.com/photo-1606314577946-8c37bd3b6b21?q=80&w=800&auto=format&fit=crop",
+                img: "https://raw.githubusercontent.com/muntasir1023/dunya_final/main/sweets.jpeg",
                 desc: "Enjoy our delicious, artisanal baklava and Mediterranean sweets. Prepared according to a traditional recipe with fresh nuts, fine layers of phyllo dough, and a perfect balance of sweetness. Ideal with coffee, tea, or as a luxury treat for any occasion.",
             },
             {
                 name: "Cleaning Supplies",
                 cat: "all",
-                img: "https://images.unsplash.com/photo-1583947582421-2c8a0b5c9f9e?q=80&w=800&auto=format&fit=crop",
+                img: "https://raw.githubusercontent.com/muntasir1023/dunya_final/main/cleaning.jpeg",
                 desc: "Discover our wide assortment of cleaning supplies for a fresh and clean home. From cleaning agents and laundry products to kitchen and bathroom essentials – we offer quality products for every cleaning task. Practical, affordable, and indispensable for daily use.",
             },
             {
                 name: "Frozen Products",
                 cat: "all",
-                img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=800&auto=format&fit=crop",
+                img: "https://raw.githubusercontent.com/muntasir1023/dunya_final/main/frozen.jpeg",
                 desc: "In our frozen food department, you will find an extensive assortment of fresh and high-quality frozen products. From vegetables, fruit, and snacks to fish, meat, and international specialties – everything is carefully selected for convenience and taste. Ideal for a quick meal without compromising on quality.",
             },
             {
                 name: "Fireworks – 26 Years of Experience",
                 cat: "all",
-                img: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=800&auto=format&fit=crop",
+                img: "https://raw.githubusercontent.com/muntasir1023/dunya_final/main/fireworks.jpg",
+
+
                 desc: "With no less than 26 years of experience, we are known for quality, service, and an extensive assortment of fireworks. From colorful consumer fireworks to impressive effects – every year we ensure a spectacular New Year's Eve. Safety, reliability, and customer satisfaction are always central to everything we do.",
             }
         ];
@@ -879,7 +886,24 @@
                     c.classList.toggle('is-dimmed', idx !== selectedIndex);
                 });
             }
+
+            // 5-second image swiper for Catering card
+            const cateringSwiper = productGrid.querySelector('.item-card[aria-label="Eastern Catering"]');
+            if (cateringSwiper) {
+                const img1 = cateringSwiper.querySelector('img');
+                if (img1) {
+                    const auntiesUrl = 'https://raw.githubusercontent.com/muntasir1023/dunya_final/main/2%20aunties.jpeg';
+                    const cateringUrl = 'https://raw.githubusercontent.com/muntasir1023/dunya_final/main/catering.jpeg';
+                    let isAunties = false;
+                    setInterval(() => {
+                        isAunties = !isAunties;
+                        img1.src = isAunties ? auntiesUrl : cateringUrl;
+                    }, 5000);
+                }
+            }
+
             selectItem(0);
+
         }
 
         function updateGrid() {
@@ -939,32 +963,35 @@
         const currentLangText = document.getElementById('current-lang-text');
         let isLangOpen = false; // State variable for dropdown
 
-        langBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            // Toggle dropdown state
-            isLangOpen = !isLangOpen;
-            if (isLangOpen) {
-                langDropdown.classList.remove('opacity-0', 'scale-95', 'pointer-events-none');
-                langDropdown.classList.add('opacity-100', 'scale-100');
-            } else {
-                langDropdown.classList.add('opacity-0', 'scale-95', 'pointer-events-none');
-                langDropdown.classList.remove('opacity-100', 'scale-100');
-            }
-        });
+        // Guard: avoid runtime errors if elements are missing
+        if (langBtn && langDropdown && currentLangText) {
+            langBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                isLangOpen = !isLangOpen;
+                if (isLangOpen) {
+                    langDropdown.classList.remove('opacity-0', 'scale-95', 'pointer-events-none');
+                    langDropdown.classList.add('opacity-100', 'scale-100');
+                } else {
+                    langDropdown.classList.add('opacity-0', 'scale-95', 'pointer-events-none');
+                    langDropdown.classList.remove('opacity-100', 'scale-100');
+                }
+            });
+        }
 
         window.setLanguage = function(langCode) {
-            localStorage.setItem('dunya-language', langCode);
-            currentLangText.textContent = langCode.toUpperCase();
-            
-            const isRTL = langCode === 'ar' || langCode === 'ku';
+            const safeLang = translations[langCode] ? langCode : 'nl';
+            localStorage.setItem('dunya-language', safeLang);
+
+            if (currentLangText) currentLangText.textContent = safeLang.toUpperCase();
+
+            const isRTL = safeLang === 'ar' || safeLang === 'ku';
             document.documentElement.setAttribute('dir', isRTL ? 'rtl' : 'ltr');
-            
+
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
-                if(translations[langCode] && translations[langCode][key]) {
-                    // Auto-style "Halal" and add icon
-                    const styledText = translations[langCode][key].replace(/(Halal|Helal|حلال)/gi, '<span class="text-dunya-light inline-flex items-center gap-1 font-bold"><i class="fa-solid fa-certificate text-[10px]"></i> $1</span>');
-                    el.style.opacity = '0'; // Add fade animation for consistency with index.html
+                if(translations[safeLang] && translations[safeLang][key]) {
+                    const styledText = translations[safeLang][key].replace(/(Halal|Helal|حلال)/gi, '<span class="text-dunya-light inline-flex items-center gap-1 font-bold"><i class="fa-solid fa-certificate text-[10px]"></i> $1</span>');
+                    el.style.opacity = '0';
                     setTimeout(() => {
                         el.innerHTML = styledText;
                         el.style.opacity = '1';
@@ -974,32 +1001,30 @@
 
             document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
                 const key = el.getAttribute('data-i18n-placeholder');
-                if(translations[langCode] && translations[langCode][key]) {
-                    el.placeholder = translations[langCode][key];
+                if(translations[safeLang] && translations[safeLang][key]) {
+                    el.placeholder = translations[safeLang][key];
                 }
             });
 
-            // Highlight selected option
             document.querySelectorAll('.lang-option').forEach(el => {
                 const itemLang = el.getAttribute('data-lang');
-                if(itemLang === langCode) {
-                    el.classList.add('lang-active');
-                } else {
-                    el.classList.remove('lang-active');
-                }
-                // No need for else if(itemLang) as in index.html, as all lang-options have data-lang
+                if(itemLang === safeLang) el.classList.add('lang-active');
+                else el.classList.remove('lang-active');
             });
 
-            // Close dropdown after selection
             isLangOpen = false;
-            langDropdown.classList.add('opacity-0', 'scale-95', 'pointer-events-none');
-            langDropdown.classList.remove('opacity-100', 'scale-100');
+            if (langDropdown) {
+                langDropdown.classList.add('opacity-0', 'scale-95', 'pointer-events-none');
+                langDropdown.classList.remove('opacity-100', 'scale-100');
+            }
         };
 
         const mobileBtn = document.getElementById('mobile-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         
         window.toggleMobileMenu = function() {
+            if (!mobileMenu || !mobileBtn) return;
+
             const isHidden = mobileMenu.classList.contains('hidden');
             if (isHidden) {
                 mobileMenu.classList.remove('hidden');
@@ -1021,7 +1046,8 @@
             }
         };
         
-        if (mobileBtn) mobileBtn.addEventListener('click', toggleMobileMenu);
+        if (mobileBtn) mobileBtn.addEventListener('click', window.toggleMobileMenu);
+
 
         // Sliding disabled per request (static image only)
         function startOliveOilSlider() {
@@ -1042,11 +1068,13 @@ const savedLang = localStorage.getItem('dunya-language') || 'nl';
 
 
         document.addEventListener('click', () => {
+            if (!langDropdown) return;
             if(!langDropdown.classList.contains('opacity-0')) {
                 isLangOpen = false;
                 langDropdown.classList.add('opacity-0', 'scale-95', 'pointer-events-none');
             }
         });
+
     </script>
 
 </body>
