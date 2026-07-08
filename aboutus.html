@@ -186,22 +186,23 @@ body {
     <div class="ambient-bg"></div>
     <div class="ambient-overlay"></div>
 
-    <!-- Navigation -->
+    <!-- Navigation Bar -->
     <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
             
             <!-- Desktop Left-aligned Links (Home, Products, About Us, Vacancy) -->
             <div class="hidden md:flex items-center gap-8 justify-start">
-                <a href="index.html" class="text-sm font-semibold text-white" data-i18n="nav_home">Home</a>
+                <a href="index.html" class="text-sm font-semibold text-gray-300 hover:text-white transition-colors" data-i18n="nav_home">Home</a>
                 <a href="items.html" class="text-sm font-semibold text-gray-300 hover:text-white transition-colors" data-i18n="nav_products">Products</a>
                 <a href="aboutus.html" class="text-sm font-semibold text-white relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-[2px] after:bg-dunya-light after:rounded-full" data-i18n="nav_about">About Us</a>
                 <a href="vacancy.html" class="text-sm font-semibold text-gray-300 hover:text-white transition-colors" data-i18n="nav_vacancy">Vacancy</a>
+
             </div>
 
             <!-- Action & WORKING Language Switcher (Stays aligned on the right) -->
             <div class="hidden md:flex items-center gap-4 relative">
-                
-                <!-- Centered banner text (copied from index.html) -->
+
+                <!-- Centered banner text -->
                 <div class="hidden sm:flex items-center justify-center flex-1">
                     <div class="glass-panel px-5 py-2 rounded-full border border-white/10">
                         <span class="text-xs font-bold tracking-wide text-white">HAVE A</span>
@@ -209,8 +210,9 @@ body {
                     </div>
                 </div>
 
-                <!-- Theme Toggle -->
+                <!-- Theme Toggle (left of language button) -->
                 <div class="theme-switch-container" onclick="toggleTheme()">
+
                     <div class="theme-switch-handle"></div>
                     <i class="fa-solid fa-moon text-[10px] text-dunya-light"></i>
                     <i class="fa-solid fa-sun text-[10px] text-gray-400"></i>
@@ -219,11 +221,14 @@ body {
                 <!-- Language Dropdown Toggle -->
                 <div class="relative">
                     <button id="lang-btn" class="glass-panel px-4 py-2 rounded-full flex items-center gap-2 cursor-pointer hover:bg-white/10 transition">
+
                         <i class="fa-solid fa-globe text-dunya-light text-sm"></i>
                         <span id="current-lang-text" class="text-xs font-semibold tracking-wide">EN</span>
                         <i class="fa-solid fa-chevron-down text-[10px] ml-1"></i>
                     </button>
 
+
+                    
                     <!-- Dropdown Menu -->
                     <div id="lang-dropdown" class="absolute right-0 mt-2 w-32 glass-panel rounded-2xl overflow-hidden opacity-0 scale-95 pointer-events-none z-50 shadow-2xl border border-white/20">
                         <ul class="py-2 text-sm text-gray-300">
@@ -238,6 +243,8 @@ body {
                         </ul>
                     </div>
                 </div>
+
+                <!-- Explore/Products CTA removed as requested -->
             </div>
 
             <!-- Mobile Menu Button -->
@@ -274,6 +281,7 @@ body {
             </div>
         </div>
     </nav>
+
 
 
     <!-- About Content -->
