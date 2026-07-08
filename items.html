@@ -381,8 +381,9 @@ body {
             
             <!-- Desktop Left-aligned Links (Home, Products, About Us, Vacancy) -->
             <div class="hidden md:flex items-center gap-8 justify-start">
-<a href="index.html" class="text-sm font-semibold text-white" data-i18n="nav_home">Home</a>
+                <a href="index.html" class="text-sm font-semibold text-gray-300 hover:text-white transition-colors" data-i18n="nav_home">Home</a>
                 <a href="items.html" class="text-sm font-semibold text-white relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-[2px] after:bg-dunya-light after:rounded-full" data-i18n="nav_products">Products</a>
+
                 <a href="aboutus.html" class="text-sm font-semibold text-gray-300 hover:text-white transition-colors" data-i18n="nav_about">About Us</a>
                 <a href="vacancy.html" class="text-sm font-semibold text-gray-300 hover:text-white transition-colors" data-i18n="nav_vacancy">Vacancy</a>
             </div>
@@ -390,16 +391,17 @@ body {
             <!-- Action & WORKING Language Switcher (Stays aligned on the right) -->
             <div class="hidden md:flex items-center gap-4 relative">
 
-                <!-- Centered banner text (copied from index.html) -->
+                <!-- Centered banner text -->
                 <div class="hidden sm:flex items-center justify-center flex-1">
                     <div class="glass-panel px-5 py-2 rounded-full border border-white/10">
                         <span class="text-xs font-bold tracking-wide text-white">HAVE A</span>
                         <span class="ml-2 text-xs font-bold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-dunya-light to-dunya-light">SWEEEET DAY !!!</span>
                     </div>
                 </div>
-                
-                <!-- Theme Toggle -->
+
+                <!-- Theme Toggle (left of language button) -->
                 <div class="theme-switch-container" onclick="toggleTheme()">
+
                     <div class="theme-switch-handle"></div>
                     <i class="fa-solid fa-moon text-[10px] text-dunya-light"></i>
                     <i class="fa-solid fa-sun text-[10px] text-gray-400"></i>
@@ -408,11 +410,14 @@ body {
                 <!-- Language Dropdown Toggle -->
                 <div class="relative">
                     <button id="lang-btn" class="glass-panel px-4 py-2 rounded-full flex items-center gap-2 cursor-pointer hover:bg-white/10 transition">
+
                         <i class="fa-solid fa-globe text-dunya-light text-sm"></i>
-<span id="current-lang-text" class="text-xs font-semibold tracking-wide">NL</span>
+                        <span id="current-lang-text" class="text-xs font-semibold tracking-wide">EN</span>
                         <i class="fa-solid fa-chevron-down text-[10px] ml-1"></i>
                     </button>
 
+
+                    
                     <!-- Dropdown Menu -->
                     <div id="lang-dropdown" class="absolute right-0 mt-2 w-32 glass-panel rounded-2xl overflow-hidden opacity-0 scale-95 pointer-events-none z-50 shadow-2xl border border-white/20">
                         <ul class="py-2 text-sm text-gray-300">
@@ -427,6 +432,8 @@ body {
                         </ul>
                     </div>
                 </div>
+
+                <!-- Explore/Products CTA removed as requested -->
             </div>
 
             <!-- Mobile Menu Button -->
@@ -440,7 +447,7 @@ body {
             <a href="index.html" class="text-2xl font-bold text-white" data-i18n="nav_home">Home</a>
             <a href="items.html" class="text-2xl font-bold text-gray-300" data-i18n="nav_products">Products</a>
             <a href="aboutus.html" class="text-2xl font-bold text-gray-300" data-i18n="nav_about">About Us</a>
-<a href="vacancy.html" class="text-2xl font-bold text-gray-300" data-i18n="nav_vacancy">Vacancy</a>
+            <a href="vacancy.html" class="text-2xl font-bold text-gray-300" data-i18n="nav_vacancy">Vacancy</a>
             
             <div class="flex items-center gap-3 glass-panel px-6 py-3 rounded-full" onclick="toggleTheme()">
                 <span class="text-sm font-medium text-white">Switch Theme</span>
@@ -463,6 +470,9 @@ body {
             </div>
         </div>
     </nav>
+
+
+
 
 
     <!-- Header Section -->
@@ -527,9 +537,20 @@ body {
                 <div class="absolute -top-24 -right-24 w-48 h-48 bg-dunya-main/10 rounded-full blur-3xl"></div>
                 <div class="absolute -bottom-24 -left-24 w-48 h-48 bg-dunya-main/5 rounded-full blur-3xl"></div>
 
-                <h4 class="text-dunya-light font-bold flex items-center justify-center gap-2 mb-6 text-sm uppercase tracking-widest">
+                <h4 class="text-dunya-light font-bold flex items-center justify-center gap-2 mb-3 text-sm uppercase tracking-widest">
                     <i class="fa-solid fa-seedling"></i> Too Good To Go
                 </h4>
+
+                <!-- Too Good To Go official logo -->
+                <div class="flex justify-center mb-6">
+                        <img
+                        src="https://s3-eu-west-1.amazonaws.com/tpd/logos/5e56519f7116b20001234b98/0x0.png"
+                        alt="Too Good To Go"
+                        loading="lazy"
+                        class="h-10 md:h-11 w-auto object-contain"
+                        referrerpolicy="no-referrer"
+                        >
+                </div>
 
                 <p class="text-lg md:text-xl text-gray-200 leading-relaxed mb-8 max-w-2xl mx-auto">
                     Together against food waste! Via Too Good To Go, we offer daily surprise bags with fresh products and delicacies that are left over at the end of the day. This way, you enjoy high-quality products for an affordable price and you contribute to a more sustainable future.
@@ -613,7 +634,7 @@ body {
             // ... [Keep existing translations as provided in items.html]
             // Example snippet check:
             en: {
-                nav_home: "Home", nav_products: "Products", nav_about: "About Us",
+                nav_home: "Home", nav_products: "Products", nav_about: "About Us", nav_vacancy: "Vacancy",
                 page_title: "International Selection", page_subtitle: "Excellence in every aisle. Discover premium cuts, traditional bakes, and world-class spices.",
                 cat_all: "All Items", cat_meat: "Butcher", cat_bakery: "Bakery", cat_dairy: "Dairy & Cheese", cat_grocery: "Grocery", cat_baklava: "Baklava",
                 cat_departments: "Our Departments",
@@ -634,8 +655,9 @@ body {
                 cat_slide_hint: "Slide to see more categories"
             },
             nl: {
-                nav_home: "Startpagina", nav_products: "Producten", nav_about: "Over Ons",
+                nav_home: "Startpagina", nav_products: "Producten", nav_about: "Over Ons", nav_vacancy: "Vacature",
                 page_title: "Internationale Selectie", page_subtitle: "Uitmuntendheid in elk gangpad. Ontdek kwaliteitsvlees en vers gebak.",
+
                 cat_all: "Alles", cat_meat: "Slagerij", cat_bakery: "Bakkerij", cat_dairy: "Zuivel", cat_grocery: "Supermarkt", cat_baklava: "Baklava",
                 footer_desc: "De smaken van de wereld in onze gemeenschap voor de afgelopen 25 jaar. Uw partner voor kwaliteitsproducten.", footer_links: "Snelkoppelingen", footer_contact: "Locatie", footer_rights: "© 2026 DÜNYA INTERNATIONALE SUPERMARKT. Alle rechten voorbehouden.",
                 premium_service_desc: "Boodschappen voor 2+ weken? Bestel via WhatsApp! Wij pakken het in, u haalt het op. Geen aanbetaling nodig.", // Added
@@ -703,7 +725,7 @@ body {
             {
                 name: "Fresh Dairy, Authentic Taste",
                 cat: "all",
-                img: "https://images.unsplash.com/photo-1546793665-c746ae3f2c95?q=80&w=800&auto=format&fit=crop",
+                img: "https://raw.githubusercontent.com/muntasir1023/dunya_final/main/dairy.jpeg",
                 desc: "Discover our extensive selection of premium feta cheese, creamy white cheese, fresh yoghurt, and authentic Mediterranean specialties. ✅ Always fresh ✅ Large stock ✅ 10 meters of chilled quality",
             },
             {
@@ -727,13 +749,13 @@ body {
             {
                 name: "Authentic Turkish and Lebanese Breads",
                 cat: "all",
-                img: "https://images.unsplash.com/photo-1523986371872-9d3ba2e2f642?q=80&w=800&auto=format&fit=crop",
+                img: "https://raw.githubusercontent.com/muntasir1023/dunya_final/main/lebaneese%20bread.png",
                 desc: "Turkish breads have been an essential part of Turkish food culture for centuries. These artisanal breads are known for their airy texture, soft interior, and golden-brown crust. Traditionally baked in stone ovens, they deliver an authentic flavor and a wonderful aroma.",
             },
             {
                 name: "Simit – The Turkish Sesame Ring",
                 cat: "all",
-                img: "https://images.unsplash.com/photo-1608198093002-ad4e6cbb7f08?q=80&w=800&auto=format&fit=crop",
+                img: "https://raw.githubusercontent.com/muntasir1023/dunya_final/main/Simit.png",
                 desc: "Simit is one of the most beloved bread specialties from Turkey. This ring-shaped delight is generously coated with roasted sesame seeds, creating a crispy exterior and a delicious nutty flavor. In Turkey, simit is often enjoyed for breakfast or as a snack, paired with cheese, olives, tomatoes, or a glass of traditional Turkish tea. Thanks to the perfect balance between crunchy and soft, simit is loved by young and old alike.",
             },
             {
@@ -894,10 +916,13 @@ body {
                 if (img1) {
                     const auntiesUrl = 'https://raw.githubusercontent.com/muntasir1023/dunya_final/main/2%20aunties.jpeg';
                     const cateringUrl = 'https://raw.githubusercontent.com/muntasir1023/dunya_final/main/catering.jpeg';
-                    let isAunties = false;
+                    const tomatoUrl = 'https://raw.githubusercontent.com/muntasir1023/dunya_final/main/tomato%20image.jpeg';
+
+                    const slideUrls = [auntiesUrl, cateringUrl, tomatoUrl];
+                    let slideIndex = 0;
                     setInterval(() => {
-                        isAunties = !isAunties;
-                        img1.src = isAunties ? auntiesUrl : cateringUrl;
+                        slideIndex = (slideIndex + 1) % slideUrls.length;
+                        img1.src = slideUrls[slideIndex];
                     }, 5000);
                 }
             }
