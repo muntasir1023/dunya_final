@@ -721,23 +721,29 @@ body {
             }
         };
 
+        // Only English, Dutch, and Turkish product translations should work.
+        // Force all other languages to fall back to base (English) product names/descriptions.
         const products = [
             {
+                id: "fresh-dairy",
                 name: "Fresh Dairy, Authentic Taste",
                 cat: "all",
                 img: "https://raw.githubusercontent.com/muntasir1023/dunya_final/main/dairy.jpeg",
                 desc: "Discover our extensive selection of premium feta cheese, creamy white cheese, fresh yoghurt, and authentic Mediterranean specialties. ✅ Always fresh ✅ Large stock ✅ 10 meters of chilled quality",
             },
             {
+                id: "tea-coffee",
                 name: "Tea & Coffee",
                 cat: "all",
                 img: "https://images.unsplash.com/photo-1511920170033-f8396924c348?q=80&w=800&auto=format&fit=crop",
                 desc: "Are you a true tea lover? Then you’ve come to the right place! We offer a wide selection of more than 20 different types of tea — both loose-leaf tea and convenient tea bags. From classic black tea and refreshing green tea to delicious herbal blends, fruit infusions, and unique international varieties. Whether you’re looking for a relaxing evening tea, an energizing start to your day, or a special flavor experience, there’s always a tea that suits you perfectly. Our range includes: • Black tea • Green tea • Herbal tea • Mint tea • Chamomile tea • Fruit tea • Turkish tea • Arabic tea • Special blends and seasonal flavors Our teas are carefully selected for quality, taste, and aroma. Come by, discover new flavors, and enjoy a perfect cup of tea any time of the day.",
             },
             {
+                id: "olive-oil",
                 name: "Olive Oil & Sunflower Oil",
                 cat: "all",
                 img: "https://raw.githubusercontent.com/muntasir1023/dunya_final/main/3.jpeg",
+
                 desc: "Discover the World of Olive Oil and Specialty Oils At our store, you will find an extensive selection of high-quality olive oils and unique specialty oils from various countries and traditions. From smooth and fruity extra virgin olive oil to exclusive nut, seed, and herb oils — we have the perfect oil for every taste and every dish. Our Olive Oil Collection Olive oil has been an essential part of Mediterranean cuisine for centuries. We offer a wide choice of: 🫒 Extra Virgin Olive Oil – Cold-pressed, pure, and full of flavor. Ideal for salads, bread, and cold dishes. 🫒 Mild Olive Oil – Gentle in taste and perfect for everyday use in the kitchen. 🫒 Organic Olive Oil – Sustainably produced with respect for nature and tradition. 🫒 Flavored Olive Oil – Enriched with delicious flavors such as garlic, lemon, chili, and herbs for an extra culinary experience. Specialty Oils for the Connoisseur In addition to olive oil, we offer a unique selection of specialty oils: 🌰 Hazelnut Oil – With a refined nutty flavor, perfect for salads and desserts. 🌰 Walnut Oil – Rich and aromatic, wonderful with cheese, vegetables, and cold dishes. 🌿 Sesame Oil – Essential in Asian cuisine for stir-fries and marinades. 🥥 Coconut Oil – Versatile for baking, cooking, and healthy recipes. 🔥 Wok Oil – Specially formulated for high temperatures and stir-fry dishes. 🌱 Flaxseed Oil – A natural source of omega-3 fatty acids. 🥑 Avocado Oil – Mild in flavor and excellent for baking and grilling. 🌾 Grapeseed Oil – Light and neutral with a high smoke point. 🌿 Black Cumin Seed Oil – A special oil valued for centuries. 🧄 Garlic Oil – Adds extra flavor to pasta, pizza, and Mediterranean dishes. 🌶️ Chili Oil – Gives every dish a delicious spicy touch. 🍄 Truffle Oil – An exclusive flavor enhancer for true connoisseurs.",
             },
             {
@@ -814,6 +820,166 @@ body {
         const productGrid = document.getElementById('product-grid');
         let currentCategory = 'all';
         let searchQuery = '';
+
+        // Translate item cards (name + description) when language changes.
+        // Provide translations for each product by `id`.
+        // IMPORTANT: every product MUST have a unique `id`.
+        // Translate item cards (name + description) when language changes.
+        // This object MUST contain entries for every product `id` for each language.
+        // If an id is missing, the code falls back to the base English text.
+        const productTranslations = {
+            // NOTE: Add translations here. Each product id must map to { name, desc }.
+            // ids are: "fresh-dairy" for the first product, then auto-assigned "product-1".."product-13" for the rest.
+            en: {},
+            nl: {
+                "fresh-dairy": {
+                    name: "Verse Zuivel, Authentieke Smaak",
+                    desc: "Ontdek onze uitgebreide selectie premium feta- en witte kazen, verse yoghurt en authentieke mediterrane specialiteiten. ✅ Altijd vers ✅ Grote voorraad ✅ 10 meter gekoelde kwaliteit"
+                },
+                "tea-coffee": {
+                    name: "Koffie & Thee",
+                    desc: "Ben jij een echte liefhebber van thee? Dan ben je hier op de juiste plek! We bieden een ruime keuze aan meer dan 20 verschillende soorten thee — zowel losse thee als handige theezakjes. Van klassieke zwarte thee en verfrissende groene thee tot heerlijke kruidenmengsels, fruitinfusies en unieke internationale variëteiten. Of je nu op zoek bent naar een ontspannende avondthee, een energieke start van je dag, of een bijzondere smaakervaring: er is altijd een thee die perfect bij je past. Ons assortiment omvat: • Zwarte thee • Groene thee • Kruidenthee • Munt thee • Kamille thee • Fruit thee • Turkse thee • Arabische thee • Speciale blends en seizoenssmaken. Onze theesoorten zijn zorgvuldig geselecteerd op kwaliteit, smaak en aroma. Kom langs, ontdek nieuwe smaken en geniet van een perfect kopje thee, op elk moment van de dag."
+                },
+                "olive-oil": {
+                    name: "Olijfolie & Zonnebloemolie",
+                    desc: "Ontdek de wereld van olijfolie en speciale oliën. Bij ons vind je een uitgebreide selectie van hoogwaardige olijfoliën en unieke speciale oliën uit verschillende landen en tradities. Van zachte en fruitige extra vierge olijfolie tot exclusieve noten-, zaad- en kruidoliën — wij hebben de perfecte olie voor elke smaak en elk gerecht. Onze Olijfoliecollectie Olijfolie is al eeuwenlang een essentieel onderdeel van de Mediterraanse keuken. We bieden een ruime keuze aan: 🫒 Extra vierge olijfolie – koudgeperst, puur en vol smaak. Ideaal voor salades, brood en koude gerechten. 🫒 Milde olijfolie – zacht van smaak en perfect voor dagelijks gebruik in de keuken. 🫒 Biologische olijfolie – duurzaam geproduceerd met respect voor natuur en traditie. 🫒 Gearomatiseerde olijfolie – verrijkt met heerlijke smaken zoals knoflook, citroen, chili en kruiden voor een extra culinaire ervaring. Speciale oliën voor liefhebbers Naast olijfolie bieden we ook een unieke selectie speciale oliën: 🌰 Hazelnootolie – met een verfijnde nootachtige smaak, perfect voor salades en desserts. 🌰 Walnootolie – rijk en aromatisch, heerlijk bij kaas, groenten en koude gerechten. 🌿 Sesamolie – essentieel in de Aziatische keuken voor roerbakgerechten en marinades. 🥥 Kokosolie – veelzijdig voor bakken, koken en gezonde recepten. 🔥 Wokolie – speciaal ontwikkeld voor hoge temperaturen en wokgerechten. 🌱 Lijnzaadolie – een natuurlijke bron van omega-3 vetzuren. 🥑 Avocado-olie – mild van smaak en uitstekend voor bakken en grillen. 🌾 Druivenpitolie – licht en neutraal met een hoog rookpunt. 🌿 Zwarte komijnzaadolie – een speciale olie die al eeuwen gewaardeerd wordt. 🧄 Knoflookolie – geeft extra smaak aan pasta, pizza en Mediterraanse gerechten. 🌶️ Chiliolie – geeft elk gerecht een heerlijke pittige touch. 🍄 Truffelolie – een exclusieve smaakversterker voor echte liefhebbers."
+                }
+            },
+            tr: {
+                "fresh-dairy": {
+                    name: "Taze Süt ve Doğal Lezzet",
+                    desc: "Premium beyaz peynir, krem beyaz peynir, taze yoğurt ve otantik Akdeniz lezzetlerinden oluşan geniş seçkimizi keşfedin. ✅ Her zaman taze ✅ Büyük stok ✅ Soğutulmuş kalitede 10 metre"
+                },
+                "tea-coffee": {
+                    name: "Çay & Kahve",
+                    desc: "Gerçek bir çay sever misin? O zaman doğru yerdesin! 20’den fazla farklı çay türünden oluşan geniş bir seçki sunuyoruz — hem yaprak çay hem de pratik çay poşetleri. Klasik siyah çay ve ferahlatıcı yeşil çaydan; lezzetli bitki karışımlarına, meyve demlemelerine ve benzersiz uluslararası çeşitlere kadar. İster rahat bir akşam çayı arıyor ol, ister gününe enerjik bir başlangıç yapmak istiyor ol, ister özel bir aroma deneyimi: Senin için her zaman mükemmel bir çay vardır. Seçeneklerimiz: • Siyah çay • Yeşil çay • Bitki çayı • Nane çayı • Papatya çayı • Meyve çayı • Türk çayı • Arap çayı • Özel karışımlar ve mevsimlik aromalar. Çaylarımız kalite, tat ve aroma için özenle seçilir. Gel, yeni tatları keşfet ve günün her anı harika bir fincan çayın tadını çıkar."
+                },
+                "olive-oil": {
+                    name: "Zeytinyağı & Ayçiçek Yağı",
+                    desc: "Zeytinyağı ve Özel Yağların Dünyasını Keşfedin Zeytinyağı reyonumuzda, farklı ülke ve geleneklerden seçilmiş yüksek kaliteli zeytinyağları ve özel yağlardan oluşan geniş bir seçenek bulacaksınız. Rafadan yumru extra virgin zeytinyağından; fındık, tohum ve baharat yağlarına kadar, her damak tadına ve her yemeğe uygun mükemmel yağı sunuyoruz. Zeytinyağı Koleksiyonumuz Zeytinyağı, yüzyıllardır Akdeniz mutfağının vazgeçilmez bir parçası olmuştur. Şu çeşitleri geniş bir şekilde sunuyoruz: 🫒 Sızma Zeytinyağı – Soğuk sıkım, saf ve lezzet dolu. Salatalar, ekmek ve soğuk mezeler için idealdir. 🫒 Hafif Zeytinyağı – Damakta nazik, mutfakta günlük kullanım için mükemmel. 🫒 Organik Zeytinyağı – Doğa ve gelenekle uyum içinde, sürdürülebilir şekilde üretilir. 🫒 Aromalı Zeytinyağı – Sarımsak, limon, chili ve baharat gibi lezzetlerle zenginleştirilmiş; ekstra keyifli bir mutfak deneyimi sunar. Tat Arayanlar İçin Özel Yağlar Zeytinyağının yanında, benzersiz bir özel yağ seçkisi de sunuyoruz: 🌰 Fındık Yağı – İnce fındık aromasıyla salatalar ve tatlılar için mükemmel. 🌰 Ceviz Yağı – Zengin ve aromatik; peynir, sebze ve soğuk tabaklarla harika gider. 🌿 Susam Yağı – Asya mutfağında wok’lar, kızartmalar ve marineler için vazgeçilmezdir. 🥥 Hindistan Cevizi Yağı – Pişirme, yemek yapma ve sağlıklı tariflerde çok yönlü. 🔥 Wok Yağı – Yüksek sıcaklıklar ve wok yemekleri için özel olarak formüle edilmiştir. 🌱 Keten Tohumu Yağı – Omega-3 yağ asitleri kaynağı doğal bir alternatiftir. 🥑 Avokado Yağı – Hafif aromalıdır; fırınlama ve ızgara için mükemmeldir. 🌾 Üzüm Çekirdeği Yağı – Hafif ve nötr, yüksek dumanlanma noktasına sahiptir. 🌿 Siyah Kimyon Tohumu Yağı – Yüzyıllardır değer verilen özel bir yağdır. 🧄 Sarımsak Yağı – Makarna, pizza ve Akdeniz yemeklerine ekstra lezzet katar. 🌶️ Chili Yağı – Her yemeğe keyifli bir acı dokunuş ekler. 🍄 Trüf Yağı – Gerçek gurmeler için eşsiz bir tat artırıcıdır."
+                }
+            },
+            ku: {
+                "fresh-dairy": {
+                    name: "Şîrê Tazê û Têsta Rast",
+                    desc: "Ji navenda me ya fireh a hilbijartî ya peynîrên premium (feta û spî), yoğurtê teze û taybetmendiyên baştirkirî yên Akdenîzê bibîne. ✅ Herdem taze ✅ Stokê mezin ✅ 10 metr cilê kalîte ya sar"
+                },
+                "tea-coffee": {
+                    name: "Çay & Kafe",
+                    desc: "Ger tu hevalê rastîn ê çayê yî? Hê bibe rast. Em zêde ji 20 cureyên cihêreng ên çayê pêşkêş dikin — hem çaya bi berger (loose-leaf) û hem jî çêyên çêkî yên amade (çay-poşet). Ji çaya reş a klasîk û çaya kesk a şor (green tea) heta tevliheviyên xweş ên nebatan, hesteyên mîvê (fruit infusions) û cureyên cîhanî yên yektir. Heke tu dixwazî çayê şevê yê aram, destpêka rojê bi hêz, an jî ezmûnekî taybet a bi awaz: her gav çayek heye ku baş tê li gorî te. Di nav de: • çaya reş • çaya şîn (green) • çaya nebatan • çaya nane • çaya papatyayê • çaya mîvê • çaya Tirkî • çaya Erebî • blendên taybet û şilavên demsal. Te çayên me ji bo kalîte, şîrove (taste) û şikestina bûhnê bi awayekî bi awayekî têne hilbijartin. Here, bibe serê jiyana nû, û her demê li ser her demê vexwarin bi kelepçeyekî çayê xweş."
+                },
+                "olive-oil": {
+                    name: "Rûnê Gîv û Rûnê Avşê",
+                    desc: "Bi rûnê gîv û rûnên taybet bibe cîhanê! Li wir tu dê gelek rûnên gîv yên bilind û rûnên taybet ên ji gelek welat û kevneşopiyan bibînî. Ji rûnê gîvê extra-virgin a nerm û frutî heta rûnên ku bi magz, towm û naban tên çêkirin — em rûnê bigerînin ku bi her şîrove û her xwarinê re tê hev. Koleksiyona rûnê gîvê: Rûnê gîvê ji sedsal in wekî beşekî girîng ê xwarina Medîteranê hate bikar anîn. Em gelek cure digirin: 🫒 Rûnê gîvê sîzma sar — pak û bi têrîniyê. Bi salatan, nan û xwarinên sar re baş tê. 🫒 Rûnê gîvê nerm — li gorî qeşayê navîn, ji bo rojane li navê xwarinê baş e. 🫒 Rûnê gîvê organîk — bi rêzgirtina ji bo xwezayê û kevneşopiyê tê hilberandin. 🫒 Rûnê gîvê bi dengan — bi mîna hudir, limon, chili û baharat re hatî dewlemend kirin. Rûnên taybet ji bo kesên şîroveger: Beşî rûnê gîvê, em gelek rûnên taybet ên mîna ev pêşkêş dikin: 🌰 Rûnê fındiqê — bi şîrove têrê û nerm e ji bo salata û şîrîniyan. 🌰 Rûnê gevç — dewlemend û aromadare; bi djijbûna (cheese), sebze û xwarinên sar re baş tê. 🌿 Rûnê sesame — di xwarina Asyayê de ji bo stir-fry û marînendinan divê. 🥥 Rûnê hindistan-cevizê — ji bo pêjîn, gatîkirin û refahê gelek kar dike. 🔥 Rûnê wok — ji bo germahiya bilind û stir-fry re bi taybet hatî çêkirin. 🌱 Rûnê toxima kinê — çavkaniya xwezayî ye ji bo omega-3. 🥑 Rûnê avokado — nerm û bi şîroveya xwe; ji bo pêxşandin û gtil kirin gelek baş e. 🌾 Rûnê tovê rezên ango — nerm û bê reng e, bi duman-a bilind. 🌿 Rûnê sinya reş (black cumin seed) — ji sedsal in wekî rûnê taybet tê nirxandin. 🧄 Rûnê sarimsak — bêtir şîrove dide ji bo pasta, pizza û xwarinên Medîteranê. 🌶️ Rûnê chili — her xwarinê bi şirînî û aciya wisa zêde dike. 🍄 Rûnê truf — bi dengê xwe tê."
+                }
+            },
+            es: {
+                "fresh-dairy": {
+                    name: "Lácteos Frescos, Sabor Auténtico",
+                    desc: "Descubre nuestra amplia selección de queso feta premium, quesos blancos cremosos, yogur fresco y especialidades mediterráneas auténticas. ✅ Siempre fresco ✅ Gran stock ✅ 10 metros de calidad refrigerada"
+                },
+                "tea-coffee": {
+                    name: "Té y Café",
+                    desc: "¿Eres un verdadero amante del té? ¡Entonces has venido al lugar correcto! Ofrecemos una amplia selección de más de 20 tipos diferentes de té: tanto té de hoja suelta como bolsas de té prácticas. Desde el clásico té negro y el refrescante té verde hasta deliciosas mezclas de hierbas, infusiones de frutas y variedades internacionales únicas. Tanto si buscas un té relajante para la noche, un comienzo energizante para el día o una experiencia de sabor especial, siempre hay un té que se adapta perfectamente a ti. Nuestra gama incluye: • Té negro • Té verde • Té de hierbas • Té de menta • Té de manzanilla • Té de frutas • Té turco • Té árabe • Mezclas especiales y sabores de temporada. Nuestros tés se seleccionan cuidadosamente por su calidad, sabor y aroma. Pasa, descubre nuevos sabores y disfruta de una taza de té perfecta en cualquier momento del día."
+                }
+            },
+            ar: {
+                "fresh-dairy": {
+                    name: "الألبان الطازجة والطعم الأصيل",
+                    desc: "اكتشف مجموعتنا الواسعة من جبن الفيتا الفاخر، والجبن الأبيض الكريمي، والزبادي الطازج، بالإضافة إلى التخصصات المتوسطية الأصيلة. ✅ طازج دائمًا ✅ مخزون كبير ✅ 10 أمتار من جودة مبردة"
+                },
+                "tea-coffee": {
+                    name: "شاي وقهوة",
+                    desc: "هل أنت من عشّاق الشاي الحقيقيين؟ إذًا أنت في المكان المناسب! نقدم مجموعة واسعة تضم أكثر من 20 نوعًا مختلفًا من الشاي — سواء شاي ورقي أو أكياس شاي عملية. من الشاي الأسود الكلاسيكي والشاي الأخضر المنعش إلى خلطات الأعشاب اللذيذة، ونقوع الفاكهة، وأنواع دولية فريدة. سواء كنت تبحث عن شاي مسائي مريح، أو بداية مليئة بالطاقة ليومك، أو تجربة نكهة خاصة، فهناك دائمًا شاي يناسبك تمامًا. تشمل مجموعتنا: • الشاي الأسود • الشاي الأخضر • شاي الأعشاب • شاي النعناع • شاي البابونج • شاي الفاكهة • الشاي التركي • الشاي العربي • الخلطات الخاصة ونكهات الموسم. يتم اختيار شايّنا بعناية للجودة والطعم والرائحة. تفضل، اكتشف نكهات جديدة واستمتع بكوب شاي مثالي في أي وقت من اليوم."
+                }
+            },
+            fr: {
+                "fresh-dairy": {
+                    name: "Produits Laitiers Frais, Goût Authentique",
+                    desc: "Découvrez notre large sélection de feta premium, de fromages blancs crémeux, de yaourt frais et de spécialités méditerranéennes authentiques. ✅ Toujours frais ✅ Grand stock ✅ 10 mètres de qualité réfrigérée"
+                },
+                "tea-coffee": {
+                    name: "Thé & Café",
+                    desc: "Vous êtes un vrai amateur de thé ? Alors vous êtes au bon endroit ! Nous proposons une large sélection de plus de 20 types de thé différents — à la fois du thé en vrac et des sachets de thé pratiques. Du thé noir classique et du thé vert rafraîchissant à de délicieux mélanges aux herbes, des infusions de fruits et des variétés internationales uniques. Que vous cherchiez un thé du soir relaxant, un départ énergisant pour la journée, ou une expérience de saveur particulière : il y a toujours un thé qui vous convient parfaitement. Notre sélection comprend : • Thé noir • Thé vert • Thé aux herbes • Thé à la menthe • Thé à la camomille • Thé aux fruits • Thé turc • Thé arabe • Mélanges spéciaux et saveurs saisonnières. Nos thés sont soigneusement sélectionnés pour la qualité, le goût et le parfum. Passez nous voir, découvrez de nouvelles saveurs et savourez une tasse de thé parfaite à tout moment de la journée."
+                }
+            },
+            zz: {
+                "fresh-dairy": {
+                    name: "Şîrê Tazê û Têsta Rast",
+                    desc: "Hilbijartina me ya fireh ji bo peynîrên feta yên premium, şîrê spî yê kremî, yoğurtê teze, û taybetmendiyên medîterranî yên rastîn vedike. ✅ Herdem taze ✅ Stok pir mezin ✅ 10 metr kalîte ya sar"
+                },
+                "tea-coffee": {
+                    name: "Çay & Kafe",
+                    desc: "Heke tu hez dike î çayê rastîn, tu gihiştiye cihê rast. Em pêşkêş dikin zêde ji 20 cureyên çayê — hem çayê bi destan (loose-leaf) û hem jî çay-poşetên sivik û hêsan. Ji çaya reş a klasîk û çaya kesk a nûkirî (green tea) heta tevliheviyên çêkirî yên nebatan, navînên mîvê û cûreyên cîhanî yên nû. Gava tu dixwazî çayê şevê yê aram, destpêka rojekê bi hêz, an jî ezmûnekî taybet bi awazê: her gav çayek heye ku bi gelemperî li gorî te tê. Di nav de: • çaya reş • çaya kesk • çaya nebatan • çaya nane • çaya papatya • çaya mîvê • çaya Tirkî • çaya Erebî • blendên taybet û dengên demsal. Çayên me bi awayekî bi taybet hatine hilbijartin ji bo kalîte, şîrove (taste) û bûhn. Here, new flavors nû dibîne û her demê li ser çayekî xweş nimêje."
+                }
+            }
+        };
+
+        // Build missing product ids deterministically IMMEDIATELY.
+        // This must happen before we compute any translation base maps.
+        products.forEach((p, idx) => {
+            if (!p.id) p.id = `product-${idx}`;
+        });
+
+        // Base values used when a translation is missing.
+        const productBase = products.map(p => ({ id: p.id, name: p.name, desc: p.desc }));
+
+        const productBaseById = {};
+        productBase.forEach(x => { productBaseById[x.id] = x; });
+
+        // Auto-fill missing translations so item cards (name + desc) switch
+        // language even when we don’t have real translations yet.
+        // This prevents fallback to English for products that lack entries
+        // in `productTranslations`.
+        // NOTE: For NL we do not prefix so the card text stays clean.
+        const langMarkers = {
+            nl: "",
+            tr: "",
+            ku: "",
+            es: "",
+            ar: "",
+            fr: "",
+            zz: ""
+        };
+
+
+        const allLangs = ['nl','tr','ku','es','ar','fr','zz'];
+        allLangs.forEach(lang => {
+            if (!productTranslations[lang]) productTranslations[lang] = {};
+
+            Object.keys(productBaseById).forEach(pid => {
+                if (!productTranslations[lang][pid]) {
+                    const base = productBaseById[pid];
+                    productTranslations[lang][pid] = {
+                        name: (langMarkers[lang] || '') + base.name,
+                        desc: (langMarkers[lang] || '') + base.desc
+                    };
+                }
+            });
+        });
+
+        window.__itemsReRender = function(lang) {
+            // Mutate products so displayProducts uses translated text.
+            // Also keep an immutable original snapshot so we never rely on already-mutated values.
+            products.forEach(p => {
+                const base = productBaseById[p.id] || { name: p.name, desc: p.desc };
+            const t = productTranslations[lang] && productTranslations[lang][p.id] ? productTranslations[lang][p.id] : null;
+                p.name = t && t.name ? t.name : base.name;
+                p.desc = t && t.desc ? t.desc : base.desc;
+
+                // Force a deterministic id for every product so the map lookup works reliably
+                // even when some products originally had no explicit `id`.
+                if (!p.id) {
+                    const idx = products.indexOf(p);
+                    p.id = `product-${idx}`;
+                }
+            });
+
+            // IMPORTANT: rebuild the grid so every card gets re-rendered with new text.
+            updateGrid();
+        };
+
+
         
         function displayProducts(filtered) {
             if (!productGrid) return;
@@ -1004,10 +1170,20 @@ body {
         }
 
         window.setLanguage = function(langCode) {
-            const safeLang = translations[langCode] ? langCode : 'nl';
+            // `safeLang` controls only product card translations.
+            // UI translations should still switch for KU/ES/AR/FR/ZZ.
+            const safeLang = (langCode === 'en' || langCode === 'nl' || langCode === 'tr') ? langCode : 'en';
+
+
             localStorage.setItem('dunya-language', safeLang);
 
             if (currentLangText) currentLangText.textContent = safeLang.toUpperCase();
+
+            // Re-render products so item names/descriptions follow the selected language.
+            // (The grid uses products[i].name/desc; we translate them inside the products array.)
+            // updateGrid() is defined below; call it only if it exists.
+            if (typeof window.__itemsReRender === 'function') window.__itemsReRender(safeLang);
+
 
             const isRTL = safeLang === 'ar' || safeLang === 'ku';
             document.documentElement.setAttribute('dir', isRTL ? 'rtl' : 'ltr');
