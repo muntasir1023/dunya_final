@@ -423,12 +423,6 @@ body {
                         <ul class="py-2 text-sm text-gray-300">
                             <li><button onclick="setLanguage('en')" class="w-full text-left px-4 py-2 hover:bg-white/10 hover:text-white transition lang-option" data-lang="en">English (EN)</button></li>
                             <li><button onclick="setLanguage('nl')" class="w-full text-left px-4 py-2 hover:bg-white/10 hover:text-white transition lang-option" data-lang="nl">Nederlands (NL)</button></li>
-                            <li><button onclick="setLanguage('tr')" class="w-full text-left px-4 py-2 hover:bg-white/10 hover:text-white transition lang-option" data-lang="tr">Türkçe (TR)</button></li>
-                            <li><button onclick="setLanguage('fr')" class="w-full text-left px-4 py-2 hover:bg-white/10 hover:text-white transition lang-option" data-lang="fr">Français (FR)</button></li>
-                            <li><button onclick="setLanguage('ku')" class="w-full text-left px-4 py-2 hover:bg-white/10 hover:text-white transition lang-option" data-lang="ku">Kurdî (KU)</button></li>
-                            <li><button onclick="setLanguage('es')" class="w-full text-left px-4 py-2 hover:bg-white/10 hover:text-white transition lang-option" data-lang="es">Español (ES)</button></li>
-                            <li><button onclick="setLanguage('ar')" class="w-full text-left px-4 py-2 hover:bg-white/10 hover:text-white transition lang-option" data-lang="ar">العربية (AR)</button></li>
-                            <li><button onclick="setLanguage('zz')" class="w-full text-left px-4 py-2 hover:bg-white/10 hover:text-white transition lang-option" data-lang="zz">Zazaki (ZZ)</button></li>
                         </ul>
                     </div>
                 </div>
@@ -461,12 +455,6 @@ body {
             <div class="flex flex-wrap justify-center gap-3 mt-4 px-6 max-w-sm">
                 <button onclick="setLanguage('en'); toggleMobileMenu();" class="glass-panel px-3 py-1.5 rounded-lg text-xs lang-option" data-lang="en">EN</button>
                 <button onclick="setLanguage('nl'); toggleMobileMenu();" class="glass-panel px-3 py-1.5 rounded-lg text-xs lang-option" data-lang="nl">NL</button>
-                <button onclick="setLanguage('tr'); toggleMobileMenu();" class="glass-panel px-3 py-1.5 rounded-lg text-xs lang-option" data-lang="tr">TR</button>
-                <button onclick="setLanguage('fr'); toggleMobileMenu();" class="glass-panel px-3 py-1.5 rounded-lg text-xs lang-option" data-lang="fr">FR</button>
-                <button onclick="setLanguage('ku'); toggleMobileMenu();" class="glass-panel px-3 py-1.5 rounded-lg text-xs lang-option" data-lang="ku">KU</button>
-                <button onclick="setLanguage('es'); toggleMobileMenu();" class="glass-panel px-3 py-1.5 rounded-lg text-xs lang-option" data-lang="es">ES</button>
-                <button onclick="setLanguage('ar'); toggleMobileMenu();" class="glass-panel px-3 py-1.5 rounded-lg text-xs lang-option" data-lang="ar">AR</button>
-                <button onclick="setLanguage('zz'); toggleMobileMenu();" class="glass-panel px-3 py-1.5 rounded-lg text-xs lang-option" data-lang="zz">ZZ</button>
             </div>
         </div>
     </nav>
@@ -629,10 +617,6 @@ body {
         })();
 
         const translations = {
-            // Note: Added 'fr' translations for consistency with index.html
-            // Please ensure all translation objects are complete and accurate for your languages.
-            // ... [Keep existing translations as provided in items.html]
-            // Example snippet check:
             en: {
                 nav_home: "Home", nav_products: "Products", nav_about: "About Us", nav_vacancy: "Vacancy",
                 page_title: "International Selection", page_subtitle: "Excellence in every aisle. Discover premium cuts, traditional bakes, and world-class spices.",
@@ -659,261 +643,192 @@ body {
                 page_title: "Internationale Selectie", page_subtitle: "Uitmuntendheid in elk gangpad. Ontdek kwaliteitsvlees en vers gebak.",
 
                 cat_all: "Alles", cat_meat: "Slagerij", cat_bakery: "Bakkerij", cat_dairy: "Zuivel", cat_grocery: "Supermarkt", cat_baklava: "Baklava",
+                cat_departments: "Onze Afdelingen",
+                details_btn: "Details",
+                freshness_badge: "Versheid Gegarandeerd",
                 footer_desc: "De smaken van de wereld in onze gemeenschap voor de afgelopen 25 jaar. Uw partner voor kwaliteitsproducten.", footer_links: "Snelkoppelingen", footer_contact: "Locatie", footer_rights: "© 2026 DÜNYA INTERNATIONALE SUPERMARKT. Alle rechten voorbehouden.",
                 premium_service_desc: "Boodschappen voor 2+ weken? Bestel via WhatsApp! Wij pakken het in, u haalt het op. Geen aanbetaling nodig.", // Added
                 search_placeholder: "Zoek producten...", // Added
                 no_results: "Geen producten gevonden die overeenkomen met uw zoekopdracht.", // Added
                 cat_slide_hint: "Scroll om meer te zien"
             },
-            tr: {
-                nav_home: "Anasayfa", nav_products: "Ürünler", nav_about: "Hakkımızda", nav_vacancy: "İş İlanı",
-                page_title: "Uluslararası Seçki", page_subtitle: "Her reyonumuzda mükemmellik. Taze etler ve geleneksel lezzetler.", cat_all: "Hepsi", cat_meat: "Kasap", cat_bakery: "Fırın", cat_dairy: "Şarküteri", cat_grocery: "Market", cat_baklava: "Baklava",
-                footer_desc: "Dünya lezzetlerini son 25 yıldır mahallemize sunuyoruz. Kaliteli alışverişteki güvenilir ortağınız.", footer_links: "Hızlı Linkler", footer_contact: "Konum", footer_rights: "© 2026 DÜNYA INTERNATIONALE SUPERMARKT. Tüm hakları saklıdır.",
-                premium_service_desc: "2+ haftalık alışveriş mi? WhatsApp'tan listenizi atın, biz hazırlayalım. Kapıda ödeme, ön ödeme yok!", // Present, but ensuring consistency
-                search_placeholder: "Ürün ara...", // Added
-                no_results: "Aradığınız ürün bulunamadı.", // Added
-                cat_slide_hint: "Daha fazlası için kaydırın"
-            },
-            ku: {
-                nav_home: "Sereke", nav_products: "Berhem", nav_about: "Derheqê Me", nav_vacancy: "Daxwaza Karê",
-                page_title: "Berhemên Cîhanî", page_subtitle: "Di her beşê de kalîte. Goştê qenc û nanê taze li benda we ye.", cat_all: "Hemû", cat_meat: "Qesab", cat_bakery: "Nanpêjgeh", cat_dairy: "Şîr û Penêr", cat_grocery: "Bazar", cat_baklava: "Baklava",
-                footer_desc: "Tehmên dinyayê ji bo civaka me ji bo 25 salên dawî. Hevparê we yê bawerbar ji bo kalîteyê.", footer_links: "Lînkên Bilez", footer_contact: "Cîh", footer_rights: "© 2026 DÜNYA INTERNATIONALE SUPERMARKT. Maf parastî ne.",
-                premium_service_desc: "Ji bo 2+ hefteyan kirîn? Bi WhatsAppê lîsteya xwe bişînin. Werin û bidin, pêşekî tune!", // Added
-                search_placeholder: "Berheman bigere...", // Added
-                no_results: "Tu berhem nehatin dîtin.", // Added
-                cat_slide_hint: "Ber bi alî ve bikişînin"
-            },
-            es: {
-                nav_home: "Inicio", nav_products: "Productos", nav_about: "Nosotros", nav_vacancy: "Vacante",
-                page_title: "Selección Internacional", page_subtitle: "Excelencia en cada pasillo. Carnes de calidad y panadería artesana.", cat_all: "Todo", cat_meat: "Carnicería", cat_bakery: "Panadería", cat_dairy: "Lácteos", cat_grocery: "Abarrotes", cat_baklava: "Baklava",
-                footer_desc: "Sabores del mundo en nuestra comunidad por los últimos 25 años. Calidad y confianza familiar.", footer_links: "Enlaces Rápidos", footer_contact: "Ubicación", footer_rights: "© 2026 DÜNYA INTERNATIONALE SUPERMARKT. Todos los derechos reservados.",
-                premium_service_desc: "¿Compra para 2+ semanas? Pida por WhatsApp. Nosotros lo preparamos, usted solo paga al recoger. Sin adelantos.", // Added
-                search_placeholder: "Buscar productos...", // Added
-                no_results: "No se encontraron productos que coincidan con su búsqueda.", // Added
-                cat_slide_hint: "Desliza para ver más"
-            },
-            ar: {
-                nav_home: "الرئيسية", nav_products: "المنتجات", nav_about: "من نحن", nav_vacancy: "وظائف",
-                page_title: "مجموعة عالمية", page_subtitle: "التميز في كل قسم. اكتشف أجود اللحوم والمخبوزات التقليدية.", cat_all: "الكل", cat_meat: "اللحوم", cat_bakery: "المخبوزات", cat_dairy: "الألبان", cat_grocery: "البقالة", cat_baklava: "بقلاوة",
-                footer_desc: "نقدم نكهات العالم لمجتمعنا على مدار الـ 25 عاماً الماضية. شريكك الموثوق للجودة.", footer_links: "روابط سريعة", footer_contact: "الموقع", footer_rights: "© 2026 DÜNYA INTERNATIONALE SUPERMARKT. جميع الحقوق محفوظة.",
-                premium_service_desc: "طلب لـ اسبوعين أو أكثر؟ أرسل قائمتك عبر الواتساب. نجهزها لك وتدفع عند الاستلام. لا يشترط الدفع المسبق.", // Added
-                search_placeholder: "ابحث عن المنتجات...", // Added
-                no_results: "لم يتم العثور على منتجات مطابقة لبحثك.", // Added
-                cat_slide_hint: "اسحب لرؤية المزيد"
-            },
-            fr: {
-                nav_home: "Accueil", nav_products: "Produits", nav_about: "À Propos", nav_vacancy: "Postes",
-                page_title: "Sélection Internationale", page_subtitle: "L'excellence dans chaque rayon. Découvrez nos viandes et pains artisanaux.", cat_all: "Tout", cat_meat: "Boucherie", cat_bakery: "Boulangerie", cat_dairy: "Laitage", cat_grocery: "Épicerie", cat_baklava: "Baklava",
-                footer_desc: "Les saveurs du monde pour notre communauté depuis 25 ans. Votre partenaire de confiance.", footer_links: "Liens Rapides", footer_contact: "Localisation", footer_rights: "© 2026 DÜNYA INTERNATIONALE SUPERMARKT. Tous droits réservés.",
-                premium_service_desc: "Courses pour 2+ semaines? Commandez via WhatsApp! On prépare tout, vous payez au retrait. Aucun acompte requis.",
-                search_placeholder: "Rechercher des produits...",
-                no_results: "Aucun produit trouvé correspondant à votre recherche.",
-                cat_slide_hint: "Glissez pour en voir plus"
-            },
-            zz: {
-                nav_home: "Keye", nav_products: "Malun", nav_about: "Ma ser", nav_vacancy: "Daxwaza Karê",
-                page_title: "Sûka Dinya", page_subtitle: "Her ca de kalîte. Goştê weş û nanê taze dermanê şıma yo.", cat_all: "Pêro", cat_meat: "Qesab", cat_bakery: "Fırın", cat_dairy: "Şıt û Penir", cat_grocery: "Markete", cat_baklava: "Baklava",
-                footer_desc: "25 serra peyêne de tehmê dinya ma de estê. İtibarê şıma yo herdemi.", footer_links: "Lînkê Leze", footer_contact: "Ca", footer_rights: "© 2026 DÜNYA INTERNATIONALE SUPERMARKT. Heqî amê pawıtene.",
-                premium_service_desc: "2+ heftan rê market? WhatsApp ra bınusên. Ma amade kenîme, şıma teyna bıpayerê. Verpê dînayîş çînyo.", // Added
-                search_placeholder: "Berheman biger...", // Added
-                no_results: "Cîyayîşê şıma rê çîyêk nêame dîtin.", // Added
-                cat_slide_hint: "Kategoriyê bîn bınesnê"
-            }
         };
 
-        // Only English, Dutch, and Turkish product translations should work.
-        // Force all other languages to fall back to base (English) product names/descriptions.
         const products = [
             {
+                cardId: 1,
                 id: "fresh-dairy",
-                name: "Fresh Dairy, Authentic Taste",
+                name: "Dairy Products Professional & Modern 🥛 Fresh Dairy, Authentic Taste",
                 cat: "all",
                 img: "https://raw.githubusercontent.com/muntasir1023/dunya_final/main/dairy.jpeg",
-                desc: "Discover our extensive selection of premium feta cheese, creamy white cheese, fresh yoghurt, and authentic Mediterranean specialties. ✅ Always fresh ✅ Large stock ✅ 10 meters of chilled quality",
+                desc: "Discover our extensive selection of feta, white cheese, yogurt, and Mediterranean specialties. ✅ Always fresh ✅ Large stock ✅ 10 meters of refrigerated quality",
             },
             {
+                cardId: 2,
                 id: "tea-coffee",
                 name: "Tea & Coffee",
                 cat: "all",
                 img: "https://images.unsplash.com/photo-1511920170033-f8396924c348?q=80&w=800&auto=format&fit=crop",
-                desc: "Are you a true tea lover? Then you’ve come to the right place! We offer a wide selection of more than 20 different types of tea — both loose-leaf tea and convenient tea bags. From classic black tea and refreshing green tea to delicious herbal blends, fruit infusions, and unique international varieties. Whether you’re looking for a relaxing evening tea, an energizing start to your day, or a special flavor experience, there’s always a tea that suits you perfectly. Our range includes: • Black tea • Green tea • Herbal tea • Mint tea • Chamomile tea • Fruit tea • Turkish tea • Arabic tea • Special blends and seasonal flavors Our teas are carefully selected for quality, taste, and aroma. Come by, discover new flavors, and enjoy a perfect cup of tea any time of the day.",
+                desc: "Discover our extensive tea and coffee selection Are you a true tea lover? Then you've come to the right place! We offer a wide range of over 20 varieties of tea, available as both loose-leaf and convenient tea bags. From classic black tea and refreshing green tea to delicious herbal blends, fruit infusions, and unique international varieties. Whether you are looking for a soothing evening tea, an energizing start to the day, or a unique flavor experience, there is always a tea to suit your taste. Our range includes: * Black tea * Green tea * Herbal tea * Mint tea * Chamomile tea * Fruit tea * Turkish tea * Arabic tea * Special blends and seasonal flavors Our teas are carefully selected for quality, flavor, and aroma. Come visit us, discover new flavors, and enjoy a delicious cup of tea at any time of day.",
             },
             {
+                cardId: 3,
                 id: "olive-oil",
                 name: "Olive Oil & Sunflower Oil",
                 cat: "all",
                 img: "https://raw.githubusercontent.com/muntasir1023/dunya_final/main/3.jpeg",
-
-                desc: "Discover the World of Olive Oil and Specialty Oils At our store, you will find an extensive selection of high-quality olive oils and unique specialty oils from various countries and traditions. From smooth and fruity extra virgin olive oil to exclusive nut, seed, and herb oils — we have the perfect oil for every taste and every dish. Our Olive Oil Collection Olive oil has been an essential part of Mediterranean cuisine for centuries. We offer a wide choice of: 🫒 Extra Virgin Olive Oil – Cold-pressed, pure, and full of flavor. Ideal for salads, bread, and cold dishes. 🫒 Mild Olive Oil – Gentle in taste and perfect for everyday use in the kitchen. 🫒 Organic Olive Oil – Sustainably produced with respect for nature and tradition. 🫒 Flavored Olive Oil – Enriched with delicious flavors such as garlic, lemon, chili, and herbs for an extra culinary experience. Specialty Oils for the Connoisseur In addition to olive oil, we offer a unique selection of specialty oils: 🌰 Hazelnut Oil – With a refined nutty flavor, perfect for salads and desserts. 🌰 Walnut Oil – Rich and aromatic, wonderful with cheese, vegetables, and cold dishes. 🌿 Sesame Oil – Essential in Asian cuisine for stir-fries and marinades. 🥥 Coconut Oil – Versatile for baking, cooking, and healthy recipes. 🔥 Wok Oil – Specially formulated for high temperatures and stir-fry dishes. 🌱 Flaxseed Oil – A natural source of omega-3 fatty acids. 🥑 Avocado Oil – Mild in flavor and excellent for baking and grilling. 🌾 Grapeseed Oil – Light and neutral with a high smoke point. 🌿 Black Cumin Seed Oil – A special oil valued for centuries. 🧄 Garlic Oil – Adds extra flavor to pasta, pizza, and Mediterranean dishes. 🌶️ Chili Oil – Gives every dish a delicious spicy touch. 🍄 Truffle Oil – An exclusive flavor enhancer for true connoisseurs.",
+                desc: "Discover the World of Olive Oil and Specialty Oils We offer an extensive range of high-quality olive oils and specialty oils from various countries and traditions. From mild and fruity extra virgin olive oil to exclusive nut, seed, and herb oils, we have the perfect oil for every taste and dish. Our Olive Oil Collection Olive oil has been an essential part of Mediterranean cuisine for centuries. We offer a wide selection: 🫒 Extra Virgin Olive Oil – Cold-pressed, pure, and rich in flavor. Ideal for salads, bread, and cold dishes. 🫒 Mild Olive Oil – Delicate in flavor and perfect for everyday kitchen use. 🫒 Organic Olive Oil – Sustainably produced with respect for nature and tradition. 🫒 Flavored Olive Oil – Infused with delicious flavors like garlic, lemon, chili, and herbs for an enhanced culinary experience. Specialty Oils for the Connoisseur In addition to olive oil, we offer a unique selection of specialty oils: 🌰 Hazelnut Oil – With a refined nutty flavor; perfect for salads and desserts. 🌰 Walnut Oil – Rich and aromatic; delicious with cheese, vegetables, and cold dishes. 🌿 Sesame Oil – Essential in Asian cuisine for stir-fries and marinades. 🥥 Coconut Oil – Versatile for baking, cooking, and healthy recipes. 🔥 Wok Oil – Specially formulated for high temperatures and stir-fry dishes. 🌱 Flaxseed Oil – A natural source of omega-3 fatty acids. 🥑 Avocado oil – Mild in flavor and excellent for frying and grilling. 🌾 Grapeseed oil – Light and neutral with a high smoke point. 🌿 Black cumin seed oil – A distinctive oil that has been prized for centuries. 🧄 Garlic oil – Adds extra flavor to pastas, pizzas, and Mediterranean dishes. 🌶️ Chili oil – Gives any dish a delicious spicy kick. 🍄 Truffle oil – An exclusive flavor enhancer for the true gourmet.",
             },
             {
-                name: "Vegetables & Fruit",
+                cardId: 4,
+                id: "fruit-veg",
+                name: "Fruit and Vegetables",
                 cat: "all",
                 img: "https://raw.githubusercontent.com/muntasir1023/dunya_final/main/spices.jpeg",
-                desc: "At our international supermarket, you will find an extensive and fresh vegetable selection from all over the world. From everyday staple vegetables to unique exotic products from Africa, Asia, the Middle East, and South America. We offer, among others, African leafy greens, peppers, okra, cassava, plantains, and many other authentic ingredients for both traditional and modern dishes. Quality, freshness, and diversity are at the heart of what we do, so every customer can rediscover the flavors of home.",
+                desc: "At our international supermarket, you will find an extensive range of fresh produce from around the world—from everyday staples to unique, exotic items from Africa, Asia, the Middle East, and South America. Our selection includes African leafy greens, peppers, okra, cassava, plantains, and many other authentic ingredients for both traditional and modern dishes. We prioritize quality, freshness, and variety, ensuring every customer can find the flavors of home.",
             },
             {
+                cardId: 5,
                 name: "Authentic Turkish and Lebanese Breads",
                 cat: "all",
                 img: "https://raw.githubusercontent.com/muntasir1023/dunya_final/main/lebaneese%20bread.png",
-                desc: "Turkish breads have been an essential part of Turkish food culture for centuries. These artisanal breads are known for their airy texture, soft interior, and golden-brown crust. Traditionally baked in stone ovens, they deliver an authentic flavor and a wonderful aroma.",
+                desc: "Turkish breads have been an essential part of Turkish culinary culture for centuries. These artisanal breads are renowned for their airy texture, soft interior, and golden-brown crust. Traditionally, they are baked in stone ovens, resulting in an authentic flavor and a delicious aroma. Simit – The Turkish Sesame Ring Simit is one of Turkey's most beloved bread specialties. This ring-shaped treat is generously coated in toasted sesame seeds, creating a crispy exterior and a delicious nutty flavor. In Turkey, simit is often enjoyed for breakfast or as a snack, paired with cheese, olives, tomatoes, or a glass of traditional Turkish tea. Thanks to the perfect balance between crispiness and softness, simit is a favorite among people of all ages. Lebanese Lavash Bread Lavash is a traditional flatbread popular across the Middle East and especially cherished in Lebanese cuisine. Made from simple ingredients, this thin, soft bread is known for its light texture and versatility. Lavash is ideal for making wraps, sandwiches, and mezze platters. It pairs beautifully with hummus, falafel, grilled vegetables, meat dishes, and various dips. Its soft texture makes it easy to roll up or fill with a variety of ingredients.",
             },
             {
+                cardId: 6,
                 name: "Simit – The Turkish Sesame Ring",
                 cat: "all",
                 img: "https://raw.githubusercontent.com/muntasir1023/dunya_final/main/Simit.png",
-                desc: "Simit is one of the most beloved bread specialties from Turkey. This ring-shaped delight is generously coated with roasted sesame seeds, creating a crispy exterior and a delicious nutty flavor. In Turkey, simit is often enjoyed for breakfast or as a snack, paired with cheese, olives, tomatoes, or a glass of traditional Turkish tea. Thanks to the perfect balance between crunchy and soft, simit is loved by young and old alike.",
+                desc: "Simit is one of Turkey's most beloved bread specialties. This ring-shaped treat is generously coated in toasted sesame seeds, creating a crispy exterior and a delicious nutty flavor. In Turkey, simit is often enjoyed for breakfast or as a snack, paired with cheese, olives, tomatoes, or a glass of traditional Turkish tea. Thanks to the perfect balance between crispiness and softness, simit is a favorite among people of all ages. Freshly baked daily in our bakery section.",
             },
             {
+                cardId: 7,
                 name: "Lebanese Lavash Bread",
                 cat: "all",
                 img: "https://raw.githubusercontent.com/muntasir1023/dunya_final/main/bread.jpeg",
-                desc: "Lavash is a traditional flatbread popular across the Middle East and particularly cherished in Lebanese cuisine. This thin, soft bread is made with simple ingredients and is known for its light texture and versatility. Lavash is ideal for making wraps, sandwiches, and mezze platters. It pairs beautifully with hummus, falafel, grilled vegetables, meat dishes, and various dips. Its soft texture makes it easy to roll or fill with a variety of ingredients.",
+                desc: "Lavash is a traditional flatbread popular across the Middle East and especially cherished in Lebanese cuisine. Made from simple ingredients, this thin, soft bread is known for its light texture and versatility. Lavash is ideal for making wraps, sandwiches, and mezze platters. It pairs beautifully with hummus, falafel, grilled vegetables, meat dishes, and various dips. Its soft texture makes it easy to roll up or fill with a variety of ingredients.",
             },
             {
+                cardId: 8,
                 name: "Halal meat and chicken",
                 cat: "all",
                 img: "https://raw.githubusercontent.com/muntasir1023/dunya_final/main/meat.jpeg",
-                desc: "Our meat and our chicken are carefully selected and prepared according to halal guidelines. This means that the entire process, from purchasing to preparation, complies with Islamic regulations. We attach great value to quality, hygiene, and respect for animals and tradition, so that you can enjoy flavorful products with peace of mind.",
+                desc: "Known as the best meat and chicken in the Gelderland region. Our Halal certified butcher shop offers premium quality cuts, prepared fresh daily. From tender steaks and juicy chicken breasts to traditional cuts for stews and grills — we ensure the highest standards of quality, freshness, and Halal integrity. Our experienced butchers are always ready to help you select the perfect cut for your meal.",
             },
             {
+                cardId: 9,
                 name: "Eastern Catering",
                 cat: "all",
                 img: "https://raw.githubusercontent.com/muntasir1023/dunya_final/main/catering.jpeg",
-                desc: "Bring the rich flavors of Eastern cuisine to your party or event with our fresh and authentic catering. From traditional hot dishes and mezze to fragrant rice dishes, grilled specialties, and sweets – everything is prepared with care and according to authentic recipes. Perfect for parties, gatherings, and special occasions.",
+                desc: "Authentic Eastern catering for every occasion. Whether you're planning a family gathering, a corporate event, or a celebration, our catering service brings the rich flavors of the Middle East and Mediterranean to your table. From flavorful mezze platters and grilled specialties to traditional rice dishes and fresh salads — we prepare everything with authentic recipes and the finest ingredients. Contact us to customize your menu.",
             },
 
             {
+                cardId: 10,
                 name: "Herbs & Spices",
                 cat: "all",
                 img: "https://raw.githubusercontent.com/muntasir1023/dunya_final/main/fruits%202.jpeg",
-                desc: "Discover our wide selection of herbs and spices from all over the world. From fragrant Mediterranean herbs to powerful Eastern spices – perfect for giving every meal extra flavor. We offer fresh quality and authentic flavors for both traditional and modern dishes.",
+                desc: "Explore our vast selection of herbs and spices from around the world. From aromatic cumin, coriander, and paprika to exotic blends like za'atar, sumac, and baharat — we offer everything you need to elevate your cooking. Our spices are sourced directly from producing regions to ensure maximum freshness and flavor. Available in various pack sizes to suit both home cooks and professional chefs.",
             },
             {
+                cardId: 11,
                 name: "Baklava & Sweets",
                 cat: "all",
                 img: "https://raw.githubusercontent.com/muntasir1023/dunya_final/main/sweets.jpeg",
-                desc: "Enjoy our delicious, artisanal baklava and Mediterranean sweets. Prepared according to a traditional recipe with fresh nuts, fine layers of phyllo dough, and a perfect balance of sweetness. Ideal with coffee, tea, or as a luxury treat for any occasion.",
+                desc: "Indulge in our exquisite selection of traditional baklava and Middle Eastern sweets. Made following authentic family recipes, our baklava features layers of flaky phyllo dough filled with premium walnuts, pistachios, or almonds, sweetened with pure honey or syrup. We also offer a variety of other delicacies including kunafa, halva, Turkish delight, and seasonal specials. Perfect for celebrations, gifts, or a sweet treat any day.",
             },
             {
+                cardId: 12,
                 name: "Cleaning Supplies",
                 cat: "all",
                 img: "https://raw.githubusercontent.com/muntasir1023/dunya_final/main/cleaning.jpeg",
-                desc: "Discover our wide assortment of cleaning supplies for a fresh and clean home. From cleaning agents and laundry products to kitchen and bathroom essentials – we offer quality products for every cleaning task. Practical, affordable, and indispensable for daily use.",
+                desc: "A complete range of household cleaning products to keep your home fresh and spotless. We stock trusted brands as well as specialty international cleaning items. Our selection includes all-purpose cleaners, dish soaps, laundry detergents, floor cleaners, disinfectants, and more. Affordable prices and convenient sizes for every household need.",
             },
             {
+                cardId: 13,
                 name: "Frozen Products",
                 cat: "all",
                 img: "https://raw.githubusercontent.com/muntasir1023/dunya_final/main/frozen.jpeg",
-                desc: "In our frozen food department, you will find an extensive assortment of fresh and high-quality frozen products. From vegetables, fruit, and snacks to fish, meat, and international specialties – everything is carefully selected for convenience and taste. Ideal for a quick meal without compromising on quality.",
+                desc: "Our frozen section offers a wide variety of products to help you always have a meal ready. Find frozen vegetables, fruits, meats, fish, ready-to-eat meals, and international specialties from around the world. Perfect for quick weeknight dinners, meal prep, or stocking up on essentials. All products are carefully stored to maintain optimal freshness and quality.",
             },
             {
+                cardId: 14,
                 name: "Fireworks – 26 Years of Experience",
                 cat: "all",
                 img: "https://raw.githubusercontent.com/muntasir1023/dunya_final/main/fireworks.jpg",
-
-
-                desc: "With no less than 26 years of experience, we are known for quality, service, and an extensive assortment of fireworks. From colorful consumer fireworks to impressive effects – every year we ensure a spectacular New Year's Eve. Safety, reliability, and customer satisfaction are always central to everything we do.",
+                desc: "With 26 years of experience in the fireworks industry, we are your trusted partner for celebrations. Our selection includes safe and high-quality fireworks for all occasions — from New Year's Eve to private festivities. We prioritize safety, quality, and compliance with all regulations. Visit our dedicated fireworks section for expert advice and the best products for your celebration.",
             }
         ];
 
         const productGrid = document.getElementById('product-grid');
         let currentCategory = 'all';
         let searchQuery = '';
+        const productTranslations = {};
 
-        // Translate item cards (name + description) when language changes.
-        // Provide translations for each product by `id`.
-        // IMPORTANT: every product MUST have a unique `id`.
-        // Translate item cards (name + description) when language changes.
-        // This object MUST contain entries for every product `id` for each language.
-        // If an id is missing, the code falls back to the base English text.
-        const productTranslations = {
-            // NOTE: Add translations here. Each product id must map to { name, desc }.
-            // ids are: "fresh-dairy" for the first product, then auto-assigned "product-1".."product-13" for the rest.
-            en: {},
-            nl: {
-                "fresh-dairy": {
-                    name: "Verse Zuivel, Authentieke Smaak",
-                    desc: "Ontdek onze uitgebreide selectie premium feta- en witte kazen, verse yoghurt en authentieke mediterrane specialiteiten. ✅ Altijd vers ✅ Grote voorraad ✅ 10 meter gekoelde kwaliteit"
-                },
-                "tea-coffee": {
-                    name: "Koffie & Thee",
-                    desc: "Ben jij een echte liefhebber van thee? Dan ben je hier op de juiste plek! We bieden een ruime keuze aan meer dan 20 verschillende soorten thee — zowel losse thee als handige theezakjes. Van klassieke zwarte thee en verfrissende groene thee tot heerlijke kruidenmengsels, fruitinfusies en unieke internationale variëteiten. Of je nu op zoek bent naar een ontspannende avondthee, een energieke start van je dag, of een bijzondere smaakervaring: er is altijd een thee die perfect bij je past. Ons assortiment omvat: • Zwarte thee • Groene thee • Kruidenthee • Munt thee • Kamille thee • Fruit thee • Turkse thee • Arabische thee • Speciale blends en seizoenssmaken. Onze theesoorten zijn zorgvuldig geselecteerd op kwaliteit, smaak en aroma. Kom langs, ontdek nieuwe smaken en geniet van een perfect kopje thee, op elk moment van de dag."
-                },
-                "olive-oil": {
-                    name: "Olijfolie & Zonnebloemolie",
-                    desc: "Ontdek de wereld van olijfolie en speciale oliën. Bij ons vind je een uitgebreide selectie van hoogwaardige olijfoliën en unieke speciale oliën uit verschillende landen en tradities. Van zachte en fruitige extra vierge olijfolie tot exclusieve noten-, zaad- en kruidoliën — wij hebben de perfecte olie voor elke smaak en elk gerecht. Onze Olijfoliecollectie Olijfolie is al eeuwenlang een essentieel onderdeel van de Mediterraanse keuken. We bieden een ruime keuze aan: 🫒 Extra vierge olijfolie – koudgeperst, puur en vol smaak. Ideaal voor salades, brood en koude gerechten. 🫒 Milde olijfolie – zacht van smaak en perfect voor dagelijks gebruik in de keuken. 🫒 Biologische olijfolie – duurzaam geproduceerd met respect voor natuur en traditie. 🫒 Gearomatiseerde olijfolie – verrijkt met heerlijke smaken zoals knoflook, citroen, chili en kruiden voor een extra culinaire ervaring. Speciale oliën voor liefhebbers Naast olijfolie bieden we ook een unieke selectie speciale oliën: 🌰 Hazelnootolie – met een verfijnde nootachtige smaak, perfect voor salades en desserts. 🌰 Walnootolie – rijk en aromatisch, heerlijk bij kaas, groenten en koude gerechten. 🌿 Sesamolie – essentieel in de Aziatische keuken voor roerbakgerechten en marinades. 🥥 Kokosolie – veelzijdig voor bakken, koken en gezonde recepten. 🔥 Wokolie – speciaal ontwikkeld voor hoge temperaturen en wokgerechten. 🌱 Lijnzaadolie – een natuurlijke bron van omega-3 vetzuren. 🥑 Avocado-olie – mild van smaak en uitstekend voor bakken en grillen. 🌾 Druivenpitolie – licht en neutraal met een hoog rookpunt. 🌿 Zwarte komijnzaadolie – een speciale olie die al eeuwen gewaardeerd wordt. 🧄 Knoflookolie – geeft extra smaak aan pasta, pizza en Mediterraanse gerechten. 🌶️ Chiliolie – geeft elk gerecht een heerlijke pittige touch. 🍄 Truffelolie – een exclusieve smaakversterker voor echte liefhebbers."
-                }
-            },
-            tr: {
-                "fresh-dairy": {
-                    name: "Taze Süt ve Doğal Lezzet",
-                    desc: "Premium beyaz peynir, krem beyaz peynir, taze yoğurt ve otantik Akdeniz lezzetlerinden oluşan geniş seçkimizi keşfedin. ✅ Her zaman taze ✅ Büyük stok ✅ Soğutulmuş kalitede 10 metre"
-                },
-                "tea-coffee": {
-                    name: "Çay & Kahve",
-                    desc: "Gerçek bir çay sever misin? O zaman doğru yerdesin! 20’den fazla farklı çay türünden oluşan geniş bir seçki sunuyoruz — hem yaprak çay hem de pratik çay poşetleri. Klasik siyah çay ve ferahlatıcı yeşil çaydan; lezzetli bitki karışımlarına, meyve demlemelerine ve benzersiz uluslararası çeşitlere kadar. İster rahat bir akşam çayı arıyor ol, ister gününe enerjik bir başlangıç yapmak istiyor ol, ister özel bir aroma deneyimi: Senin için her zaman mükemmel bir çay vardır. Seçeneklerimiz: • Siyah çay • Yeşil çay • Bitki çayı • Nane çayı • Papatya çayı • Meyve çayı • Türk çayı • Arap çayı • Özel karışımlar ve mevsimlik aromalar. Çaylarımız kalite, tat ve aroma için özenle seçilir. Gel, yeni tatları keşfet ve günün her anı harika bir fincan çayın tadını çıkar."
-                },
-                "olive-oil": {
-                    name: "Zeytinyağı & Ayçiçek Yağı",
-                    desc: "Zeytinyağı ve Özel Yağların Dünyasını Keşfedin Zeytinyağı reyonumuzda, farklı ülke ve geleneklerden seçilmiş yüksek kaliteli zeytinyağları ve özel yağlardan oluşan geniş bir seçenek bulacaksınız. Rafadan yumru extra virgin zeytinyağından; fındık, tohum ve baharat yağlarına kadar, her damak tadına ve her yemeğe uygun mükemmel yağı sunuyoruz. Zeytinyağı Koleksiyonumuz Zeytinyağı, yüzyıllardır Akdeniz mutfağının vazgeçilmez bir parçası olmuştur. Şu çeşitleri geniş bir şekilde sunuyoruz: 🫒 Sızma Zeytinyağı – Soğuk sıkım, saf ve lezzet dolu. Salatalar, ekmek ve soğuk mezeler için idealdir. 🫒 Hafif Zeytinyağı – Damakta nazik, mutfakta günlük kullanım için mükemmel. 🫒 Organik Zeytinyağı – Doğa ve gelenekle uyum içinde, sürdürülebilir şekilde üretilir. 🫒 Aromalı Zeytinyağı – Sarımsak, limon, chili ve baharat gibi lezzetlerle zenginleştirilmiş; ekstra keyifli bir mutfak deneyimi sunar. Tat Arayanlar İçin Özel Yağlar Zeytinyağının yanında, benzersiz bir özel yağ seçkisi de sunuyoruz: 🌰 Fındık Yağı – İnce fındık aromasıyla salatalar ve tatlılar için mükemmel. 🌰 Ceviz Yağı – Zengin ve aromatik; peynir, sebze ve soğuk tabaklarla harika gider. 🌿 Susam Yağı – Asya mutfağında wok’lar, kızartmalar ve marineler için vazgeçilmezdir. 🥥 Hindistan Cevizi Yağı – Pişirme, yemek yapma ve sağlıklı tariflerde çok yönlü. 🔥 Wok Yağı – Yüksek sıcaklıklar ve wok yemekleri için özel olarak formüle edilmiştir. 🌱 Keten Tohumu Yağı – Omega-3 yağ asitleri kaynağı doğal bir alternatiftir. 🥑 Avokado Yağı – Hafif aromalıdır; fırınlama ve ızgara için mükemmeldir. 🌾 Üzüm Çekirdeği Yağı – Hafif ve nötr, yüksek dumanlanma noktasına sahiptir. 🌿 Siyah Kimyon Tohumu Yağı – Yüzyıllardır değer verilen özel bir yağdır. 🧄 Sarımsak Yağı – Makarna, pizza ve Akdeniz yemeklerine ekstra lezzet katar. 🌶️ Chili Yağı – Her yemeğe keyifli bir acı dokunuş ekler. 🍄 Trüf Yağı – Gerçek gurmeler için eşsiz bir tat artırıcıdır."
-                }
-            },
-            ku: {
-                "fresh-dairy": {
-                    name: "Şîrê Tazê û Têsta Rast",
-                    desc: "Ji navenda me ya fireh a hilbijartî ya peynîrên premium (feta û spî), yoğurtê teze û taybetmendiyên baştirkirî yên Akdenîzê bibîne. ✅ Herdem taze ✅ Stokê mezin ✅ 10 metr cilê kalîte ya sar"
-                },
-                "tea-coffee": {
-                    name: "Çay & Kafe",
-                    desc: "Ger tu hevalê rastîn ê çayê yî? Hê bibe rast. Em zêde ji 20 cureyên cihêreng ên çayê pêşkêş dikin — hem çaya bi berger (loose-leaf) û hem jî çêyên çêkî yên amade (çay-poşet). Ji çaya reş a klasîk û çaya kesk a şor (green tea) heta tevliheviyên xweş ên nebatan, hesteyên mîvê (fruit infusions) û cureyên cîhanî yên yektir. Heke tu dixwazî çayê şevê yê aram, destpêka rojê bi hêz, an jî ezmûnekî taybet a bi awaz: her gav çayek heye ku baş tê li gorî te. Di nav de: • çaya reş • çaya şîn (green) • çaya nebatan • çaya nane • çaya papatyayê • çaya mîvê • çaya Tirkî • çaya Erebî • blendên taybet û şilavên demsal. Te çayên me ji bo kalîte, şîrove (taste) û şikestina bûhnê bi awayekî bi awayekî têne hilbijartin. Here, bibe serê jiyana nû, û her demê li ser her demê vexwarin bi kelepçeyekî çayê xweş."
-                },
-                "olive-oil": {
-                    name: "Rûnê Gîv û Rûnê Avşê",
-                    desc: "Bi rûnê gîv û rûnên taybet bibe cîhanê! Li wir tu dê gelek rûnên gîv yên bilind û rûnên taybet ên ji gelek welat û kevneşopiyan bibînî. Ji rûnê gîvê extra-virgin a nerm û frutî heta rûnên ku bi magz, towm û naban tên çêkirin — em rûnê bigerînin ku bi her şîrove û her xwarinê re tê hev. Koleksiyona rûnê gîvê: Rûnê gîvê ji sedsal in wekî beşekî girîng ê xwarina Medîteranê hate bikar anîn. Em gelek cure digirin: 🫒 Rûnê gîvê sîzma sar — pak û bi têrîniyê. Bi salatan, nan û xwarinên sar re baş tê. 🫒 Rûnê gîvê nerm — li gorî qeşayê navîn, ji bo rojane li navê xwarinê baş e. 🫒 Rûnê gîvê organîk — bi rêzgirtina ji bo xwezayê û kevneşopiyê tê hilberandin. 🫒 Rûnê gîvê bi dengan — bi mîna hudir, limon, chili û baharat re hatî dewlemend kirin. Rûnên taybet ji bo kesên şîroveger: Beşî rûnê gîvê, em gelek rûnên taybet ên mîna ev pêşkêş dikin: 🌰 Rûnê fındiqê — bi şîrove têrê û nerm e ji bo salata û şîrîniyan. 🌰 Rûnê gevç — dewlemend û aromadare; bi djijbûna (cheese), sebze û xwarinên sar re baş tê. 🌿 Rûnê sesame — di xwarina Asyayê de ji bo stir-fry û marînendinan divê. 🥥 Rûnê hindistan-cevizê — ji bo pêjîn, gatîkirin û refahê gelek kar dike. 🔥 Rûnê wok — ji bo germahiya bilind û stir-fry re bi taybet hatî çêkirin. 🌱 Rûnê toxima kinê — çavkaniya xwezayî ye ji bo omega-3. 🥑 Rûnê avokado — nerm û bi şîroveya xwe; ji bo pêxşandin û gtil kirin gelek baş e. 🌾 Rûnê tovê rezên ango — nerm û bê reng e, bi duman-a bilind. 🌿 Rûnê sinya reş (black cumin seed) — ji sedsal in wekî rûnê taybet tê nirxandin. 🧄 Rûnê sarimsak — bêtir şîrove dide ji bo pasta, pizza û xwarinên Medîteranê. 🌶️ Rûnê chili — her xwarinê bi şirînî û aciya wisa zêde dike. 🍄 Rûnê truf — bi dengê xwe tê."
-                }
-            },
-            es: {
-                "fresh-dairy": {
-                    name: "Lácteos Frescos, Sabor Auténtico",
-                    desc: "Descubre nuestra amplia selección de queso feta premium, quesos blancos cremosos, yogur fresco y especialidades mediterráneas auténticas. ✅ Siempre fresco ✅ Gran stock ✅ 10 metros de calidad refrigerada"
-                },
-                "tea-coffee": {
-                    name: "Té y Café",
-                    desc: "¿Eres un verdadero amante del té? ¡Entonces has venido al lugar correcto! Ofrecemos una amplia selección de más de 20 tipos diferentes de té: tanto té de hoja suelta como bolsas de té prácticas. Desde el clásico té negro y el refrescante té verde hasta deliciosas mezclas de hierbas, infusiones de frutas y variedades internacionales únicas. Tanto si buscas un té relajante para la noche, un comienzo energizante para el día o una experiencia de sabor especial, siempre hay un té que se adapta perfectamente a ti. Nuestra gama incluye: • Té negro • Té verde • Té de hierbas • Té de menta • Té de manzanilla • Té de frutas • Té turco • Té árabe • Mezclas especiales y sabores de temporada. Nuestros tés se seleccionan cuidadosamente por su calidad, sabor y aroma. Pasa, descubre nuevos sabores y disfruta de una taza de té perfecta en cualquier momento del día."
-                }
-            },
-            ar: {
-                "fresh-dairy": {
-                    name: "الألبان الطازجة والطعم الأصيل",
-                    desc: "اكتشف مجموعتنا الواسعة من جبن الفيتا الفاخر، والجبن الأبيض الكريمي، والزبادي الطازج، بالإضافة إلى التخصصات المتوسطية الأصيلة. ✅ طازج دائمًا ✅ مخزون كبير ✅ 10 أمتار من جودة مبردة"
-                },
-                "tea-coffee": {
-                    name: "شاي وقهوة",
-                    desc: "هل أنت من عشّاق الشاي الحقيقيين؟ إذًا أنت في المكان المناسب! نقدم مجموعة واسعة تضم أكثر من 20 نوعًا مختلفًا من الشاي — سواء شاي ورقي أو أكياس شاي عملية. من الشاي الأسود الكلاسيكي والشاي الأخضر المنعش إلى خلطات الأعشاب اللذيذة، ونقوع الفاكهة، وأنواع دولية فريدة. سواء كنت تبحث عن شاي مسائي مريح، أو بداية مليئة بالطاقة ليومك، أو تجربة نكهة خاصة، فهناك دائمًا شاي يناسبك تمامًا. تشمل مجموعتنا: • الشاي الأسود • الشاي الأخضر • شاي الأعشاب • شاي النعناع • شاي البابونج • شاي الفاكهة • الشاي التركي • الشاي العربي • الخلطات الخاصة ونكهات الموسم. يتم اختيار شايّنا بعناية للجودة والطعم والرائحة. تفضل، اكتشف نكهات جديدة واستمتع بكوب شاي مثالي في أي وقت من اليوم."
-                }
-            },
-            fr: {
-                "fresh-dairy": {
-                    name: "Produits Laitiers Frais, Goût Authentique",
-                    desc: "Découvrez notre large sélection de feta premium, de fromages blancs crémeux, de yaourt frais et de spécialités méditerranéennes authentiques. ✅ Toujours frais ✅ Grand stock ✅ 10 mètres de qualité réfrigérée"
-                },
-                "tea-coffee": {
-                    name: "Thé & Café",
-                    desc: "Vous êtes un vrai amateur de thé ? Alors vous êtes au bon endroit ! Nous proposons une large sélection de plus de 20 types de thé différents — à la fois du thé en vrac et des sachets de thé pratiques. Du thé noir classique et du thé vert rafraîchissant à de délicieux mélanges aux herbes, des infusions de fruits et des variétés internationales uniques. Que vous cherchiez un thé du soir relaxant, un départ énergisant pour la journée, ou une expérience de saveur particulière : il y a toujours un thé qui vous convient parfaitement. Notre sélection comprend : • Thé noir • Thé vert • Thé aux herbes • Thé à la menthe • Thé à la camomille • Thé aux fruits • Thé turc • Thé arabe • Mélanges spéciaux et saveurs saisonnières. Nos thés sont soigneusement sélectionnés pour la qualité, le goût et le parfum. Passez nous voir, découvrez de nouvelles saveurs et savourez une tasse de thé parfaite à tout moment de la journée."
-                }
-            },
-            zz: {
-                "fresh-dairy": {
-                    name: "Şîrê Tazê û Têsta Rast",
-                    desc: "Hilbijartina me ya fireh ji bo peynîrên feta yên premium, şîrê spî yê kremî, yoğurtê teze, û taybetmendiyên medîterranî yên rastîn vedike. ✅ Herdem taze ✅ Stok pir mezin ✅ 10 metr kalîte ya sar"
-                },
-                "tea-coffee": {
-                    name: "Çay & Kafe",
-                    desc: "Heke tu hez dike î çayê rastîn, tu gihiştiye cihê rast. Em pêşkêş dikin zêde ji 20 cureyên çayê — hem çayê bi destan (loose-leaf) û hem jî çay-poşetên sivik û hêsan. Ji çaya reş a klasîk û çaya kesk a nûkirî (green tea) heta tevliheviyên çêkirî yên nebatan, navînên mîvê û cûreyên cîhanî yên nû. Gava tu dixwazî çayê şevê yê aram, destpêka rojekê bi hêz, an jî ezmûnekî taybet bi awazê: her gav çayek heye ku bi gelemperî li gorî te tê. Di nav de: • çaya reş • çaya kesk • çaya nebatan • çaya nane • çaya papatya • çaya mîvê • çaya Tirkî • çaya Erebî • blendên taybet û dengên demsal. Çayên me bi awayekî bi taybet hatine hilbijartin ji bo kalîte, şîrove (taste) û bûhn. Here, new flavors nû dibîne û her demê li ser çayekî xweş nimêje."
-                }
-            }
-        };
+        // Pre-populate Dutch translations for the first 4 product cards
+        // (fresh-dairy, tea-coffee, olive-oil, fruit-veg)
+        // Must be set BEFORE the auto-generation loop below so the
+        // "if (!productTranslations[lang][pid])" check skips these.
+        (function() {
+            const nl = {};
+            nl['fresh-dairy'] = {
+                name: "Zuivelproducten – Professioneel & Modern 🥛",
+                desc: "Ontdek ons uitgebreide assortiment feta, witte kaas, yoghurt en Mediterrane specialiteiten. ✅ Altijd vers ✅ Ruime voorraad ✅ 10 meter gekoelde kwaliteit"
+            };
+            nl['tea-coffee'] = {
+                name: "Thee & Koffie",
+                desc: "Ontdek onze uitgebreide thee- en koffieselectie. Bent u een echte theeliefhebber? Dan bent u bij ons aan het juiste adres! Wij bieden een breed assortiment van meer dan 20 theesoorten, zowel losse thee als handige theezakjes. Van klassieke zwarte thee en verfrissende groene thee tot heerlijke kruidenmelanges, fruitinfusies en unieke internationale variëteiten."
+            };
+            nl['olive-oil'] = {
+                name: "Olijfolie & Zonnebloemolie",
+                desc: "Ontdek de wereld van olijfolie en speciale oliën. Wij bieden een uitgebreid assortiment hoogwaardige olijfoliën en speciale oliën uit verschillende landen en tradities. Van milde en fruitige extra vierge olijfolie tot exclusieve noten-, zaad- en kruidenoliën."
+            };
+            nl['fruit-veg'] = {
+                name: "Fruit en Groenten",
+                desc: "Bij onze internationale supermarkt vindt u een uitgebreid assortiment verse producten van over de hele wereld - van alledaagse basisproducten tot unieke, exotische items uit Afrika, Azië, het Midden-Oosten en Zuid-Amerika. Wij geven prioriteit aan kwaliteit, versheid en variëteit."
+            };
+            nl['product-4'] = {
+                name: "Authentieke Turkse en Libanese broden",
+                desc: "Turkse broden vormen al eeuwenlang een belangrijk onderdeel van de Turkse eetcultuur. Deze ambachtelijke broden staan bekend om hun luchtige structuur, zachte binnenkant en goudbruine korst. Traditioneel worden ze gebakken in steenovens, wat zorgt voor een authentieke smaak en een heerlijke geur. Simit – De Turkse Sesamring Simit is een van de meest geliefde broodspecialiteiten uit Turkije. Deze ringvormige lekkernij wordt rijkelijk bedekt met geroosterde sesamzaadjes, wat zorgt voor een knapperige buitenkant en een heerlijke nootachtige smaak. In Turkije wordt simit vaak gegeten als ontbijt of tussendoortje, gecombineerd met kaas, olijven, tomaat of een glas traditionele Turkse thee. Door de perfecte balans tussen krokant en zacht is simit geliefd bij jong en oud. Libanees Lavash Brood Lavash is een traditioneel platbrood dat populair is in het Midden-Oosten en vooral geliefd is binnen de Libanese keuken. Dit dunne, zachte brood wordt bereid met eenvoudige ingrediënten en staat bekend om zijn lichte structuur en veelzijdigheid. Lavash is ideaal voor het maken van wraps, sandwiches en mezze-schotels. Het combineert uitstekend met hummus, falafel, gegrilde groenten, vleesgerechten en diverse dips. Dankzij de zachte textuur kan het gemakkelijk worden opgerold of gevuld met verschillende ingrediënten."
+            };
+            nl['product-5'] = {
+                name: "Simit – De Turkse Sesamring",
+                desc: "Simit is een van de meest geliefde broodspecialiteiten uit Turkije. Deze ringvormige lekkernij wordt rijkelijk bedekt met geroosterde sesamzaadjes, wat zorgt voor een knapperige buitenkant en een heerlijke nootachtige smaak. In Turkije wordt simit vaak gegeten als ontbijt of tussendoortje, gecombineerd met kaas, olijven, tomaat of een glas traditionele Turkse thee. Dankzij de perfecte balans tussen krokant en zacht is simit geliefd bij jong en oud. Dagelijks vers gebakken in onze bakkerij."
+            };
+            nl['product-6'] = {
+                name: "Libanees Lavash Brood",
+                desc: "Lavash is een traditioneel platbrood dat populair is in het Midden-Oosten en vooral geliefd is binnen de Libanese keuken. Dit dunne, zachte brood wordt bereid met eenvoudige ingrediënten en staat bekend om zijn lichte structuur en veelzijdigheid. Lavash is ideaal voor het maken van wraps, sandwiches en mezze-schotels. Het combineert uitstekend met hummus, falafel, gegrilde groenten, vleesgerechten en diverse dips."
+            };
+            nl['product-7'] = {
+                name: "Halal vlees en kip",
+                desc: "Bekend als het beste vlees en kip in de regio Gelderland. Onze Halal gecertificeerde slagerij biedt premium kwaliteit, dagelijks vers bereid. Van malse steaks en sappige kipfilets tot traditionele stukken voor stoofschotels en grill — wij garanderen de hoogste normen op het gebied van kwaliteit, versheid en Halal integriteit."
+            };
+            nl['product-8'] = {
+                name: "Oosterse Catering",
+                desc: "Authentieke Oosterse catering voor elke gelegenheid. Of u nu een familiebijeenkomst, een zakelijk evenement of een feest plant, onze cateringservice brengt de rijke smaken van het Midden-Oosten en de Middellandse Zee naar uw tafel. Van smaakvolle mezze-schotels en gegrilde specialiteiten tot traditionele rijstgerechten en frisse salades."
+            };
+            nl['product-9'] = {
+                name: "Kruiden & Specerijen",
+                desc: "Ontdek onze uitgebreide selectie kruiden en specerijen van over de hele wereld. Van aromatische komijn, koriander en paprika tot exotische melanges zoals za'atar, sumak en baharat — wij bieden alles wat u nodig heeft om uw kookkunsten naar een hoger niveau te tillen. Onze specerijen worden rechtstreeks uit de productiegebieden gehaald."
+            };
+            nl['product-10'] = {
+                name: "Baklava & Zoetigheden",
+                desc: "Geniet van onze verfijnde selectie traditionele baklava en Midden-Oosterse zoetigheden. Gemaakt volgens authentieke familierecepten, met laagjes knapperig filodeeg gevuld met premium walnoten, pistachenoten of amandelen, gezoet met pure honing of siroop. Ook verkrijgbaar: kunafa, halva, Turks fruit en seizoensspecialiteiten."
+            };
+            nl['product-11'] = {
+                name: "Schoonmaakartikelen",
+                desc: "Een compleet assortiment huishoudelijke schoonmaakproducten om uw huis fris en vlekkeloos te houden. Wij voeren vertrouwde merken en speciale internationale schoonmaakartikelen. Allesreinigers, afwasmiddel, wasmiddelen, vloerreinigers, ontsmettingsmiddelen en meer. Betaalbare prijzen en handige verpakkingen."
+            };
+            nl['product-12'] = {
+                name: "Diepvriesproducten",
+                desc: "Onze diepvriesafdeling biedt een breed scala aan producten zodat u altijd een maaltijd bij de hand heeft. Diepvriesgroenten, fruit, vlees, vis, kant-en-klaarmaaltijden en internationale specialiteiten van over de hele wereld. Perfect voor doordeweekse diners of het inslaan van basisproducten."
+            };
+            nl['product-13'] = {
+                name: "Vuurwerk – 26 Jaar Ervaring",
+                desc: "Met 26 jaar ervaring in de vuurwerkbranche zijn wij uw vertrouwde partner voor feestelijkheden. Ons assortiment omvat veilig en hoogwaardig vuurwerk voor alle gelegenheden — van oudjaarsavond tot particuliere feesten. Wij geven prioriteit aan veiligheid, kwaliteit en naleving van alle regelgeving."
+            };
+            productTranslations['nl'] = nl;
+        })();
 
         // Build missing product ids deterministically IMMEDIATELY.
         // This must happen before we compute any translation base maps.
@@ -927,23 +842,12 @@ body {
         const productBaseById = {};
         productBase.forEach(x => { productBaseById[x.id] = x; });
 
-        // Auto-fill missing translations so item cards (name + desc) switch
-        // language even when we don’t have real translations yet.
-        // This prevents fallback to English for products that lack entries
-        // in `productTranslations`.
-        // NOTE: For NL we do not prefix so the card text stays clean.
         const langMarkers = {
-            nl: "",
-            tr: "",
-            ku: "",
-            es: "",
-            ar: "",
-            fr: "",
-            zz: ""
+            nl: ""
         };
 
 
-        const allLangs = ['nl','tr','ku','es','ar','fr','zz'];
+        const allLangs = ['nl'];
         allLangs.forEach(lang => {
             if (!productTranslations[lang]) productTranslations[lang] = {};
 
@@ -1170,10 +1074,7 @@ body {
         }
 
         window.setLanguage = function(langCode) {
-            // `safeLang` controls only product card translations.
-            // UI translations should still switch for KU/ES/AR/FR/ZZ.
-            const safeLang = (langCode === 'en' || langCode === 'nl' || langCode === 'tr') ? langCode : 'en';
-
+            const safeLang = (langCode === 'en' || langCode === 'nl') ? langCode : 'en';
 
             localStorage.setItem('dunya-language', safeLang);
 
@@ -1184,9 +1085,7 @@ body {
             // updateGrid() is defined below; call it only if it exists.
             if (typeof window.__itemsReRender === 'function') window.__itemsReRender(safeLang);
 
-
-            const isRTL = safeLang === 'ar' || safeLang === 'ku';
-            document.documentElement.setAttribute('dir', isRTL ? 'rtl' : 'ltr');
+            document.documentElement.setAttribute('dir', 'ltr');
 
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
