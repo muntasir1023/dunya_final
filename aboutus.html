@@ -635,8 +635,12 @@ body {
             const safeLang = translations[langCode] ? langCode : 'en';
             localStorage.setItem('dunya-language', safeLang);
 
+            // If this language doesn’t exist in the translation map, we also fall back to English.
+            // (But keep the original chosen language for RTL.)
+            const translateLang = translations[langCode] ? langCode : 'en';
 
             if (currentLangText) currentLangText.textContent = safeLang.toUpperCase();
+
 
             const isRTL = safeLang === 'ar' || safeLang === 'ku';
             document.documentElement.setAttribute('dir', isRTL ? 'rtl' : 'ltr');
