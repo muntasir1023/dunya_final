@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html>
+<html lang="nl" class="scroll-smooth light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DÃœNYA INTERNATIONALE SUPERMARKT</title>
+
+    <link rel="icon" href="https://raw.githubusercontent.com/muntasir1023/Dunya/main/dunya%20logo.png" type="image/png">
+    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/muntasir1023/Dunya/main/dunya%20logo.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        dunya: {
+                            light: '#005E2A',
+                            main: '#005E2A',
+                            dark: '#005E2A',
+                            overlay: 'rgba(10, 20, 25, 0.75)',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+body {
+            background-color: #0a0f0d;
+            color: #ffffff;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+        html, body { margin: 0; padding: 0; }
+
+.ambient-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100vh;
+            background-image: url('https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            z-index: -2;
+            filter: brightness(0.35);
+        }
+        .ambient-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100vh;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 94, 42, 0.08) 0%, rgba(10, 15, 13, 0.98) 100%);
+
+            z-index: -1;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-nav {
+            background: rgba(10, 15, 12, 0.8);
+            backdrop-filter: blur(25px) saturate(180%);
+            -webkit-backdrop-filter: blur(25px) saturate(180%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-button {
+            background: rgba(0, 94, 42, 0.2);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 94, 42, 0.4);
+            transition: all 0.3s ease;
+        }
+        .glass-button:hover {
+            background: rgba(0, 94, 42, 0.4);
+            box-shadow: 0 0 20px rgba(0, 94, 42, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .glass-card-border {
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* --- Light theme --- */
+        html.light body { background-color: #fdfdfd; color: #0f172a; }
+        html.light .ambient-overlay { background: radial-gradient(circle at 50% 50%, rgba(0, 94, 42, 0.04) 0%, rgba(253, 253, 253, 0.7) 100%); }
+
+        html.light .ambient-bg { filter: brightness(1.0) saturate(0.8); opacity: 0.3; }
+
+        html.light .glass-panel {
+            background: #ffffff;
+            border: 1px solid rgba(0,0,0,0.1);
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+            color: #0f172a;
+        }
+        /* Match index.html transparency (instead of opaque white) */
+        html.light .glass-nav {
+            background: rgba(0, 94, 42, 0.07) !important;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+        }
+
+        /* Enhanced Text Visibility (fix: vacancy.html text/button not turning dark in light mode) */
+        html.light .text-white:not(.glass-button *),
+        html.light .text-gray-100,
+        html.light .text-gray-200,
+        html.light .text-gray-300,
+        html.light .text-gray-400,
+        html.light h1,
+        html.light h2,
+        html.light h3,
+        html.light h4,
+        html.light .flex-col span {
+            color: #000000 !important;
+        }
+        html.light .text-gray-300, html.light .text-gray-400 { color: #000000 !important; }
+        html.light .text-dunya-light { color: #005E2A !important; }
+
+        /* Cursor (blue accent is handled later by your other edits; keep simple here) */
+        #cursor-dot {
+            width: 8px; height: 8px; background-color: #005E2A;
+            border-radius: 50%; position: fixed; pointer-events: none;
+            z-index: 9999; transform: translate(-50%, -50%);
+        }
+        #cursor-outline {
+            width: 36px; height: 36px; border: 1px solid rgba(0, 94, 42, 0.6);
+            border-radius: 50%; position: fixed; pointer-events: none;
+            z-index: 9998; transform: translate(-50%, -50%);
+            transition: width 0.2s, height 0.2s, background-color 0.2s;
+        }
+        @media (hover: none) and (pointer: coarse) {
+            #cursor-dot, #cursor-outline { display: none; }
+        }
+
+        [dir="rtl"] { text-align: right; }
+        [dir="rtl"] .ml-auto { margin-right: auto; margin-left: 0; }
+
+        .lang-active { color: #005
